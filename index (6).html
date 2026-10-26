@@ -1,0 +1,375 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>لعبة الحب أونلاين 💞 -- 50 جولة</title>
+<style>
+:root{--bg:#fff1f4;--card:#fff;--text:#4a1626;--accent:#e63e6d;--b2:#7c4dff;--gold:#f5a623;--muted:#a05a6e;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d0f15;--card:#2c1720;--text:#ffe3ea;--accent:#ff5c8a;--b2:#a58bff;--gold:#ffc861;--muted:#d49aab;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1d0f15;--card:#2c1720;--text:#ffe3ea;--accent:#ff5c8a;--b2:#a58bff;--gold:#ffc861;--muted:#d49aab;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:"Cairo","Segoe UI",Tahoma,sans-serif;display:flex;justify-content:center;padding:14px;text-align:center}
+#app{width:min(440px,100%);display:flex;flex-direction:column;gap:12px}
+.box{background:var(--card);border-radius:18px;padding:16px;box-shadow:0 6px 20px rgba(230,62,109,.15);display:flex;flex-direction:column;align-items:center;gap:10px}
+h1{margin:0;font-size:22px}
+h2{margin:0;font-size:18px}
+p{margin:0;color:var(--muted);line-height:1.7}
+input{font:inherit;padding:10px 12px;border-radius:12px;border:2px solid var(--accent);background:transparent;color:var(--text);width:100%;text-align:center}
+button.b{font:inherit;font-weight:700;padding:11px 16px;border:0;border-radius:12px;background:var(--accent);color:#fff;cursor:pointer;flex:1;min-width:130px;transition:transform .1s}
+button.b:active{transform:scale(.96)}
+button.b.alt{background:var(--b2)}
+button.b.gold{background:var(--gold);color:#3a2300}
+button.b:disabled{opacity:.45}
+.row{display:flex;gap:8px;width:100%;flex-wrap:wrap}
+.sc{display:flex;gap:8px;width:100%}
+.sc div{flex:1;border-radius:12px;padding:6px;border:2px solid transparent;background:rgba(127,127,127,.12);font-weight:700;font-size:14px}
+.sc div.on{border-color:var(--accent)}
+.sc b{display:block;font-size:24px;color:var(--accent)}
+.sc small{display:block;font-size:11px;color:var(--gold);min-height:15px}
+#txt{font-size:20px;font-weight:700;line-height:1.7;min-height:80px;display:flex;align-items:center}
+#kind{color:var(--b2);font-weight:700;font-size:14px}
+#last{color:var(--accent);font-weight:700;min-height:22px;line-height:1.6;animation:pop .4s}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.tag{background:var(--gold);color:#3a2300;border-radius:20px;padding:3px 12px;font-weight:700;font-size:13px}
+.bar{width:100%;height:8px;border-radius:8px;background:rgba(127,127,127,.2);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);transition:width .3s}
+#chat{width:100%;height:170px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:4px}
+.m{max-width:80%;padding:7px 11px;border-radius:14px;font-size:15px;text-align:start;word-break:break-word}
+.m.me{align-self:flex-start;background:var(--accent);color:#fff}
+.m.ot{align-self:flex-end;background:rgba(127,127,127,.2)}
+.m small{display:block;font-size:10px;opacity:.7}
+.ansbox{background:rgba(127,127,127,.12);border-radius:12px;padding:10px;width:100%;font-weight:700;line-height:1.7}
+.pl{width:100%;border:2px solid var(--gold);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:6px;line-height:1.7}
+.pl b{font-size:17px}
+.ti{display:inline-block;background:rgba(127,127,127,.15);border-radius:14px;padding:2px 10px;margin:2px;font-size:13px;font-weight:700}
+.big{font-size:42px}
+</style>
+</head>
+<body>
+<div id="app">
+ <div class="box" id="main"><p>جارٍ التحميل…</p></div>
+ <div class="box" id="cbox" style="display:none"><b>💬 دردشة اللعبة</b><div id="chat"></div><div class="row"><input id="ci" placeholder="اكتب رسالة…" style="flex:1;width:auto"><button class="b" id="cs" style="flex:none;min-width:70px">إرسال</button></div></div>
+</div>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getDatabase,ref,onValue,push,query,limitToLast,runTransaction} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+const firebaseConfig={
+  apiKey:"AIzaSyB6YZw2zqVycNa3fDFU-_ybljyqyVz5Ohw",
+  authDomain:"love-game-8df86.firebaseapp.com",
+  databaseURL:"https://love-game-8df86-default-rtdb.firebaseio.com",
+  projectId:"love-game-8df86",
+  storageBucket:"love-game-8df86.firebasestorage.app",
+  messagingSenderId:"7096177936",
+  appId:"1:7096177936:web:bad481d5466115d2b00195"
+};
+const rdb=getDatabase(initializeApp(firebaseConfig));
+const sref=ref(rdb,"love-game/state"),cref=ref(rdb,"love-game/chat");
+const $=x=>document.getElementById(x);
+
+/* ================= بنك الأسئلة ================= */
+const P=[
+ {s:"صباحك بيبدأ إزاي؟",g:"صباح {o} بيبدأ إزاي؟",o:["☕ قهوة قبل أي كلام","📱 أفتح الموبايل على طول","🚿 دش سريع وأنزل","😴 بضرب منبه 5 مرات"]},
+ {s:"لو هتسافر بكرة، هتختار فين؟",g:"لو {o} هيسافر بكرة، هيختار فين؟",o:["🏝️ جزيرة هادية","🏙️ مدينة كبيرة صاخبة","🏕️ رحلة طبيعة وخيام","🛳️ كروز على البحر"]},
+ {s:"أول حاجة بتعملها لما توصل البيت؟",g:"أول حاجة {o} بيعملها لما يوصل البيت؟",o:["👕 أغير هدومي","📱 أفتح الموبايل","🍔 آكل حاجة","🛋️ أرمي نفسي على السرير"]},
+ {s:"لو عندك ساعة فاضية، بتعمل إيه؟",g:"لو {o} عنده ساعة فاضية، بيعمل إيه؟",o:["📖 أقرا","🎮 ألعب","🚶 أتمشى","📱 أقلب في السوشيال"]},
+ {s:"أكثر حاجة بتشتريك في شخص؟",g:"أكثر حاجة بتشتري {o} في شخص؟",o:["😂 خفة الدم","🤝 الوفاء","🧠 الذكاء","💪 الجدعنة"]},
+ {s:"لو هتتعشى برة، تختار إيه؟",g:"لو {o} هيتعشى برة، هيختار إيه؟",o:["🍕 بيتزا","🍔 برجر","🍣 سوشي","🍝 باستا"]},
+ {s:"أكتر حاجة بتحب تعملها في الويك إند؟",g:"أكتر حاجة {o} بيحب يعملها في الويك إند؟",o:["🌳 أخرج للطبيعة","🎬 سينما","🏠 قعدة في البيت","🛍️ مول وتسوق"]},
+ {s:"لو هتاخد كورس مجاني، هيبقى إيه؟",g:"لو {o} هياخد كورس مجاني، هيبقى إيه؟",o:["💻 برمجة","🎨 رسم وتصميم","🗣️ لغة جديدة","💼 بزنس"]},
+ {s:"نوع الفيلم اللي بتحبه؟",g:"نوع الفيلم اللي {o} بيحبه؟",o:["😂 كوميدي","🎬 درامي","👻 رعب","🚀 خيال علمي"]},
+ {s:"لو بقى معاك 100 ألف، هتعمل بيهم إيه؟",g:"لو {o} بقى معاه 100 ألف، هيعمل بيهم إيه؟",o:["🏠 أحوشهم","✈️ أسافر","🎁 أشتري هدوم وأغراض","📱 أطور حاجة"]},
+ {s:"أكتر موقف بتحسه محرج؟",g:"أكتر موقف {o} بيحسه محرج؟",o:["🎤 الكلام قدام ناس","🤝 السلام بالغلط على حد","📞 اتصال غلط","💬 رسالة بالغلط"]},
+ {s:"أحلى وقت في اليوم بالنسبة لك؟",g:"أحلى وقت في اليوم بالنسبة لـ {o}؟",o:["🌅 الصبح","☀️ الضهر","🌇 العصر والمغرب","🌙 الليل"]},
+ {s:"نوع الموسيقى اللي بتحبه؟",g:"نوع الموسيقى اللي {o} بيحبه؟",o:["🎤 عربي شعبي","🎸 روك","🎹 كلاسيك","🎧 إلكترونيك"]},
+ {s:"لو هتختار حيوان أليف؟",g:"لو {o} هيختار حيوان أليف، هيبقى إيه؟",o:["🐱 قطة","🐶 كلب","🐦 عصفور","🐠 سمكة"]},
+ {s:"أسلوبك في اللبس؟",g:"أسلوب {o} في اللبس؟",o:["👕 كاجوال بسيط","👔 كلاسيك مرتب","🧢 ستريت وير","🎨 ملون ومميز"]}
+];
+const Q=[
+ "إيه أكتر حاجة بتعجبك في شخصية {o}؟ 🌟",
+ "إيه أحلى نصيحة {o} قالها لك؟ 💡",
+ "لو تعرف تهدي {o} حاجة واحدة، هتكون إيه؟ 🎁",
+ "إيه أكتر موقف حسيت فيه إن {o} بيفهمك؟ 🧠",
+ "لو {o} كان شخصية كرتونية، هيبقى مين؟ 🎬",
+ "إيه أكثر حاجة نفسك تعرفها عن {o}؟ 🔍",
+ "إيه أحلى كلمة سمعتها من {o}؟ 💬",
+ "إيه أكتر حاجة بتحبها في طريقة {o} في الكلام؟ 🗣️",
+ "لو تكتب كتاب عن {o}، هيبقى اسمه إيه؟ 📖",
+ "إيه أحلى هدية قدمها لك {o}؟ 🎀",
+ "إيه الحاجة اللي نفسك {o} يتعلمها؟ 📚",
+ "إيه أكتر حاجة بتخليك تفتخر بـ {o}؟ 💪"
+];
+const D=[
+ "غني مقطع من أغنية بتحبها 🎤",
+ "قلد شخصية كرتونية مشهورة 🎭",
+ "قول 3 حاجات بتحبها في نفسك 💪",
+ "اعمل حركة مضحكة دلوقتي 😂",
+ "اكتب رسالة حب في الدردشة 💌",
+ "قلد {o} في حركة بيعملها كتير 😅",
+ "قول نكتة دلوقتي 😄",
+ "صور حاجة قدامك وابعت 🌟",
+ "قول حكمة بتؤمن بيها 📿",
+ "ابعت إيموجي بيعبر عن حالتك دلوقتي 🎯",
+ "امدح {o} في 10 ثواني ⏱️",
+ "اعمل صوت حيوان لمدة 5 ثواني 🐱",
+ "قول سر صغير عنك 🤫",
+ "قول جملة رومانسية باللهجة العامية 💕"
+];
+const W=[
+ ["مين فينا أشطر في الطبخ؟ 🍳","👨‍🍳 الشيف"],
+ ["مين فينا أكثر واحد بيسمع؟ 👂","👂 السامع الحنين"],
+ ["مين فينا أشطر في الكلام؟ 🗣️","🗣️ الخطيب"],
+ ["مين فينا أكثر واحد بيخاف؟ 🕷️","🐛 الخواف"],
+ ["مين فينا أكثر واحد متحمس؟ 🔥","🔥 المتحمس"],
+ ["مين فينا أكثر واحد هادي؟ 😌","😌 الهادي"],
+ ["مين فينا أشطر في الجدال؟ 🤔","🤔 المحامي"],
+ ["مين فينا أكثر واحد طفولي؟ 🧒","🧒 الطفولي"],
+ ["مين فينا أكثر واحد عملي؟ 🧠","🧠 العقل المدبر"],
+ ["مين فينا أكثر واحد بيحب السفر؟ ✈️","✈️ الرحالة"],
+ ["مين فينا أشطر في المفاجآت؟ 🎁","🎁 ملك المفاجآت"],
+ ["مين فينا أكثر واحد بيصرف؟ 💰","💰 الكرم"]
+];
+const H=[
+ ["☕ قهوة","🍵 شاي"],
+ ["🌅 صبح","🌙 ليل"],
+ ["🎬 فيلم","🎮 لعبة"],
+ ["🍕 بيتزا","🍔 برجر"],
+ ["🏠 قعدة بيت","🚶 خروج"],
+ ["📱 موبايل","📖 كتاب"],
+ ["🎵 موسيقى","🎙️ بودكاست"],
+ ["🐶 كلب","🐱 قطة"],
+ ["🌊 بحر","⛰️ جبل"],
+ ["✈️ سفر","🏡 قعدة"],
+ ["🍫 شوكولاتة","🍿 فشار"],
+ ["🎨 رسم","🎸 موسيقى"],
+ ["📸 صور","📝 كتابة"],
+ ["🎮 لعب","📺 مشاهدة"]
+];
+const R=[
+ "إيه أكتر حاجة نفسك تكتشفها عن {o}؟ 🔍",
+ "لو {o} يبقى فيلم، هيبقى نوعه إيه؟ 🎬",
+ "إيه أحلى مجاملة سمعتها من {o}؟ 💬",
+ "إيه أكتر حاجة بتحبها في صوت {o}؟ 🎵",
+ "لو تعيش يوم كامل مع {o}، هتعمل إيه؟ 🌅",
+ "إيه أكتر حاجة بتضحكك في {o}؟ 😂",
+ "لو {o} يبقى لون، هيبقى إيه؟ 🎨",
+ "إيه أحلى حاجة بتخاف تخسرها في {o}؟ 💔",
+ "لو تكتب أغنية لـ {o}، عن إيه هتكون؟ 🎤",
+ "إيه أكتر حاجة بتخليك تشتاق لـ {o}؟ 🥺"
+];
+
+/* ================= حالة اللعبة ================= */
+let uid=null,st=null,pq=0,pa=[],mo=null,mrk=-1;
+const PAT=[
+"g","m","d","g","v","q","g","m","d","q",
+"v","q","g","m","d","g","v","g","m","r",
+"g","d","v","q","g","m","d","g","v","q",
+"g","m","r","g","d","v","q","q","m","d",
+"g","v","r","q","g","m","d","r","g","v"
+];
+const MULT={9:2,19:2,29:2,39:2,49:2};
+const MAX=PAT.length;
+const L=x=>x?Object.keys(x).map(k=>x[k]):[];
+const pair=(x,d)=>{x=x||[];return [x[0]==null?d:x[0],x[1]==null?d:x[1]]};
+const shuf=n=>{const a=[...Array(n).keys()];for(let m=a.length-1;m>0;m--){const x=Math.floor(Math.random()*(m+1));[a[m],a[x]]=[a[x],a[m]]}return a};
+function makeDeck(){
+ const sz={g:P.length,m:H.length,d:D.length,v:W.length,q:Q.length,r:R.length},pool={};
+ for(const k in sz)pool[k]=shuf(sz[k]);
+ return PAT.map((ty,i)=>ty+"|"+pool[ty].pop()+"|"+(MULT[i]||1));
+}
+const isTurn=ty=>ty=="g"||ty=="q"||ty=="d";
+function turnFor(deck,r){let n=0;for(let j=0;j<r;j++)if(isTurn(deck[j].split("|")[0]))n++;return n%2}
+function fresh(){return {n:["",""],u:["",""],ph:"lobby",prof:[null,null],t:0,r:0,S:[0,0],ok:[0,0],tot:[0,0],sk:[0,0],bs:[0,0],ti:[[],[]],v:[null,null],a:"",last:"",deck:[]}}
+function norm(s){
+ s.n=pair(s.n,"");s.u=pair(s.u,"");s.S=pair(s.S,0);s.ok=pair(s.ok,0);s.tot=pair(s.tot,0);s.sk=pair(s.sk,0);s.bs=pair(s.bs,0);
+ s.prof=pair(s.prof,null).map(p=>p?L(p):null);
+ s.ti=pair(s.ti,null).map(L);
+ s.v=pair(s.v,null).map(e=>e!==null&&typeof e=="object"?L(e):e);
+ s.deck=L(s.deck);s.a=s.a||"";s.last=s.last||"";s.t=s.t||0;s.r=s.r||0;s.ph=s.ph||"lobby";
+ return s}
+function startPlay(s){s.ph="play";s.r=0;s.S=[0,0];s.ok=[0,0];s.tot=[0,0];s.sk=[0,0];s.bs=[0,0];s.ti=[[],[]];s.v=[null,null];s.a="";s.last="يلا نبدأ! 🔥 50 جولة قدامنا";s.deck=makeDeck();s.t=turnFor(s.deck,0)}
+function adv(s,msg){s.last=msg;s.v=[null,null];s.a="";s.r++;if(s.r>=MAX)s.ph="end";else s.t=turnFor(s.deck,s.r)}
+function cur(s){const p=s.deck[s.r].split("|");return {ty:p[0],id:+p[1],mx:+p[2]}}
+function me(){return st?st.u.indexOf(uid):-1}
+
+function act(fn){runTransaction(sref,c=>{const s=c?norm(c):fresh();return fn(s)===false?undefined:s}).catch(e=>{$("main").insertAdjacentHTML("afterbegin","<p style='color:var(--accent)'>مش قادر أحفظ: "+(e&&e.code)+" (راجع قواعد Firebase)</p>")})}
+const inRound=(s,r)=>s.ph=="play"&&s.r==r;
+
+function join(){
+ const nm=$("nm").value.trim().slice(0,14)||"لاعب";
+ act(s=>{if(s.u.indexOf(uid)>=0)return false;
+  if(!s.u[0]){s.n[0]=nm;s.u[0]=uid;s.ph="lobby"}
+  else if(!s.u[1]){s.n[1]=nm;s.u[1]=uid;s.ph="prof"}
+  else return false})
+}
+function resetAll(){pq=0;pa=[];act(s=>{Object.assign(s,fresh());return true})}
+function replay(){act(s=>{if(s.ph!="end")return false;startPlay(s)})}
+
+function mk(p,txt,cls,fn,dis){const b=document.createElement("button");b.className="b "+(cls||"");b.textContent=txt;b.disabled=!!dis;b.onclick=fn;p.appendChild(b);return b}
+function tp(p,txt){const e=document.createElement("p");e.textContent=txt;p.appendChild(e);return e}
+function dv(p,cls,txt){const e=document.createElement("div");if(cls)e.className=cls;if(txt!=null)e.textContent=txt;p.appendChild(e);return e}
+function bar(p,pc){const b=dv(p,"bar"),i=document.createElement("i");i.style.width=pc+"%";b.appendChild(i)}
+
+function titlesOf(s,k){
+ const out=[],acc=s.tot[k]?s.ok[k]/s.tot[k]:0;
+ if(s.tot[k]){
+  if(acc>=.75)out.push("🔮 قارئ الأفكار");
+  else if(acc>=.5)out.push("🕵️ المحقق الشاطر");
+  else if(acc>=.25)out.push("🤔 لسه بيتعرّف");
+  else out.push("😅 مش واخد باله من حبيبه");
+ }
+ if(s.bs[k]>=3)out.push("🔥 صاحب السلسلة ×"+s.bs[k]);
+ s.ti[k].forEach(t=>out.push(t));
+ return out}
+
+function verdict(s){
+ const a=s.S[0],b=s.S[1],gap=Math.abs(a-b),w=a>b?0:1,l=1-w;
+ const tot=s.tot[0]+s.tot[1],comp=tot?Math.round((s.ok[0]+s.ok[1])/tot*100):0;
+ let head,body;
+ if(gap==0){head="🤝 تعادل! الحب كسب";body="مفيش غالب ولا مغلوب… الاتنين متساويين في الحب والعند 😂"}
+ else if(gap<=50){head="🏆 الفايز: "+s.n[w];body="فوز بالعافية! "+s.n[l]+" كان قريب أوي، الجولة الجاية الدنيا هتتقلب 😏"}
+ else if(gap<=150){head="👑 الفايز: "+s.n[w];body=s.n[w]+" حافظ حبيبه كويس. و"+s.n[l]+" عليه يذاكر أكتر 📚"}
+ else{head="👑🔥 فوز ساحق لـ "+s.n[w];body=s.n[l]+" هيدفع العشا النهارده، والحكم نهائي ومفيهوش استئناف 😂🍽️"}
+ let cm;
+ if(comp>=75)cm="💞 توأم روح! بتفهموا بعض من غير كلام";
+ else if(comp>=50)cm="✨ كيميا حلوة، شوية تركيز كمان وتبقوا مثال يحتذى بيه";
+ else if(comp>=25)cm="🌱 لسه بتتعرفوا على بعض… كمّلوا وهتطلعوا حلوين";
+ else cm="😂 محتاجين قعدة صفا وتتكلموا أكتر!";
+ return {head,body,comp,cm}}
+
+function render(){
+ const m=$("main");m.innerHTML="";const s=st,i=me();
+ dv(m,"","").appendChild(Object.assign(document.createElement("h1"),{textContent:"لعبة الحب أونلاين 💞"}));
+ if(!s||(s.ph=="lobby"&&i<0)){
+  tp(m,!s||!s.u[0]?"اكتب اسمك وادخل، وابعت الرابط للتاني يدخل كمان 💌":(s.n[0]+" منتظرك! ادخل واكتب اسمك"));
+  const inp=document.createElement("input");inp.id="nm";inp.placeholder="اسمك";m.appendChild(inp);mk(m,"ادخل اللعبة 🎮","",join);return}
+ if(s.ph=="lobby"){tp(m,"⏳ منتظرين اللاعب التاني يفتح الرابط ويدخل…");mk(m,"إلغاء","alt",resetAll);return}
+ if(i<0){tp(m,"اللعبة دي فيها لاعبين بالفعل ("+s.n[0]+" و"+s.n[1]+")");mk(m,"ابدأ لعبة جديدة","",resetAll);return}
+ const other=s.n[1-i];
+
+ if(s.ph=="prof"){
+  if(s.prof[i]){
+   dv(m,"big","⏳");
+   tp(m,"تمام يا "+s.n[i]+"! إجاباتك اتسجلت ✅ -- منتظرين "+other+" يخلص أسئلته…");
+   return}
+  tp(m,"الأول: جاوب عن نفسك بصراحة 😏 "+other+" هيحاول يخمّن إجاباتك بعد كده!");
+  bar(m,Math.round(pq/P.length*100));
+  const q=P[pq];
+  dv(m,"","").textContent="سؤال "+(pq+1)+" من "+P.length;
+  dv(m,"").id="txt";m.lastChild.textContent=q.s;
+  const bt=dv(m,"row");
+  q.o.forEach((o,k)=>mk(bt,o,k%2?"alt":"",()=>{
+   pa.push(k);pq++;
+   if(pq>=P.length){const mine=pa.slice();act(x=>{x.prof[i]=mine;if(x.prof[0]&&x.prof[1])startPlay(x)});pa=[];pq=0}
+   else render();
+  }));
+  return}
+
+ const sc=dv(m,"sc");
+ [0,1].forEach(k=>{const d=dv(sc,"");
+  if(s.ph=="play"){const c=cur(s);if(isTurn(c.ty)&&k==s.t)d.className="on"}
+  d.textContent=s.n[k]+(k==i?" (أنت)":"");
+  const b=document.createElement("b");b.textContent=s.S[k];d.appendChild(b);
+  const sm=document.createElement("small");sm.textContent=s.sk[k]>=2?"🔥 سلسلة "+s.sk[k]:"";d.appendChild(sm)});
+ const l=dv(m,"","");l.id="last";l.textContent=s.last;
+
+ if(s.ph=="end"){
+  const v=verdict(s);
+  dv(m,"big",s.S[0]==s.S[1]?"🤝":"🏆");
+  const h=document.createElement("h2");h.textContent=v.head;m.appendChild(h);
+  tp(m,v.body);
+  [0,1].forEach(k=>{const pl=dv(m,"pl");const bb=document.createElement("b");bb.textContent=s.n[k]+" -- "+s.S[k]+" نقطة";pl.appendChild(bb);
+   const sm=dv(pl,"","");sm.style.color="var(--muted)";sm.style.fontSize="13px";sm.textContent="خمّن صح "+s.ok[k]+" من "+s.tot[k];
+   const tt=dv(pl,"","");titlesOf(s,k).forEach(t=>{const e=document.createElement("span");e.className="ti";e.textContent=t;tt.appendChild(e)})});
+  const cp=dv(m,"pl","");const c1=document.createElement("b");c1.textContent="نسبة التفاهم: "+v.comp+"%";cp.appendChild(c1);bar(cp,v.comp);dv(cp,"",v.cm);
+  const bt=dv(m,"row");
+  mk(bt,"🔁 نفس الإجابات، 50 جولة جديدة","",replay);
+  mk(bt,"🆕 نبدأ من الأول","alt",resetAll);
+  return}
+
+ const r=s.r,c=cur(s),mine=s.t==i,who=s.n[s.t];
+ if(mrk!=r){mrk=r;mo=null}
+ const meta=dv(m,"","");
+ const t1=document.createElement("small");t1.style.color="var(--muted)";t1.textContent="الجولة "+(r+1)+" من "+MAX+" ";meta.appendChild(t1);
+ if(c.mx>1){const g=document.createElement("span");g.className="tag";g.textContent=r==MAX-1?"👑 الجولة الذهبية ×2":"⚡ جولة دبل ×2";meta.appendChild(g)}
+ const pts=10*c.mx;
+ const kd=dv(m,"","");kd.id="kind";
+ const bt=document.createElement("div");bt.className="row";
+ const body=ty=>{const e=dv(m,"","");e.id="txt";return e};
+
+ if(c.ty=="g"){
+  const asked=1-s.t,q=P[c.id],txt=q.g.replace(/\{o\}/g,s.n[asked]);
+  kd.textContent="🕵️ خمّن -- "+who+" بيخمّن إجابة "+s.n[asked]+" (+"+pts+")";
+  body().textContent=txt;m.appendChild(bt);
+  if(mine){
+   tp(bt,"اختار اللي تتوقعه 👇");
+   q.o.forEach((o,k)=>mk(bt,o,k%2?"alt":"",()=>{act(x=>{if(!inRound(x,r)||x.t!=i)return false;
+     const real=x.prof[1-i][c.id],ok=k==real;x.tot[i]++;
+     if(ok){x.ok[i]++;x.sk[i]++;if(x.sk[i]>x.bs[i])x.bs[i]=x.sk[i];const bonus=Math.min(15,5*(x.sk[i]-1));x.S[i]+=pts+bonus;
+      adv(x,"✅ "+x.n[i]+" عرف! الإجابة "+q.o[real]+" -- +"+(pts+bonus)+(bonus?" (بونص سلسلة 🔥)":""))}
+     else{x.sk[i]=0;adv(x,"❌ "+x.n[i]+" قال "+q.o[k]+" بس "+x.n[1-i]+" اختار "+q.o[real]+" 😅")}})}));
+  }else{
+   tp(bt,"⏳ "+who+" بيخمّن إجابتك على: «"+q.s+"» -- ادعي له 😂");
+  }
+ }
+ else if(c.ty=="m"){
+  const h=H[c.id];
+  kd.textContent="🔮 قارئ الأفكار -- الاتنين يختاروا ويتوقعوا (+"+pts+" لكل توقع صح)";
+  const done=s.v[i]!==null;
+  if(done){body().textContent=h[0]+"  أو  "+h[1];m.appendChild(bt);tp(bt,"✅ سجلت اختيارك: "+h[s.v[i][0]]+" وتوقعك: "+h[s.v[i][1]]+" -- ⏳ منتظر "+other)}
+  else if(mo===null){body().textContent="إنت شخصياً بتفضل إيه؟";m.appendChild(bt);h.forEach((o,k)=>mk(bt,o,k?"alt":"",()=>{mo=k;render()}))}
+  else{body().textContent="طب "+other+" هيختار إيه؟ 🤔";m.appendChild(bt);h.forEach((o,k)=>mk(bt,o,k?"alt":"",()=>{const own=mo;
+    act(x=>{if(!inRound(x,r)||x.v[i]!==null)return false;x.v[i]=[own,k];
+     if(x.v[0]!==null&&x.v[1]!==null){
+      const res=[0,1].map(z=>x.v[z][1]==x.v[1-z][0]);
+      [0,1].forEach(z=>{x.tot[z]++;if(res[z]){x.ok[z]++;x.S[z]+=pts;x.sk[z]++;if(x.sk[z]>x.bs[z])x.bs[z]=x.sk[z]}else x.sk[z]=0});
+      const msg=x.n[0]+" اختار "+h[x.v[0][0]]+" و"+x.n[1]+" اختار "+h[x.v[1][0]]+" -- "+(res[0]&&res[1]?"الاتنين قرّوا بعض! 💞":res[0]?x.n[0]+" عرف بس "+x.n[1]+" لأ 😄":res[1]?x.n[1]+" عرف بس "+x.n[0]+" لأ 😄":"محدش عرف التاني! 😂");
+      adv(x,msg)}})}))}
+ }
+ else if(c.ty=="v"){
+  const w=W[c.id];kd.textContent="👆 تصويت -- لو اتفقتوا: +5 للاتنين واللقب لـ اللي اتصوّت له";
+  body().textContent=w[0];m.appendChild(bt);
+  if(s.v[i]!==null){tp(bt,"✅ اخترت: "+s.n[s.v[i]]+" -- ⏳ منتظر "+other)}
+  else{tp(bt,"اختار/ي واحد 👇");[0,1].forEach(k=>mk(bt,s.n[k],k?"alt":"",()=>{act(x=>{if(!inRound(x,r)||x.v[i]!==null)return false;x.v[i]=k;
+    if(x.v[0]!==null&&x.v[1]!==null){
+     if(x.v[0]==x.v[1]){const z=x.v[0];x.S[0]+=5;x.S[1]+=5;x.ti[z].push(w[1]);adv(x,"اتفقتوا! 🎖️ "+x.n[z]+" خد لقب: "+w[1]+" (+5 للاتنين)")}
+     else adv(x,x.n[0]+" صوّت لـ "+x.n[x.v[0]]+" و"+x.n[1]+" صوّت لـ "+x.n[x.v[1]]+" -- اختلفتوا 😄")}})}))}
+ }
+ else if(c.ty=="r"){
+  kd.textContent="💬 سؤال رومانسي -- الاتنين يجاوبوا (+5 لكل واحد)";
+  body().textContent=R[c.id];m.appendChild(bt);
+  if(s.v[i]===null){tp(bt,"اتكلموا في الدردشة أو بصوتكم، وبعدين دوس 👇");mk(bt,"جاوبت ✔","",()=>{act(x=>{if(!inRound(x,r)||x.v[i]!==null)return false;x.v[i]=1;
+    if(x.v[0]!==null&&x.v[1]!==null){x.S[0]+=5;x.S[1]+=5;adv(x,"حلوين أوي 🥰 +5 للاتنين")}})})}
+  else tp(bt,"✅ جاوبت -- ⏳ منتظر "+other);
+ }
+ else{
+  const isQ=c.ty=="q",tx=(isQ?Q:D)[c.id].replace(/\{o\}/g,s.n[1-s.t]);
+  kd.textContent=(isQ?"🧠 سؤال -- ":"🔥 تحدي -- ")+who+(isQ?" يجاوب":" ينفّذ")+" (+"+pts+")";
+  body().textContent=tx;m.appendChild(bt);
+  if(mine){
+   if(!s.a){
+    if(isQ){tp(bt,"اكتب إجابتك 👇");const ai=document.createElement("input");ai.id="ans";ai.placeholder="إجابتك…";bt.appendChild(ai);
+     mk(bt,"إرسال الإجابة 📨","",()=>{const v=$("ans").value.trim();if(!v)return;act(x=>{if(!inRound(x,r)||x.a)return false;x.a=v.slice(0,200)})})}
+    else{tp(bt,"نفّذ التحدي وبعدين دوس 👇");mk(bt,"خلصت التحدي ✔","",()=>act(x=>{if(!inRound(x,r)||x.a)return false;x.a="تم"}))}
+   }else tp(bt,"✅ تم -- ⏳ منتظر حكم "+other);
+  }else{
+   if(!s.a)tp(bt,"⏳ منتظر "+who+(isQ?" يجاوب…":" ينفّذ التحدي…"));
+   else{
+    const ab=dv(bt,"ansbox",isQ?"إجابة "+who+": "+s.a:who+" بيقول إنه نفّذ التحدي ✔");
+    mk(bt,isQ?"❤️ عجبتني (+"+pts+" لـ "+who+")":"✔ نفّذ (+"+pts+" لـ "+who+")","",()=>act(x=>{if(!inRound(x,r))return false;x.S[x.t]+=pts;adv(x,"برافو لـ "+who+"! 👏 +"+pts)}));
+    mk(bt,isQ?"😅 ضعيفة":"✖ لأ","alt",()=>act(x=>{if(!inRound(x,r))return false;adv(x,isQ?"حكم "+x.n[1-x.t]+": إجابة ضعيفة 😅":"يا خسارة، التحدي مأخدش 😅")}));
+   }
+  }
+ }
+}
+
+function send(){const v=$("ci").value.trim();if(!v||me()<0)return;$("ci").value="";push(cref,{u:uid,n:st.n[me()],m:v.slice(0,300),t:Date.now()}).catch(()=>{})}
+function chat(){onValue(query(cref,limitToLast(60)),q=>{const box=$("chat");box.innerHTML="";q.forEach(d=>{const x=d.val(),el=document.createElement("div");el.className="m "+(x.u==uid?"me":"ot");const sm=document.createElement("small");sm.textContent=x.n;el.appendChild(sm);el.appendChild(document.createTextNode(x.m));box.appendChild(el)});box.scrollTop=box.scrollHeight})}
+try{uid=localStorage.getItem("lg_uid");if(!uid){uid="u"+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem("lg_uid",uid)}}catch(e){uid="u"+Math.random().toString(36).slice(2)}
+$("cbox").style.display="flex";$("cs").onclick=send;$("ci").onkeydown=e=>{if(e.key=="Enter")send()};
+onValue(sref,sn=>{const v=sn.val();st=v?norm(v):null;render()},e=>{$("main").innerHTML="<p>مشكلة في الاتصال: "+e.code+"</p>"});
+chat();
+</script>
+</body>
+</html>
