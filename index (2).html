@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>لعبة الحب أونلاين 💞</title>
+<style>
+:root{--bg:#fff1f4;--card:#fff;--text:#4a1626;--accent:#e63e6d;--b2:#7c4dff;--muted:#a05a6e;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d0f15;--card:#2c1720;--text:#ffe3ea;--accent:#ff5c8a;--b2:#a58bff;--muted:#d49aab;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1d0f15;--card:#2c1720;--text:#ffe3ea;--accent:#ff5c8a;--b2:#a58bff;--muted:#d49aab;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:"Cairo","Segoe UI",Tahoma,sans-serif;display:flex;justify-content:center;padding:14px;text-align:center}
+#app{width:min(440px,100%);display:flex;flex-direction:column;gap:12px}
+.box{background:var(--card);border-radius:18px;padding:16px;box-shadow:0 6px 20px rgba(230,62,109,.15);display:flex;flex-direction:column;align-items:center;gap:10px}
+h1{margin:0;font-size:22px}
+p{margin:0;color:var(--muted);line-height:1.7}
+input{font:inherit;padding:10px 12px;border-radius:12px;border:2px solid var(--accent);background:transparent;color:var(--text);width:100%;text-align:center}
+button.b{font:inherit;font-weight:700;padding:11px 16px;border:0;border-radius:12px;background:var(--accent);color:#fff;cursor:pointer;flex:1;min-width:110px}
+button.b.alt{background:var(--b2)}
+button.b:disabled{opacity:.45}
+.row{display:flex;gap:8px;width:100%;flex-wrap:wrap}
+.sc{display:flex;gap:8px;width:100%}
+.sc div{flex:1;border-radius:12px;padding:6px;border:2px solid transparent;background:rgba(127,127,127,.12);font-weight:700;font-size:14px}
+.sc div.on{border-color:var(--accent)}
+.sc b{display:block;font-size:24px;color:var(--accent)}
+#txt{font-size:20px;font-weight:700;line-height:1.7;min-height:90px;display:flex;align-items:center}
+#kind{color:var(--b2);font-weight:700;font-size:14px}
+#last{color:var(--accent);font-weight:700;min-height:22px}
+#chat{width:100%;height:170px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:4px}
+.m{max-width:80%;padding:7px 11px;border-radius:14px;font-size:15px;text-align:start;word-break:break-word}
+.m.me{align-self:flex-start;background:var(--accent);color:#fff}
+.m.ot{align-self:flex-end;background:rgba(127,127,127,.2)}
+.m small{display:block;font-size:10px;opacity:.7}
+</style>
+</head>
+<body>
+<div id="app">
+ <div class="box" id="main"><p>جارٍ التحميل…</p></div>
+ <div class="box" id="cbox" style="display:none"><b>💬 دردشة اللعبة</b><div id="chat"></div><div class="row"><input id="ci" placeholder="اكتب رسالة…" style="flex:1;width:auto"><button class="b" id="cs" style="flex:none;min-width:70px">إرسال</button></div></div>
+</div>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getDatabase,ref,set,onValue,push,query,limitToLast} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+// ===== الصق إعدادات مشروعك هنا (Project settings > Your apps > Config) =====
+const firebaseConfig={
+  apiKey:"AIzaSyB6YZw2zqVycNa3fDFU-_ybljyqyVz5Ohw",
+  authDomain:"love-game-8df86.firebaseapp.com",
+  databaseURL:"https://love-game-8df86-default-rtdb.firebaseio.com",
+  projectId:"love-game-8df86",
+  storageBucket:"love-game-8df86.firebasestorage.app",
+  messagingSenderId:"7096177936",
+  appId:"1:7096177936:web:bad481d5466115d2b00195"
+};
+// ==========================================================================
+const rdb=getDatabase(initializeApp(firebaseConfig));
+const sref=ref(rdb,"love-game/state"),cref=ref(rdb,"love-game/chat");
+
+var $=function(x){return document.getElementById(x)};
+var Q=["قول/ي أكلة {o} المفضلة بالظبط","فين كانت أول مرة اتقابلنا؟","إيه أكتر حاجة بتضايق {o}؟","اسم أغنية بتفكرك بـ {o}؟","قول/ي حلم بسيط نفسه {o} يتحقق","إيه الحاجة اللي {o} بيخاف منها؟","قول/ي معلومة عن {o} متعرفهاش غيرك","إيه أحلى مكان لـ {o} في الدنيا؟"];
+var D=["قول/ي لـ {o} جملة غزل بصوت مسرحي 🎭","قلّد/ي {o} وهو بيتكلم 😂","ابعت/ي لـ {o} رسالة حب في الدردشة من غير كلمة بحبك","اوصف/ي {o} في 5 كلمات بس، بسرعة!","احكي/ي موقف محرج حصلك قدام {o}","اكتب/ي في الدردشة أحلى ذكرى جمعتك بـ {o} 💌"];
+var W=["مين فينا أكتر واحد بيتأخر؟ ⏰","مين فينا أكتر واحد بيزعل بسرعة؟","مين فينا أكتر واحد بيغير؟","مين فينا أكتر واحد رومانسي؟ 🌹","مين فينا أكتر واحد عنيد؟","مين فينا اللي بيعتذر الأول؟"];
+var H=["🏖️ بحر ولا ⛰️ جبل؟","☕ قهوة ولا 🍵 شاي؟","🌅 شروق ولا 🌇 غروب؟","🍫 حلو ولا 🍟 مالح؟","🌧️ شتا ولا ☀️ صيف؟","✈️ سفر ولا 🏠 قعدة في البيت؟"];
+var R=["إيه أحلى لحظة جمعتنا لحد دلوقتي؟ 💞","إيه الحاجة اللي نفسك نعملها سوا السنة دي؟","إيه أكتر حاجة بتحبها في شخصية التاني؟","لو سافرنا بكرة، رايحين فين؟ ✈️","إيه الكلمة اللي نفسك تسمعها أكتر؟ 💬"];
+var uid=null,st=null,busy=false;
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function fresh(){return {n:["",""],u:["",""],t:0,r:0,S:[0,0],ph:"lobby",c:null,v:[null,null],last:"",MAX:10}}
+function card(s){var ty=pick(["q","q","d","d","v","v","r"]),o=s.n[1-s.t];
+ if(ty=="q")return {ty:ty,tx:pick(Q).replace(/\{o\}/g,o)};
+ if(ty=="d")return {ty:ty,tx:pick(D).replace(/\{o\}/g,o)};
+ if(ty=="r")return {ty:ty,tx:pick(R)};
+ if(Math.random()<.5)return {ty:"v",tx:pick(W),op:[s.n[0],s.n[1]]};
+ var h=pick(H);return {ty:"v",tx:"اختاروا في نفس الوقت: "+h,op:h.split(" ولا ")}}
+function adv(s,msg){s.last=msg;s.v=[null,null];s.t=1-s.t;s.r++;if(s.r>=s.MAX)s.ph="end";else s.c=card(s);return s}
+function me(){return st?st.u.indexOf(uid):-1}
+function join(){var nm=$("nm").value.trim()||"لاعب";var s=st||fresh();if(me()>=0)return;
+ if(!s.u[0]){s.n[0]=nm;s.u[0]=uid;s.ph="lobby"}
+ else if(!s.u[1]){s.n[1]=nm;s.u[1]=uid;s.ph="play";s.t=0;s.r=0;s.S=[0,0];s.c=card(s)}
+ save(s)}
+function reset(){save(fresh())}
+function mk(p,txt,cls,fn,dis){var b=document.createElement("button");b.className="b "+(cls||"");b.textContent=txt;b.disabled=!!dis;b.onclick=fn;p.appendChild(b);return b}
+function render(){
+ var m=$("main");m.innerHTML="";var s=st,i=me();
+ var h=document.createElement("h1");h.textContent="لعبة الحب أونلاين 💞";m.appendChild(h);
+ if(!s||s.ph=="lobby"&&i<0){var p=document.createElement("p");p.textContent=!s||!s.u[0]?"اكتب اسمك وادخل، وابعت الرابط للتاني يدخل كمان 💌":(s.n[0]+" منتظرك! ادخل/ي واكتب/ي اسمك");m.appendChild(p);var inp=document.createElement("input");inp.id="nm";inp.placeholder="اسمك";m.appendChild(inp);mk(m,"ادخل اللعبة 🎮","",join);return}
+ if(s.ph=="lobby"){var p2=document.createElement("p");p2.textContent="⏳ منتظرين اللاعب التاني يفتح الرابط ويدخل…";m.appendChild(p2);mk(m,"إلغاء","alt",reset);return}
+ if(i<0){var p3=document.createElement("p");p3.textContent="اللعبة دي فيها لاعبين بالفعل ("+s.n[0]+" و"+s.n[1]+")";m.appendChild(p3);mk(m,"ابدأ لعبة جديدة","",reset);return}
+ var sc=document.createElement("div");sc.className="sc";[0,1].forEach(function(k){var d=document.createElement("div");d.className=s.ph=="play"&&k==s.t?"on":"";d.textContent=s.n[k]+(k==i?" (أنت)":"");var b=document.createElement("b");b.textContent=s.S[k];d.appendChild(b);sc.appendChild(d)});m.appendChild(sc);
+ var l=document.createElement("div");l.id="last";l.textContent=s.last;m.appendChild(l);
+ if(s.ph=="end"){var a=s.S[0],c=s.S[1],e=document.createElement("div");e.id="txt";e.textContent=a==c?"تعادل! 🤝 الاتنين كسبوا 💞":"🏆 الفايز: "+s.n[a>c?0:1];m.appendChild(e);mk(m,"نلعب تاني 🔁","",reset);return}
+ var rd=document.createElement("small");rd.style.color="var(--muted)";rd.textContent="الجولة "+(s.r+1)+" من "+s.MAX;m.appendChild(rd);
+ var c=s.c,mine=s.t==i,kd=document.createElement("div");kd.id="kind";
+ kd.textContent=c.ty=="q"?"🧠 سؤال — الدور على "+s.n[s.t]:c.ty=="d"?"🔥 تحدي — الدور على "+s.n[s.t]:c.ty=="v"?"👆 الاتنين يختاروا":"💬 سؤال رومانسي للاتنين";m.appendChild(kd);
+ var tx=document.createElement("div");tx.id="txt";tx.textContent=c.tx;m.appendChild(tx);
+ var bt=document.createElement("div");bt.className="row";m.appendChild(bt);
+ if(c.ty=="q"||c.ty=="d"){
+  if(mine){var w=document.createElement("p");w.textContent=c.ty=="q"?"جاوب/ي بصوتك أو في الدردشة، و"+s.n[1-i]+" هيحكم 👇":"نفّذ/ي التحدي، و"+s.n[1-i]+" هيحكم 👇";bt.appendChild(w)}
+  else{mk(bt,"✔ صح/نفّذ (+1 لـ "+s.n[s.t]+")","",function(){var n=JSON.parse(JSON.stringify(s));n.S[n.t]++;save(adv(n,"برافو لـ "+s.n[s.t]+"! 👏"))});mk(bt,"✖ لأ","alt",function(){save(adv(JSON.parse(JSON.stringify(s)),"يا خسارة 😅"))})}
+ }else if(c.ty=="v"){
+  c.op.forEach(function(o,k){mk(bt,o,k?"alt":"",function(){var n=JSON.parse(JSON.stringify(s));n.v[i]=k;if(n.v[0]!==null&&n.v[1]!==null){if(n.v[0]==n.v[1]){n.S[0]++;n.S[1]++;save(adv(n,"متفقين! +1 للاتنين 💞"))}else save(adv(n,"اختلفتوا 😄 والاختلاف جميل"))}else save(n)},s.v[i]!==null)});
+  if(s.v[i]!==null){var wt=document.createElement("p");wt.textContent="⏳ منتظر اختيار "+s.n[1-i];bt.appendChild(wt)}
+ }else{mk(bt,"جاوبنا الاتنين 💞 (+1 لكل واحد)","",function(){var n=JSON.parse(JSON.stringify(s));n.S[0]++;n.S[1]++;save(adv(n,"حلوين أوي 🥰"))})}
+}
+function norm(s){var a=function(x,d){x=x||[];return [x[0]==null?d:x[0],x[1]==null?d:x[1]]};s.v=a(s.v,null);s.S=a(s.S,0);s.u=a(s.u,"");s.n=a(s.n,"");return s}
+function save(s){if(busy)return;busy=true;set(sref,s).then(function(){busy=false}).catch(function(e){busy=false;$("main").insertAdjacentHTML("afterbegin","<p style='color:var(--accent)'>مش قادر أحفظ: "+(e&&e.code)+" (راجع قواعد Firebase)</p>")})}
+function send(){var v=$("ci").value.trim();if(!v||me()<0)return;$("ci").value="";push(cref,{u:uid,n:st.n[me()],m:v.slice(0,300),t:Date.now()}).catch(function(){})}
+function chat(){onValue(query(cref,limitToLast(60)),function(q){var box=$("chat");box.innerHTML="";q.forEach(function(d){var x=d.val(),el=document.createElement("div");el.className="m "+(x.u==uid?"me":"ot");var sm=document.createElement("small");sm.textContent=x.n;el.appendChild(sm);el.appendChild(document.createTextNode(x.m));box.appendChild(el)});box.scrollTop=box.scrollHeight})}
+try{uid=localStorage.getItem("lg_uid");if(!uid){uid="u"+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem("lg_uid",uid)}}catch(e){uid="u"+Math.random().toString(36).slice(2)}
+$("cbox").style.display="flex";$("cs").onclick=send;$("ci").onkeydown=function(e){if(e.key=="Enter")send()};
+onValue(sref,function(sn){var v=sn.val();st=v?norm(v):null;render()},function(e){$("main").innerHTML="<p>مشكلة في الاتصال: "+e.code+"</p>"});
+chat();
+
+</script>
+</body>
+</html>
