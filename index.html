@@ -1,28 +1,27 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>لعبة الحب أونلاين 💞 -- 100 جولة</title>
+<title>لعبة الحب أونلاين 💞</title>
 <style>
-:root{--bg:#fff1f4;--card:#fff;--text:#4a1626;--accent:#e63e6d;--b2:#7c4dff;--gold:#f5a623;--muted:#a05a6e;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d0f15;--card:#2c1720;--text:#ffe3ea;--accent:#ff5c8a;--b2:#a58bff;--gold:#ffc861;--muted:#d49aab;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#1d0f15;--card:#2c1720;--text:#ffe3ea;--accent:#ff5c8a;--b2:#a58bff;--gold:#ffc861;--muted:#d49aab;color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{--bg:#fff1f4;--card:#fff;--text:#4a1626;--accent:#e63e6d;--b2:#7c4dff;--gold:#f5a623;--muted:#a05a6e;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#1d0f15;--card:#2c1720;--text:#ffe3ea;--accent:#ff5c8a;--b2:#a58bff;--gold:#ffc861;--muted:#d49aab;color-scheme:dark}}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:"Cairo","Segoe UI",Tahoma,sans-serif;display:flex;justify-content:center;padding:14px;text-align:center}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:"Cairo","Segoe UI",Tahoma,sans-serif;display:flex;justify-content:center;padding:14px 14px 90px;text-align:center}
 #app{width:min(440px,100%);display:flex;flex-direction:column;gap:12px}
 .box{background:var(--card);border-radius:18px;padding:16px;box-shadow:0 6px 20px rgba(230,62,109,.15);display:flex;flex-direction:column;align-items:center;gap:10px}
-h1{margin:0;font-size:22px}
-h2{margin:0;font-size:18px}
+h1{margin:0;font-size:22px}h2{margin:0;font-size:18px}h3{margin:0;font-size:16px}
 p{margin:0;color:var(--muted);line-height:1.7}
 input{font:inherit;padding:10px 12px;border-radius:12px;border:2px solid var(--accent);background:transparent;color:var(--text);width:100%;text-align:center}
 button.b{font:inherit;font-weight:700;padding:11px 16px;border:0;border-radius:12px;background:var(--accent);color:#fff;cursor:pointer;flex:1;min-width:130px;transition:transform .1s}
 button.b:active{transform:scale(.96)}
-button.b.alt{background:var(--b2)}
-button.b.gold{background:var(--gold);color:#3a2300}
+button.b.alt{background:var(--b2)}button.b.gold{background:var(--gold);color:#3a2300}button.b.ghost{background:rgba(127,127,127,.18);color:var(--text)}
 button.b:disabled{opacity:.45}
+.row>p,.row>.ansbox,.row>input{flex-basis:100%}
 .row{display:flex;gap:8px;width:100%;flex-wrap:wrap}
+.top{display:flex;width:100%;justify-content:space-between;align-items:center;gap:8px}
+.code{font-weight:800;letter-spacing:3px;background:rgba(127,127,127,.15);border-radius:10px;padding:2px 10px;direction:ltr}
 .sc{display:flex;gap:8px;width:100%}
 .sc div{flex:1;border-radius:12px;padding:6px;border:2px solid transparent;background:rgba(127,127,127,.12);font-weight:700;font-size:14px}
 .sc div.on{border-color:var(--accent)}
@@ -33,28 +32,42 @@ button.b:disabled{opacity:.45}
 #last{color:var(--accent);font-weight:700;min-height:22px;line-height:1.6;animation:pop .4s}
 @keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
 .tag{background:var(--gold);color:#3a2300;border-radius:20px;padding:3px 12px;font-weight:700;font-size:13px}
+.sec{background:rgba(124,77,255,.15);color:var(--b2);border-radius:20px;padding:3px 12px;font-weight:700;font-size:13px}
 .bar{width:100%;height:8px;border-radius:8px;background:rgba(127,127,127,.2);overflow:hidden}
 .bar i{display:block;height:100%;background:var(--accent);transition:width .3s}
-#chat{width:100%;height:170px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:4px}
+.ansbox{background:rgba(127,127,127,.12);border-radius:12px;padding:10px;width:100%;font-weight:700;line-height:1.7}
+.pl{width:100%;border:2px solid var(--gold);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:6px;line-height:1.7;text-align:start}
+.pl b{font-size:17px}
+.pl .ln{font-size:14px}.pl .ln span{color:var(--muted)}
+.ti{display:inline-block;background:rgba(127,127,127,.15);border-radius:14px;padding:2px 10px;margin:2px;font-size:13px;font-weight:700}
+.big{font-size:42px}
+.fav{width:100%;text-align:start;font-size:14px;line-height:1.7;background:rgba(127,127,127,.1);border-radius:10px;padding:8px}
+.seg{display:flex;gap:6px;width:100%}.seg button{flex:1;font:inherit;font-weight:700;padding:8px 4px;border-radius:10px;border:2px solid var(--accent);background:transparent;color:var(--text);cursor:pointer;font-size:13px}.seg button.on{background:var(--accent);color:#fff}
+.err{color:var(--accent);font-weight:700}
+.rooms{width:100%;display:flex;flex-direction:column;gap:6px}
+.rooms button{font:inherit;padding:8px 12px;border-radius:10px;border:1px solid var(--muted);background:transparent;color:var(--text);cursor:pointer;display:flex;justify-content:space-between}
+/* chat */
+#fab{position:fixed;bottom:16px;left:16px;width:54px;height:54px;border-radius:50%;border:0;background:var(--accent);color:#fff;font-size:24px;box-shadow:0 6px 18px rgba(0,0,0,.3);cursor:pointer;display:none;z-index:20}
+#fab i{position:absolute;top:-4px;right:-4px;background:var(--gold);color:#3a2300;font-style:normal;font-size:12px;font-weight:800;min-width:20px;height:20px;border-radius:10px;display:none;align-items:center;justify-content:center;padding:0 5px}
+#sheet{position:fixed;left:0;right:0;bottom:0;margin:0 auto;width:min(440px,100%);height:min(60vh,460px);background:var(--card);border-radius:20px 20px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.3);z-index:30;display:none;flex-direction:column;padding:10px 12px 12px;gap:8px}
+#sheet .hd{display:flex;justify-content:space-between;align-items:center;font-weight:800}
+#sheet .hd button{border:0;background:rgba(127,127,127,.2);color:var(--text);border-radius:50%;width:30px;height:30px;font-size:16px;cursor:pointer}
+#chat{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:4px}
 .m{max-width:80%;padding:7px 11px;border-radius:14px;font-size:15px;text-align:start;word-break:break-word}
 .m.me{align-self:flex-start;background:var(--accent);color:#fff}
 .m.ot{align-self:flex-end;background:rgba(127,127,127,.2)}
 .m small{display:block;font-size:10px;opacity:.7}
-.ansbox{background:rgba(127,127,127,.12);border-radius:12px;padding:10px;width:100%;font-weight:700;line-height:1.7}
-.pl{width:100%;border:2px solid var(--gold);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:6px;line-height:1.7}
-.pl b{font-size:17px}
-.ti{display:inline-block;background:rgba(127,127,127,.15);border-radius:14px;padding:2px 10px;margin:2px;font-size:13px;font-weight:700}
-.big{font-size:42px}
+.qk{display:flex;gap:6px;justify-content:center}.qk button{border:0;background:rgba(127,127,127,.15);border-radius:10px;font-size:18px;padding:2px 8px;cursor:pointer}
+.cin{display:flex;gap:6px}.cin input{flex:1;width:auto}
 </style>
 </head>
 <body>
-<div id="app">
- <div class="box" id="main"><p>جارٍ التحميل…</p></div>
- <div class="box" id="cbox" style="display:none"><b>💬 دردشة اللعبة</b><div id="chat"></div><div class="row"><input id="ci" placeholder="اكتب رسالة…" style="flex:1;width:auto"><button class="b" id="cs" style="flex:none;min-width:70px">إرسال</button></div></div>
-</div>
+<div id="app"><div class="box" id="main"><p>جارٍ التحميل…</p></div></div>
+<button id="fab" aria-label="الدردشة">💬<i id="badge">0</i></button>
+<div id="sheet"><div class="hd"><span>💬 دردشة الغرفة <span class="code" id="scode"></span></span><button id="cx">✕</button></div><div id="chat"></div><div class="qk" id="qk"></div><div class="cin"><input id="ci" placeholder="اكتب رسالة…" maxlength="300"><button class="b" id="cs" style="flex:none;min-width:70px">إرسال</button></div></div>
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {getDatabase,ref,onValue,push,query,limitToLast,runTransaction} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import {getDatabase,ref,get,onValue,push,query,limitToLast,runTransaction} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 const firebaseConfig={
   apiKey:"AIzaSyB6YZw2zqVycNa3fDFU-_ybljyqyVz5Ohw",
   authDomain:"love-game-8df86.firebaseapp.com",
@@ -65,260 +78,212 @@ const firebaseConfig={
   appId:"1:7096177936:web:bad481d5466115d2b00195"
 };
 const rdb=getDatabase(initializeApp(firebaseConfig));
-const sref=ref(rdb,"love-game/state"),cref=ref(rdb,"love-game/chat");
 const $=x=>document.getElementById(x);
+const BASE="love-game/rooms/";
+const ls={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
 
-/* ================= بنك الأسئلة الجديد 100% (خالي من أي تكرار) ================= */
+/* ====== بنك الأسئلة (الستة أقسام بالترتيب اللي بعته) ====== */
+const GQ=[{"q": "إيه أكلتك المفضلة؟", "o": ["بيتزا", "مكرونة", "فراخ مشوية", "سوشي"]}, {"q": "لو معاك إجازة أسبوع، تقضيها فين؟", "o": ["على البحر", "في الجبل", "مدينة كبيرة", "في البيت"]}, {"q": "إيه أكتر حاجة بتضايقك؟", "o": ["التأخير", "الكدب", "إني أتجاهل", "الدوشة"]}, {"q": "لما بتزعل، بتعمل إيه؟", "o": ["بسكت", "بفرفر", "بعتزل", "بأكل"]}, {"q": "لغة الحب بتاعتك؟", "o": ["كلام حلو", "هدايا", "حضن", "وقت"]}, {"q": "في الخروجات بتبقى إنت…", "o": ["قلب الحفلة", "هادي", "المخطط", "عايز أرجع"]}, {"q": "إيه نوع الموسيقى اللي بتسمعه؟", "o": ["شعبي", "طرب", "روك", "إلكترونيك"]}, {"q": "أحلى هدية ممكن تتهاداها؟", "o": ["رحلة", "حاجة غالية", "رسالة", "عشاء"]}, {"q": "إيه أكتر عيب فيك؟", "o": ["العند", "الغيرة", "التأجيل", "الرغي"]}, {"q": "لو كسبت مليون جنيه، أول حاجة تعملها؟", "o": ["بيت", "سفر", "عربية", "تحويش"]}, {"q": "لو معاك يوم كامل فاضي، هتعمله إيه؟", "o": ["نوم", "ألعاب", "خروج", "قراية"]}, {"q": "إيه أكتر حاجة بتخليك تبتسم لوحدك؟", "o": ["رسالة", "أغنية", "أكل", "فيديوهات"]}, {"q": "لو هتتعلم مهارة جديدة؟", "o": ["موسيقى", "لغة", "طبخ", "برمجة"]}, {"q": "إيه أكتر حاجة بتخوفك؟", "o": ["حشرات", "كلام قدام ناس", "طيران", "وحدة"]}, {"q": "لو بقى عندك سوبر باور؟", "o": ["طيران", "قراءة أفكار", "إيقاف الزمن", "اختفاء"]}, {"q": "إيه أحلى وقت في يومك؟", "o": ["الصبح", "الضهر", "المغرب", "نص الليل"]}, {"q": "إيه أول حاجة بتحطها في شنطة السفر؟", "o": ["هدوم", "شاحن", "أكل", "كاميرا"]}, {"q": "لو هتبدأ مشروع بكرة؟", "o": ["كافيه", "براند", "أونلاين", "حلويات"]}, {"q": "إيه أكتر حاجة بتضايقك في الناس؟", "o": ["التأخير", "مبيسمعوش", "رغي", "وعود كدابة"]}, {"q": "لو هتعيش في مكان تاني؟", "o": ["مدينة كبيرة", "ساحلية", "جبل", "برة"]}, {"q": "إيه أحلى هدية ممكن تاخدها؟", "o": ["رسالة", "غالية", "عشاء", "سفر"]}, {"q": "إيه أحلى حاجة في الشتا؟", "o": ["مشروب سخن", "مطر", "هدوم تقيلة", "أكل"]}, {"q": "صباحك بيبدأ إزاي؟", "o": ["قهوة", "موبايل", "دش", "ضرب منبه"]}, {"q": "أول حاجة بتعملها لما توصل البيت؟", "o": ["أغير هدومي", "أفتح موبايل", "آكل", "أنام"]}, {"q": "أكثر حاجة بتشتريك في شخص؟", "o": ["خفة دم", "وفاء", "ذكاء", "جدعنة"]}, {"q": "لو هتتعشى برة؟", "o": ["بيتزا", "برجر", "سوشي", "باستا"]}, {"q": "أكتر حاجة بتحب تعملها في الويك إند؟", "o": ["طبيعة", "سينما", "قعدة بيت", "تسوق"]}, {"q": "لو هتاخد كورس مجاني؟", "o": ["برمجة", "رسم", "لغة", "بزنس"]}, {"q": "نوع الفيلم اللي بتحبه؟", "o": ["كوميدي", "درامي", "رعب", "خيال علمي"]}, {"q": "لو بقى معاك 100 ألف؟", "o": ["أحوشهم", "أسافر", "أشتري أغراض", "أطور حاجة"]}, {"q": "أكتر موقف بتحسه محرج؟", "o": ["كلام قدام ناس", "سلام غلط", "اتصال غلط", "رسالة غلط"]}, {"q": "لو هتختار حيوان أليف؟", "o": ["قطة", "كلب", "عصفور", "سمكة"]}, {"q": "أسلوبك في اللبس؟", "o": ["كاجوال", "كلاسيك", "ستريت", "ملون"]}, {"q": "إيه أكتر حاجة بتخليك تضحك من قلبك؟", "o": ["مواقف محرجة", "فيديوهات قطط", "نكت بايخة", "مقالب"]}, {"q": "بيت أحلامك شكله إيه؟", "o": ["فيلا", "بنتهاوس", "شاليه", "قصر"]}, {"q": "أكتر شغلانة بيت بتكرهها؟", "o": ["غسيل", "مواعين", "كنس", "زبالة"]}, {"q": "فين بتحس بالراحة أكتر؟", "o": ["سرير", "عربية", "قهوة", "طبيعة"]}, {"q": "لو هتشتري حاجة غالية؟", "o": ["موبايل", "لابتوب", "عربية", "ساعة"]}, {"q": "إيه أكتر حاجة بتخاف منها في المستقبل؟", "o": ["فشل", "فلوس", "مرض", "شغل"]}, {"q": "لما تكون زعلان بتحب تسمع إيه؟", "o": ["متخافش", "تعال نضحك", "أكل", "خروج"]}, {"q": "لو هتعيد تربية نفسك؟", "o": ["كنت ههتم براحتي", "بعبر عن مشاعري", "أثق في نفسي", "مش بضيع وقت"]}, {"q": "إيه أحلى عادة عندك؟", "o": ["قراية", "رياضة", "تنظيم وقت", "مساعدة"]}, {"q": "إيه نوع الهدايا اللي بتفضلها؟", "o": ["عملية", "فيها ذكرى", "غالية", "مفاجآت"]}, {"q": "إيه أكتر حاجة بتعملك توتر؟", "o": ["كلام قدام ناس", "امتحانات", "مكالمات", "زحمة"]}, {"q": "لو هتبقى حيوان ليوم؟", "o": ["طير", "أسد", "كلب", "دلفين"]}, {"q": "أحلى فاكهة؟", "o": ["بطيخ", "فراولة", "موز", "مانجا"]}, {"q": "لو هتتعلم لغة؟", "o": ["إنجليزي", "فرنساوي", "إسباني", "ياباني"]}, {"q": "إيه أغرب خلطة أكل بتحبها؟", "o": ["بيتزا بشوكولاتة", "بطاطس بعسل", "عيش بمربى", "مكرونة بكاتشب"]}, {"q": "لو رجعت بالزمن؟", "o": ["فراعنة", "عصور وسطى", "مستقبل", "ديناصورات"]}, {"q": "إيه أكتر إيموجي بتستخدمه؟", "o": ["😂", "❤️", "🔥", "👍"]}, {"q": "إيه موهبتك المخفية؟", "o": ["غنا", "كتابة", "رسم", "ألعاب سحرية"]}, {"q": "إيه أحلى ريحة؟", "o": ["قهوة", "مطر", "خبز", "ورد"]}, {"q": "لما بتتوتر بتعمل إيه؟", "o": ["أكل حلويات", "أمشي", "ألعب", "أنام"]}, {"q": "لو هتعيش على أكلة واحدة؟", "o": ["بيتزا", "برجر", "مشويات", "مكرونة"]}, {"q": "إيه الحاجة اللي بتخليك حاسس بالذنب؟", "o": ["أكل غير صحي", "نوم كتير", "تأخير", "تضييع وقت"]}];
+const OQ=["احكي لـ {o} أول انطباع خدته عنه لما اتقابلتوا 👀", "قول لـ {o} حاجة بتحبها فيه وعمرك ما قلتها له 💌", "إيه أكتر موقف حبيت فيه {o} أكتر؟", "لو {o} فيلم، هيبقى اسمه إيه؟ 🎬", "دلّع {o} بأحلى لقب من عندك 😘", "وصف {o} في 3 كلمات بس وفسّر ليه", "إيه أكتر حاجة بتعجبك في شخصية {o}؟ 🌟", "إيه أحلى نصيحة {o} قالها لك؟ 💡", "لو تعرف تهدي {o} حاجة واحدة، هتكون إيه؟ 🎁", "إيه أكتر موقف حسيت فيه إن {o} بيفهمك؟ 🧠", "لو {o} كان شخصية كرتونية، هيبقى مين؟ 🎬", "إيه أكثر حاجة نفسك تعرفها عن {o}؟ 🔍", "إيه أحلى كلمة سمعتها من {o}؟ 💬", "إيه أكتر حاجة بتحبها في طريقة {o} في الكلام؟ 🗣️", "لو تكتب كتاب عن {o}، هيبقى اسمه إيه؟ 📖", "إيه أحلى هدية قدمها لك {o}؟ 🎀", "إيه الحاجة اللي نفسك {o} يتعلمها؟ 📚", "إيه أكتر حاجة بتخليك تفتخر بـ {o}؟ 💪", "إيه أول حاجة لفتت نظرك في {o}؟ 👀", "إيه أحلى موقف جمعكم سوا وبتفتكره دايماً؟ ✨", "لو تكتب رسالة لـ {o} مش هيتقراها غير بعد سنة، هتكتب إيه؟ ✉️", "إيه الحاجة اللي بتخاف تقولها لـ {o} بس نفسك تقولها؟ 🤫", "إيه حلم نفسك تحققه مع {o}؟ 💭", "لو {o} كان أكلة، هيبقى إيه وليه؟ 🍔", "إيه أكتر موقف حسيت فيه إن {o} هو الشخص الصح؟ 🫂", "إيه أكتر حاجة بتضحكك في {o} حتى لو مش بيحاول؟ 😂", "إيه أول انطباع خدته عن {o} لما شفته؟ 📸", "إيه أحلى هدية نفسك تقدمها لـ {o}؟ 🎁", "لو تعرف ترجع بالزمن ليوم واحد مع {o}، هيبقى أنهي يوم؟ ⏳", "إيه أكتر مكان نفسك تروحه مع {o}؟ ✈️", "إيه الكلمة اللي لو {o} قالها هتذوب؟ 🫠", "إيه الموهبة المخفية اللي عند {o} ومحدش يعرفها؟ 🤫", "اوصف أحلى يوم تقضيه مع {o} من الصبح للليل 🌅", "إيه الحاجة الصغيرة اللي بيعملها {o} وبتفرحك جداً؟ ✨", "لو هتدي {o} لقب، هتسميه إيه؟ 👑", "إيه المكان اللي عمرك ما رحتوه مع بعض ونفسك تروحوه؟ 🗺️", "إيه الحاجة اللي نفسك تتعلمها سوا؟ 📚", "إيه أكتر موقف مضحك حصلكم مع بعض؟ 😂", "لو هتوصف {o} لشخص غريب في جملة واحدة، هتقول إيه؟ 🗣️", "إيه الحاجة اللي بيعملها {o} وبتخليك تحس إنك محبوب؟ ❤️", "لو هتطبخ لـ {o} أكلة، هتعمله إيه؟ 🍳", "إيه هدف نفسك تحققوه سوا في الـ 5 سنين الجايين؟ 🎯", "إيه أحلى حاجة في شكل {o}؟ 😍", "إيه الأغنية اللي بتوصف علاقتكم؟ 🎵"];
+const DQ=["قول لـ {o} جملة غزل بصوت مسرحي 🎭", "قلّد {o} وهو بيتكلم 😂", "ابعت لـ {o} رسالة حب في الدردشة من غير كلمة بحبك", "اكتب في الدردشة أحلى ذكرى جمعتك بـ {o} 💌", "احكي موقف محرج حصلك قدام {o} 🙈", "غنّي لـ {o} مقطع من أغنية بتفكرك بيه 🎤", "غني مقطع من أغنية بتحبها 🎤", "قلد شخصية كرتونية مشهورة 🎭", "قول 3 حاجات بتحبها في نفسك 💪", "اعمل حركة مضحكة دلوقتي 😂", "اكتب رسالة حب في الدردشة 💌", "قلد {o} في حركة بيعملها كتير 😅", "قول نكتة دلوقتي 😄", "صور حاجة قدامك وابعت 🌟", "قول حكمة بتؤمن بيها 📿", "ابعت إيموجي بيعبر عن حالتك دلوقتي 🎯", "امدح {o} في 10 ثواني ⏱️", "اعمل صوت حيوان لمدة 5 ثواني 🐱", "قول سر صغير عنك 🤫", "قول جملة رومانسية باللهجة العامية 💕", "ابعت لـ {o} رسالة حب من غير ما تستخدم حرف الألف 💌", "قول لـ {o} 3 حاجات بتحبها فيه في 5 ثواني ⏱️", "امدح {o} بكلمة واحدة بس تكون قوية ومؤثرة 💪", "اعمل لـ {o} مفاجأة دلوقتي (هدية، كلمة، أو حركة) 🎁", "قلد شكل {o} لما بيبقى زعلان أو متنرفز 😤", "اكتب اسم {o} في الدردشة بس بالرموز/الإيموجي 🎨", "قلد صوت {o} في مكالمة تليفون 📞", "قول لـ {o} أكتر حاجة بتخاف تخسرها فيه 💔", "ابعت سيلفي شكلك فيه مضحك أو غريب دلوقتي 🤳", "قول جملة صعبة 3 مرات بسرعة 🗣️", "اعمل نفسك روبوت واتكلم كده لحد دورك الجاي 🤖", "اتكلم بلكنة إنجليزية لمدة دقيقة كاملة 🇬🇧", "اكتب بيت شعر سريع لـ {o} دلوقتي 📝", "اعمل 10 سكوات أو ضغط دلوقتي حالاً 🏋️", "ابعت فويس نوت بتغني فيه عيد ميلاد سعيد لـ {o} 🎵", "اقرأ آخر رسالة جاتلك في الموبايل بصوت درامي 🎬", "اخترع حركة رقص جديدة وسميها باسم {o} 💃", "ارسم رسمة سريعة لـ {o} على موبايلك وابعتها 🎨", "امدح نفسك 3 مرات بصوت عالي من غير كلمة (أنا كويس) 🌟"];
+const VQ=[["مين فينا أكتر واحد بيتأخر؟ ⏰", "⏰ ملك التأخير"], ["مين فينا أكتر واحد بيزعل بسرعة؟ 🥺", "🥺 ملك الزعل"], ["مين فينا أكتر واحد بيغير؟ 🔥", "🔥 ملك الغيرة"], ["مين فينا أكتر واحد رومانسي؟ 🌹", "🌹 الرومانسي الأول"], ["مين فينا أكتر واحد عنيد؟ 🐂", "🐂 دماغه ناشفة"], ["مين فينا اللي بيعتذر الأول؟ 🕊️", "🕊️ حمامة السلام"], ["مين فينا أكتر واحد رغّاي؟ 🗣️", "🗣️ ملك الرغي"], ["مين فينا أكتر واحد كسلان؟ 🛌", "🛌 ملك الكسل"], ["مين فينا اللي بيصحى بدري؟ ⏰", "⏰ عصفور الصبح"], ["مين فينا اللي بيخطط لكل حاجة؟ 🗺️", "🗺️ مدير الرحلات"], ["مين فينا اللي بيسأل \"إيه فيك\" أول واحد؟ 💬", "💬 حبيب مطمن"], ["مين فينا اللي بيصر على رأيه؟ 🐂", "🐂 دماغ ناشفة"], ["مين فينا اللي بيضحك من أقل حاجة؟ 😂", "😂 ملك الضحك"], ["مين فينا اللي بيفكر في التاني أكتر؟ 💭", "💭 قلب حنين"], ["مين فينا اللي بيختفي وقت الزعل؟ 🙈", "🙈 الحمامة الزعلانة"], ["مين فينا اللي بيقول \"بحبك\" أكتر؟ ❤️", "❤️ ملك الكلام الحلو"], ["مين فينا أشطر في الطبخ؟ 🍳", "🍳 الشيف"], ["مين فينا أكثر واحد بيسمع؟ 👂", "👂 السامع الحنين"], ["مين فينا أشطر في الكلام؟ 🗣️", "🗣️ الخطيب"], ["مين فينا أكثر واحد بيخاف؟ 🕷️", "🕷️ الخواف"], ["مين فينا أكثر واحد متحمس؟ 🔥", "🔥 المتحمس"], ["مين فينا أكثر واحد هادي؟ 😌", "😌 الهادي"], ["مين فينا أشطر في الجدال؟ 🤔", "🤔 المحامي"], ["مين فينا أكثر واحد طفولي؟ 🧒", "🧒 الطفولي"], ["مين فينا أكثر واحد عملي؟ 🧠", "🧠 العقل المدبر"], ["مين فينا أكثر واحد بيحب السفر؟ ✈️", "✈️ الرحالة"], ["مين فينا أشطر في المفاجآت؟ 🎁", "🎁 ملك المفاجآت"], ["مين فينا أكثر واحد بيصرف؟ 💰", "💰 الكرم"], ["مين فينا هيعرف ينجو من الزومبي؟ 🧟‍♂️", "🧟‍♂️ الناجي"], ["مين فينا السواقة بتاعته أحسن؟ 🚗", "🚗 السواق الماهر"], ["مين فينا بيعيط في الأفلام الحزينة؟ 😢", "😢 القلب الرقيق"], ["مين فينا بياخد وقت أطول في الحمام؟ 🚿", "🚿 ملك الدش"], ["مين فينا بينسى المناسبات؟ 📅", "📅 النسيان"], ["مين فينا صوته أحلى في الغنا؟ 🎤", "🎤 الفنان"], ["مين فينا بيتوه بسرعة؟ 🗺️", "🗺️ التايه"], ["مين فينا بيفكر في الأكل أكتر؟ 🍔", "🍔 الأكول"], ["مين فينا بيسهر أكتر؟ 🦉", "🦉 كائن الليل"], ["مين فينا عنده وسواس نضافة؟ 🧹", "🧹 المستر كلين"], ["مين فينا هيكسب في لعبة معلومات؟ 🧠", "🧠 العقل"], ["مين فينا صبره أطول؟ 🧘‍♂️", "🧘‍♂️ الصبور"], ["مين فينا بيحب النميمة", "النميمة الحكاوي)؟ 🗣️ (السامع الحنين"], ["مين فينا بياخد صور أحلى؟ 📸", "📸 المصور"]];
+const MQ=[["🏖️ بحر", "⛰️ جبل"], ["☕ قهوة", "🍵 شاي"], ["🌅 شروق", "🌇 غروب"], ["🍫 حلو", "🍟 مالح"], ["🌧️ شتا", "☀️ صيف"], ["✈️ سفر", "🏠 قعدة في البيت"], ["🎬 فيلم", "📺 سيرياس"], ["🐶 كلب", "🐱 قطة"], ["🎧 سماعات", "🔊 سبيكر"], ["📱 سوشيال", "📖 كتاب"], ["🌅 صبح", "🌙 ليل"], ["🎬 فيلم", "🎮 لعبة"], ["🍕 بيتزا", "🍔 برجر"], ["🏠 قعدة بيت", "🚶 خروج"], ["📱 موبايل", "📖 كتاب"], ["🎵 موسيقى", "🎙️ بودكاست"], ["🌊 بحر", "⛰️ جبل"], ["🍫 شوكولاتة", "🍿 فشار"], ["🎨 رسم", "🎸 موسيقى"], ["📸 صور", "📝 كتابة"], ["🎮 لعب", "📺 مشاهدة"], ["🌊 بحر", "🏊 مسبح"], ["🌮 تاكو", "🍕 بيتزا"], ["📱 رسالة", "📞 مكالمة"], ["📚 كتب", "🎧 بودكاست"], ["🍫 شوكولاتة بالحليب", "🍫 شوكولاتة غامقة"], ["🎬 أكشن", "😂 كوميدي"], ["📺 نتفليكس", "▶️ يوتيوب"], ["⛰️ جبل", "🏜️ صحرا"], ["☕ قهوة", "🥤 مشروب طاقة"], ["🏖️ شاطئ", "🌲 غابة"], ["🎲 ألعاب لوحية", "🎮 ألعاب فيديو"], ["🚆 قطر", "🚌 أتوبيس"], ["🌸 ربيع", "☀️ صيف"], ["🍵 شاي", "🍋 ليمونادة"], ["🚿 دش الصبح", "🚿 دش بالليل"], ["🏙️ مدينة", "🌳 ريف"]];
+const RQ=["إيه أحلى لحظة جمعتكم سوا لحد دلوقتي؟ 💞", "إيه الحاجة اللي نفسك تعملوها سوا السنة دي؟ ✨", "إيه أكتر حاجة بتحبها في شخصية التاني؟ 🌹", "لو سافرتوا بكرة، رايحين فين؟ ✈️", "إيه الكلمة اللي نفسك تسمعها منه أكتر؟ 💬", "إيه اللي بيخليك تحس إنكم لبعض؟ 💗", "إيه أكتر حاجة نفسك تكتشفها عن {o} لسه؟ 🔍", "إيه أحلى حاجة في صوت {o}؟ 🎵", "لو تعيش يوم كامل مع {o} من غير فلوس، هتعملوا إيه؟ 💸", "إيه أكتر حاجة بتخليك تشتاق لـ {o}؟ 🥺", "لو {o} يبقى لون، هيبقى إيه؟ 🎨", "لو تكتب أغنية لـ {o}، عن إيه هتكون؟ 🎤", "لو {o} يبقى فيلم، هيبقى نوعه إيه؟ 🎬", "إيه أكتر حاجة نفسك تقولها لـ {o} ومش لاقي وقت؟ 🗣️", "إيه أكتر حاجة بتخليك حاسس إنك قريب من {o} جداً؟ 💞", "إمتى بتحس إن {o} بيحبك أكتر؟ ❤️", "إزاي بتكملوا بعض في الشخصية؟ 🧩", "إيه أول حاجة بتتطلع لرؤيتها لما تشوف {o}؟ 👀", "إيه اللون اللي بيمثل علاقتكم؟ 🎨", "إيه أحلى حاجة في علاقتكم دلوقتي؟ 🌟", "إيه تصرف صغير من {o} بيعنيلك الدنيا؟ ✨", "اوصف مستقبلكم سوا في 3 كلمات؟ 🔮", "إيه أحلى حاجة بيعملها {o} من غير ما يحس؟ 🥰", "إيه موقف مضحك حصل بينكم بسبب سوء تفاهم؟ 🤭", "إيه العادة اللي نفسك تبدأوها سوا؟ 🎯", "إيه وعد نفسك توعد بيه {o}؟ 🤝", "إزاي {o} غير حياتك للأحسن؟ 🦋", "إيه أحلى طريقة بتحبو تقضوها في ليلة هادية؟ 🌙"];
+const SEC={g:"🕵️ أسئلة التخمين",q:"🧠 أسئلة مفتوحة",d:"🔥 التحديات",v:"👆 مين فينا؟",m:"🔮 قارئ الأفكار",r:"💬 أسئلة رومانسية"};
+// أسئلة أساسية دايماً موجودة في أسئلتك عشان تحليل الشخصية: لغة الحب، الزعل، العيب، الخوف، القوة، الجاذبية، الخروجات، الضيق
+const CORE={love:4,upset:3,flaw:8,fear:13,power:14,attr:24,out:5,annoy:18};
+const COREIDX=Object.values(CORE);
+const PROF_N=20;
 
-// P: تخمين (17 سؤال)
-const P=[
- {s:"إيه الوظيفة اللي كنت بتحلم بيها وإنت صغير؟",g:"{o} كان بيحلم يشتغل إيه وهو صغير؟",o:["👨‍🚀 رائد فضاء","👨‍⚕️ دكتور","✈️ طيار","🎮 لاعب أو مبرمج"]},
- {s:"إيه أغرب أكلة أو خلطة بتحبها؟",g:"إيه أغرب خلطة أكل {o} بيحبها؟",o:["🍕 بيتزا بالشوكولاتة","🍟 بطاطس بالعسل","🍞 عيش بالجبنة والمربى","🍝 مكرونة بالكاتشب"]},
- {s:"لو رجعت بالزمن، كنت هتروح أنهي عصر؟",g:"لو {o} رجع بالزمن، هيروح فين؟",o:["🏺 عصر الفراعنة","🏰 العصور الوسطى","🚀 المستقبل البعيد","🦖 عصر الديناصورات"]},
- {s:"إيه أكتر إيموجي بتستخدمه في الشات؟",g:"إيه أكتر إيموجي {o} بيستخدمه؟",o:["😂 ضحك","❤️ قلب","🔥 نار","👍 تمام"]},
- {s:"إيه الموهبة المخفية اللي عندك؟",g:"إيه الموهبة المخفية عند {o}؟",o:["🎤 الغنا","✍️ الكتابة","🎨 الرسم","🤹 الألعاب السحرية"]},
- {s:"إيه أحلى خروجة ممكن تروحها؟",g:"أحلى خروجة بالنسبة لـ {o} هي؟",o:["🎬 سينما","☕ قهوة هادية","🍽️ عشاء فاخر","🌳 تمشية في الطبيعة"]},
- {s:"لو هتقابل شخصية تاريخية، هتختار مين؟",g:"{o} هيقابل مين من التاريخ؟",o:["🏛️ كليوباترا","🔬 أينشتاين","⚔️ صلاح الدين","🎨 ليوناردو دافنشي"]},
- {s:"إيه أحلى ريحة بتحبها؟",g:"{o} بيحب ريحة إيه؟",o:["☕ القهوة","🌧️ المطر","🍞 الخبز الطازج","🌸 الورد"]},
- {s:"إيه المهارة اللي نفسك تتعلمها؟",g:"إيه المهارة اللي {o} نفسه يتعلمها؟",o:["🗣️ لغة جديدة","🎸 موسيقى","💻 برمجة","📷 تصوير"]},
- {s:"لما بتتوتر، بتعمل إيه؟",g:"{o} بيعمل إيه لما يتوتر؟",o:["🍫 ياكل حلويات","🚶 يتمشى","🎮 يلعب","😴 ينام"]},
- {s:"لو هتعيش على أكلة واحدة للأبد، هتختار إيه؟",g:"أكلة {o} الأبدية هتكون إيه؟",o:["🍕 بيتزا","🍔 برجر","🍗 مشويات","🍝 مكرونة"]},
- {s:"إيه أحلى فصل في السنة بالنسبة لك؟",g:"أحلى فصل لـ {o} هو؟",o:["🌸 الربيع","☀️ الصيف","🍂 الخريف","❄️ الشتا"]},
- {s:"إيه أكتر مغامرة مجنونة عملتها؟",g:"{o} عمل مغامرة إيه؟",o:["🎢 ركوب مرعب","✈️ سفر لوحده","🏕️ تخييم في الصحرا","🚗 سواقة سريعة"]},
- {s:"إيه الحاجة اللي بتخليك حاسس بالذنب لو عملتها؟",g:"{o} بيحس بالذنب لو عمل إيه؟",o:["🍔 ياكل أكل غير صحي","😴 ينام كتير","⏰ يتأخر","📱 يضيع وقت"]},
- {s:"إيه لغة الحب اللي بتحبها؟",g:"إيه لغة الحب المفضلة لـ {o}؟",o:["💌 كلام حلو","🎁 هدايا","🤗 لمس وحضن","⏳ وقت مع بعض"]},
- {s:"لو هتسكن في عصر تاني، هيكون إيه؟",g:"{o} هيسكن في عصر إيه؟",o:["🏺 العصر الفرعوني","🏰 عصر الفرسان","🚀 عصر الفضاء","🎸 الستينات"]},
- {s:"إيه عربية أحلامك؟",g:"عربية أحلام {o} هي؟",o:["🏎️ عربية رياضية سريعة","🚙 عربية دفع رباعي","🚗 عربية كلاسيك","⚡ عربية كهربائية"]}
-];
-
-// Q: أسئلة مفتوحة (17 سؤال)
-const Q=[
- "إيه الموهبة المخفية اللي عند {o} ومحدش يعرفها؟ 🤫",
- "اوصف أحلى يوم تقضيه مع {o} من الصبح للليل 🌅",
- "إيه الحاجة الصغيرة اللي بيعملها {o} وبتفرحك جداً؟ ✨",
- "لو هتدي {o} لقب، هتسميه إيه؟ 👑",
- "إيه المكان اللي عمرك ما رحتوه مع بعض ونفسك تروحوه؟ 🗺️",
- "إيه الحاجة اللي نفسك تتعلمها سوا؟ 📚",
- "إيه أكتر موقف مضحك حصلكم مع بعض؟ 😂",
- "لو هتوصف {o} لشخص غريب في جملة واحدة، هتقول إيه؟ 🗣️",
- "إيه فيلم أو مسلسل بيفكرك بـ {o}؟ 🎬",
- "إيه الحاجة اللي بيعملها {o} وبتخليك تحس إنك محبوب؟ ❤️",
- "لو هتطبخ لـ {o} أكلة، هتعمله إيه؟ 🍳",
- "إيه هدف نفسك تحققوه سوا في الـ 5 سنين الجايين؟ 🎯",
- "إيه أحلى حاجة في شكل {o}؟ 😍",
- "إيه أحلى موقف بيعملها {o} وبتبقى مش ناسيه؟ 🎁",
- "لو تقدر توقف الزمن في لحظة معينة مع {o}، هتختار أنهي لحظة؟ ⏳",
- "إيه الأغنية اللي بتوصف علاقتكم؟ 🎵",
- "إيه حلم شفته قريب و{o} كان فيه؟ 💭"
-];
-
-// D: تحديات (17 سؤال)
-const D=[
- "قلد شخصية مشهورة جداً لمدة 10 ثواني 🎭",
- "ابعت سيلفي شكلك فيه مضحك أو غريب دلوقتي 🤳",
- "قول جملة صعبة (Tongue twister) 3 مرات بسرعة 🗣️",
- "اعمل نفسك روبوت واتكلم كده لحد دورك الجاي 🤖",
- "اتكلم بلكنة إنجليزية لمدة دقيقة كاملة 🇬🇧",
- "غني كورس أغنية من طفولتك 🎤",
- "اكتب بيت شعر سريع لـ {o} دلوقتي 📝",
- "اكتب رسالة لـ {o} مكونة من إيموجي بس 🎨",
- "اعمل 10 سكوات أو ضغط دلوقتي حالاً 🏋️",
- "قول عادة غريبة أو مضحكة بتعملها لما تكون لوحدك 🙈",
- "ابعت فويس نوت بتغني فيه عيد ميلاد سعيد لـ {o} 🎵",
- "قول لـ {o} حاجة إنت ممتن له فيها جداً 🫂",
- "اقرأ آخر رسالة جاتلك في الموبايل بصوت درامي 🎬",
- "اخترع حركة رقص جديدة وسميها باسم {o} 💃",
- "ارسم رسمة سريعة لـ {o} على موبايلك وابعتها 🎨",
- "قول فكرة أو سر عمرك ما قلته لحد 🤫",
- "امدح نفسك 3 مرات بصوت عالي من غير كلمة (أنا كويس) 🌟"
-];
-
-// W: تصويت (16 سؤال)
-const W=[
- ["مين فينا هيعرف ينجو من الزومبي؟ 🧟‍♂️","🧟‍♂️ الناجي"],
- ["مين فينا السواقة بتاعته أحسن؟ 🚗","🚗 السواق الماهر"],
- ["مين فينا بيعيط في الأفلام الحزينة؟ 😢","😢 القلب الرقيق"],
- ["مين فينا بياخد وقت أطول في الحمام؟ 🚿","🚿 ملك الدش"],
- ["مين فينا بينسى المناسبات؟ 📅","📅 النسيان"],
- ["مين فينا صوته أحلى في الغنا؟ 🎤","🎤 الفنان"],
- ["مين فينا بيتوه بسرعة في مكان جديد؟ 🗺️","🗺️ التايه"],
- ["مين فينا بيفكر في الأكل أكتر؟ 🍔","🍔 الأكول"],
- ["مين فينا بيسهر أكتر؟ 🦉","🦉 كائن الليل"],
- ["مين فينا عنده وسواس نضافة؟ 🧹","🧹 المister Clean"],
- ["مين فينا هيكسب في لعبة معلومات؟ 🧠","🧠 العقل"],
- ["مين فينا صبره أطول؟ 🧘‍♂️","🧘‍♂️ الصبور"],
- ["مين فينا بيصرف فلوس على حاجات ملهاش لازمة؟ 🛍️","🛍️ المبذر"],
- ["مين فينا بيحب النميمة (الحكاوي)؟ 🗣️","🗣️ السامع الحنين"],
- ["مين فينا بياخد صور أحلى؟ 📸","📸 المصور"],
- ["مين فينا بيضحك على نكته بنفسه؟ 😂","😂 الضحوك"]
-];
-
-// H: قارئ الأفكار (17 سؤال)
-const H=[
- ["🌊 بحر (Ocean)","🏊 مسبح (Pool)"],
- ["🌮 تاكو","🍕 بيتزا"],
- ["🌅 يصحى بدري","🦉 يسهر"],
- ["📱 رسالة (Text)","📞 مكالمة (Call)"],
- ["📚 كتب","🎧 بودكاست"],
- ["🍫 شوكولاتة بالحليب","🍫 شوكولاتة غامقة"],
- ["🎬 أكشن","😂 كوميدي"],
- ["📺 نتفليكس","▶️ يوتيوب"],
- ["⛰️ جبل","🏜️ صحرا"],
- ["☕ قهوة","🥤 مشروب طاقة"],
- ["🏖️ شاطئ","🌲 غابة"],
- ["🎲 ألعاب لوحية","🎮 ألعاب فيديو"],
- ["🚆 قطر","🚌 أتوبيس"],
- ["🌸 ربيع","☀️ صيف"],
- ["🍵 شاي","🍋 ليمونادة"],
- ["🚿 دش الصبح","🚿 دش بالليل"],
- ["🏙️ مدينة","🌳 ريف"]
-];
-
-// R: أسئلة رومانسية (16 سؤال)
-const R=[
- "إيه أكتر حاجة بتخليك حاسس إنك قريب من {o} جداً؟ 💞",
- "إمتى بتحس إن {o} بيحبك أكتر؟ ❤️",
- "إيه الحلم اللي نفسك تحققه مع {o}؟ 🌠",
- "إيه أحلى ذكرى ليكم وانتم بتضحكوا؟ 😂",
- "إزاي بتكملوا بعض في الشخصية؟ 🧩",
- "إيه أول حاجة بتتطلع لرؤيتها لما تشوف {o}؟ 👀",
- "إيه اللون اللي بيمثل علاقتكم؟ 🎨",
- "إيه أحلى حاجة في علاقتكم دلوقتي؟ 🌟",
- "إيه تصرف صغير من {o} بيعنيلك الدنيا؟ ✨",
- "اوصف مستقبلكم سوا في 3 كلمات؟ 🔮",
- "إيه أحلى حاجة بيعملها {o} من غير ما يحس؟ 🥰",
- "إيه موقف مضحك حصل بينكم بسبب سوء تفاهم؟ 🤭",
- "إيه العادة اللي نفسك تبدأوها سوا؟ 🎯",
- "إيه وعد نفسك توعد بيه {o}؟ 🤝",
- "إزاي {o} غير حياتك للأحسن؟ 🦋",
- "إيه أحلى طريقة بتحبو تقضوها في ليلة هادية؟ 🌙"
-];
-
-/* ================= حالة اللعبة ================= */
-let uid=null,st=null,pq=0,pa=[],mo=null,mrk=-1;
-
-// 100 جولة (المصفوفة دي متظبطة بالظبط على 100 عنصر ومفيش أي نقص)
-const PAT=[
-"g","q","d","m","v","r","g","q","d","m",
-"v","r","g","q","d","m","v","r","g","q",
-"d","m","v","r","g","q","d","m","v","r",
-"g","q","d","m","v","r","g","q","d","m",
-"v","r","g","q","d","m","v","r","g","q",
-"d","m","v","r","g","q","d","m","v","r",
-"g","q","d","m","v","r","g","q","d","m",
-"v","r","g","q","d","m","v","r","g","q",
-"d","m","v","r","g","q","d","m","v","r",
-"g","q","d","m","v","r","g","q","d","m"
-];
-
-// مضاعفات النقاط في الجولات: 20, 40, 60, 80, 100
-const MULT={19:2, 39:2, 59:2, 79:2, 99:2}; 
-
-const MAX=PAT.length;
+/* ====== أدوات ====== */
+let uid=ls.get("lg_uid");if(!uid){uid="u"+Math.random().toString(36).slice(2)+Date.now().toString(36);ls.set("lg_uid",uid)}
+let code=null,st=null,pq=0,pa=[],mo=null,mrk=-1,unsubS=null,unsubC=null,chatOpen=false,msgs=[],joinErr="",lenSel=60;
 const L=x=>x?Object.keys(x).map(k=>x[k]):[];
 const pair=(x,d)=>{x=x||[];return [x[0]==null?d:x[0],x[1]==null?d:x[1]]};
-const shuf=n=>{const a=[...Array(n).keys()];for(let m=a.length-1;m>0;m--){const x=Math.floor(Math.random()*(m+1));[a[m],a[x]]=[a[x],a[m]]}return a};
+const shuf=a=>{a=a.slice();for(let m=a.length-1;m>0;m--){const x=Math.floor(Math.random()*(m+1));[a[m],a[x]]=[a[x],a[m]]}return a};
+const CH="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+const newCode=()=>Array.from({length:5},()=>CH[Math.floor(Math.random()*CH.length)]).join("");
+const sref=c=>ref(rdb,BASE+c+"/state"),cref=c=>ref(rdb,BASE+c+"/chat");
+const myRooms=()=>{try{return JSON.parse(ls.get("lg_rooms")||"[]")}catch(e){return[]}};
+const addRoom=(c,n)=>{const r=myRooms().filter(x=>x.c!=c);r.unshift({c,n:n||""});ls.set("lg_rooms",JSON.stringify(r.slice(0,5)))};
+const dropRoom=c=>ls.set("lg_rooms",JSON.stringify(myRooms().filter(x=>x.c!=c)));
 
-// دالة إنشاء الجدول (بها صمام أمان عشان اللعبة متقفش)
-function makeDeck(){
- const sz={g:P.length,m:H.length,d:D.length,v:W.length,q:Q.length,r:R.length},pool={};
- for(const k in sz)pool[k]=shuf(sz[k]);
- 
- return PAT.map((ty,i)=>{
-   // الحماية: لو الأسئلة خلصت لأي سبب، بيعيد خلطها تاني
-   if(!pool[ty] || pool[ty].length === 0) pool[ty] = shuf(sz[ty]); 
-   return ty+"|"+pool[ty].pop()+"|"+(MULT[i]||1)
- });
-}
-
-const isTurn=ty=>ty=="g"||ty=="q"||ty=="d";
-function turnFor(deck,r){let n=0;for(let j=0;j<r;j++)if(isTurn(deck[j].split("|")[0]))n++;return n%2}
-function fresh(){return {n:["",""],u:["",""],ph:"lobby",prof:[null,null],t:0,r:0,S:[0,0],ok:[0,0],tot:[0,0],sk:[0,0],bs:[0,0],ti:[[],[]],v:[null,null],a:"",last:"",deck:[]}}
+function pickPI(){const rest=shuf(GQ.map((_,i)=>i).filter(i=>!COREIDX.includes(i))).slice(0,PROF_N-COREIDX.length);return shuf(COREIDX.concat(rest))}
+function fresh(host,len){return {n:[host,""],u:[uid,""],ph:"lobby",len:len,pi:pickPI(),req:null,prof:[null,null],t:0,r:0,S:[0,0],ok:[0,0],tot:[0,0],sk:[0,0],bs:[0,0],ti:[[],[]],v:[null,null],a:"",last:"",deck:[],ak:[0,0],ac:[0,0],cw:[0,0],cn:[0,0],dc:[0,0],dt:[0,0],fav:[]}}
 function norm(s){
  s.n=pair(s.n,"");s.u=pair(s.u,"");s.S=pair(s.S,0);s.ok=pair(s.ok,0);s.tot=pair(s.tot,0);s.sk=pair(s.sk,0);s.bs=pair(s.bs,0);
+ s.ak=pair(s.ak,0);s.ac=pair(s.ac,0);s.cw=pair(s.cw,0);s.cn=pair(s.cn,0);s.dc=pair(s.dc,0);s.dt=pair(s.dt,0);
  s.prof=pair(s.prof,null).map(p=>p?L(p):null);
  s.ti=pair(s.ti,null).map(L);
  s.v=pair(s.v,null).map(e=>e!==null&&typeof e=="object"?L(e):e);
- s.deck=L(s.deck);s.a=s.a||"";s.last=s.last||"";s.t=s.t||0;s.r=s.r||0;s.ph=s.ph||"lobby";
+ s.deck=L(s.deck);s.pi=L(s.pi);s.fav=L(s.fav);s.a=s.a||"";s.last=s.last||"";s.t=s.t||0;s.r=s.r||0;s.ph=s.ph||"lobby";s.len=s.len||60;s.req=s.req||null;
  return s}
-function startPlay(s){s.ph="play";s.r=0;s.S=[0,0];s.ok=[0,0];s.tot=[0,0];s.sk=[0,0];s.bs=[0,0];s.ti=[[],[]];s.v=[null,null];s.a="";s.last="يلا نبدأ! 🔥 100 جولة قدامنا";s.deck=makeDeck();s.t=turnFor(s.deck,0)}
-function adv(s,msg){s.last=msg;s.v=[null,null];s.a="";s.r++;if(s.r>=MAX)s.ph="end";else s.t=turnFor(s.deck,s.r)}
+
+/* ====== جدول الجولات ====== */
+const CYC=["g","q","d","m","v","r"];
+const SZ={g:()=>PROF_N,q:()=>OQ.length,d:()=>DQ.length,v:()=>VQ.length,m:()=>MQ.length,r:()=>RQ.length};
+function makeDeck(len){
+ const step=Math.round(len/5),cnt={};
+ return Array.from({length:len},(_,i)=>{const ty=CYC[i%6];cnt[ty]=cnt[ty]||0;const id=cnt[ty]++%SZ[ty]();
+  return ty+"|"+id+"|"+(((i+1)%step==0)?2:1)})}
+const isTurn=ty=>ty=="g"||ty=="q"||ty=="d";
+function turnFor(deck,r){let n=0;for(let j=0;j<r;j++)if(isTurn(deck[j].split("|")[0]))n++;return n%2}
+function startPlay(s){s.ph="play";s.r=0;s.S=[0,0];s.ok=[0,0];s.tot=[0,0];s.sk=[0,0];s.bs=[0,0];s.ti=[[],[]];s.v=[null,null];s.a="";s.ak=[0,0];s.ac=[0,0];s.cw=[0,0];s.cn=[0,0];s.dc=[0,0];s.dt=[0,0];s.fav=[];
+ s.last="يلا نبدأ! 🔥 "+s.len+" جولة قدامكم";s.deck=makeDeck(s.len);s.t=turnFor(s.deck,0)}
+function adv(s,msg){s.last=msg;s.v=[null,null];s.a="";s.r++;if(s.r>=s.len)s.ph="end";else s.t=turnFor(s.deck,s.r)}
 function cur(s){const p=s.deck[s.r].split("|");return {ty:p[0],id:+p[1],mx:+p[2]}}
 function me(){return st?st.u.indexOf(uid):-1}
-
-function act(fn){runTransaction(sref,c=>{const s=c?norm(c):fresh();return fn(s)===false?undefined:s}).catch(e=>{$("main").insertAdjacentHTML("afterbegin","<p style='color:var(--accent)'>مش قادر أحفظ: "+(e&&e.code)+" (راجع قواعد Firebase)</p>")})}
 const inRound=(s,r)=>s.ph=="play"&&s.r==r;
 
-function join(){
- const nm=$("nm").value.trim().slice(0,14)||"لاعب";
- act(s=>{if(s.u.indexOf(uid)>=0)return false;
-  if(!s.u[0]){s.n[0]=nm;s.u[0]=uid;s.ph="lobby"}
-  else if(!s.u[1]){s.n[1]=nm;s.u[1]=uid;s.ph="prof"}
-  else return false})
+function act(fn,c){const cc=c||code;if(!cc)return;runTransaction(sref(cc),x=>{if(!x)return;const s=norm(x);return fn(s)===false?undefined:s}).catch(e=>{$("main").insertAdjacentHTML("afterbegin","<p class='err'>مش قادر أحفظ: "+(e&&e.code)+"</p>")})}
+
+/* ====== الغرف ====== */
+function myName(){const v=($("nm")&&$("nm").value.trim().slice(0,14))||ls.get("lg_name")||"";if(v)ls.set("lg_name",v);return v}
+async function createRoom(){
+ const nm=myName();if(!nm){joinErr="اكتب اسمك الأول";render();return}
+ for(let k=0;k<6;k++){const c=newCode();
+  try{const r=await runTransaction(sref(c),x=>x?undefined:fresh(nm,lenSel));
+   if(r.committed){addRoom(c,nm);openRoom(c);return}}catch(e){joinErr="مش قادر أعمل غرفة: "+(e&&e.code);render();return}}
 }
-function resetAll(){pq=0;pa=[];act(s=>{Object.assign(s,fresh());return true})}
+async function askJoin(c){
+ c=(c||"").trim().toUpperCase();const nm=myName();
+ if(!nm){joinErr="اكتب اسمك الأول";render();return}
+ if(c.length!=5){joinErr="الكود 5 حروف";render();return}
+ joinErr="";
+ let res="";
+ try{const g=await get(sref(c));if(!g.exists()){joinErr="مفيش غرفة بالكود ده";render();return}
+  await runTransaction(sref(c),x=>{if(!x)return {tmp:1};
+   const s=norm(x);
+   if(s.u.indexOf(uid)>=0){res="in";return}
+   if(s.u[1]){res="full";return}
+   s.req={u:uid,n:nm};res="asked";return s});
+  }catch(e){joinErr="مشكلة اتصال: "+(e&&e.code);render();return}
+ if(res=="none"){joinErr="مفيش غرفة بالكود ده";render();return}
+ if(res=="full"){joinErr="الغرفة دي فيها لاعبين بالفعل";render();return}
+ addRoom(c,"");openRoom(c)}
+function openRoom(c){
+ closeRoom(true);code=c;pq=0;pa=[];mrk=-1;msgs=[];st=null;ls.set("lg_last",c);
+ history.replaceState(null,"","?r="+c);
+ unsubS=onValue(sref(c),sn=>{const v=sn.val();st=v?norm(v):null;render()},e=>{$("main").innerHTML="<p>مشكلة في الاتصال: "+e.code+"</p>"});
+ unsubC=onValue(query(cref(c),limitToLast(80)),q=>{msgs=[];q.forEach(d=>{msgs.push(d.val())});drawChat()});
+ $("scode").textContent=c;render()}
+function closeRoom(keep){if(unsubS){unsubS();unsubS=null}if(unsubC){unsubC();unsubC=null}code=null;st=null;msgs=[];setChat(false);$("fab").style.display="none";if(!keep){history.replaceState(null,"",location.pathname);ls.set("lg_last","");render()}}
+function leave(){const c=code;closeRoom();if(c)dropRoom(c);render()}
+function resetRoom(){const keepHost=st;act(s=>{const n=s.n.slice(),u=s.u.slice(),len=s.len;Object.assign(s,fresh(n[0],len));s.n=n;s.u=u;s.ph="prof";s.pi=pickPI();return true});pq=0;pa=[]}
 function replay(){act(s=>{if(s.ph!="end")return false;startPlay(s)})}
 
+/* ====== واجهة مساعدة ====== */
 function mk(p,txt,cls,fn,dis){const b=document.createElement("button");b.className="b "+(cls||"");b.textContent=txt;b.disabled=!!dis;b.onclick=fn;p.appendChild(b);return b}
 function tp(p,txt){const e=document.createElement("p");e.textContent=txt;p.appendChild(e);return e}
 function dv(p,cls,txt){const e=document.createElement("div");if(cls)e.className=cls;if(txt!=null)e.textContent=txt;p.appendChild(e);return e}
 function bar(p,pc){const b=dv(p,"bar"),i=document.createElement("i");i.style.width=pc+"%";b.appendChild(i)}
+function head(m,withLeave){const t=dv(m,"top");const h=document.createElement("h1");h.textContent="لعبة الحب 💞";t.appendChild(h);
+ if(code){const c=document.createElement("span");c.className="code";c.textContent=code;t.appendChild(c)}}
+function shareRoom(){const url=location.origin+location.pathname+"?r="+code;const msg="تعالى العب معايا لعبة الحب 💞 كود الغرفة: "+code;
+ if(navigator.share){navigator.share({title:"لعبة الحب",text:msg,url}).catch(()=>{})}
+ else if(navigator.clipboard){navigator.clipboard.writeText(msg+"\n"+url).then(()=>{$("last")&&($("last").textContent="اتنسخ الرابط ✅")}).catch(()=>{})}}
 
-function titlesOf(s,k){
- const out=[],acc=s.tot[k]?s.ok[k]/s.tot[k]:0;
- if(s.tot[k]){
-  if(acc>=.75)out.push("🔮 قارئ الأفكار");
-  else if(acc>=.5)out.push("🕵️ المحقق الشاطر");
-  else if(acc>=.25)out.push("🤔 لسه بيتعرّف");
-  else out.push("😅 مش واخد باله من حبيبه");
- }
- if(s.bs[k]>=3)out.push("🔥 صاحب السلسلة ×"+s.bs[k]);
- s.ti[k].forEach(t=>out.push(t));
+/* ====== تحليل الشخصية ====== */
+const T_LOVE=["الكلام الحلو والاعتراف بالمشاعر بيفرّحوه 💌","بيعبّر بالهدايا والتفاصيل الصغيرة 🎁","القرب والحضن بيطمّنوه 🤗","أغلى حاجة عنده الوقت والاهتمام ⏳"];
+const T_UPSET=["بيسكت: اسأله بهدوء وماتضغطش","بيفرفر: سيبه يهدى وبعدين اتكلموا","بيعتزل: محتاج مساحة بس مش غياب","بياكل: وجبة حلوة تصلّح نص المشكلة 🍫"];
+const T_FLAW=["دماغ ناشفة بس ثابت على اللي بيحبه","الغيرة دليل تعلق، ومحتاجة طمأنة","التأجيل بيتحل بمواعيد واضحة","الرغي بيدفّي أي قعدة"];
+const T_OUT=[["روح الشلة 🎉","أي خروجة بتبقى حفلة"],["الهادي العميق 🌙","قليل الكلام وعميق في المشاعر"],["المخطط الذكي 🧭","بيظبط كل حاجة قبل ما تحصل"],["البيتوتي الدافي 🏠","راحته في البيت ومع حبيبه"]];
+function pct(a,b){return b?Math.round(a/b*100):0}
+function analysis(s,k){
+ const out=[];const pr=s.prof[k];
+ const core=key=>{const p=s.pi.indexOf(CORE[key]);if(!pr||p<0||pr[p]==null)return null;return {i:pr[p],t:GQ[CORE[key]].o[pr[p]]}};
+ const o=core("out");
+ out.push(["الشخصية",o?T_OUT[o.i][0]+" -- "+T_OUT[o.i][1]:"شخصية مميزة 💫"]);
+ let x=core("love");if(x)out.push(["لغة الحب",x.t+" -- "+T_LOVE[x.i]]);
+ x=core("upset");if(x)out.push(["عند الزعل",T_UPSET[x.i]]);
+ x=core("flaw");if(x)out.push(["العيب المعترف بيه",x.t+" -- "+T_FLAW[x.i]]);
+ x=core("fear");if(x)out.push(["أكتر حاجة بتخوّف",x.t]);
+ x=core("attr");if(x)out.push(["اللي بيشتريه في الناس",x.t]);
+ x=core("power");if(x)out.push(["سوبر باور الأحلام",x.t]);
+ const knows=pct(s.ok[k],s.tot[k]),known=pct(s.ac[k],s.ak[k]);
+ out.push(["فهمه لحبيبه",s.tot[k]?knows+"% من توقعاته صح":"لسه مفيش توقعات"]);
+ out.push(["فهم حبيبه له",s.ak[1-k]?pct(s.ac[1-k],s.ak[1-k])+"% (من أسئلة التخمين عليه)":"لسه"]);
+ const av=s.cn[k]?Math.round(s.cw[k]/s.cn[k]):0;
+ out.push(["أسلوب الكلام",!s.cn[k]?"ماجاوبش على أسئلة مفتوحة":av<20?"مختصر وعملي ✂️":av<60?"متوازن في التعبير ⚖️":"كاتب مشاعر 📝"]);
+ out.push(["التحديات",s.dt[k]?s.dc[k]+" من "+s.dt[k]+" اتنفذت"+(s.dc[k]==s.dt[k]?" 💪":""):"مفيش تحديات"]);
+ // نقطة القوة
+ let strong;const romantic=s.ti[k].some(t=>/رومانسي|الكلام الحلو|قلب حنين|حبيب مطمن/.test(t));
+ if(romantic)strong="قلب كبير: الاتنين شايفينه رومانسي وحنين 🌹";
+ else if(knows>=60)strong="فاهم حبيبه بعمق 🔮";
+ else if(s.dt[k]&&s.dc[k]==s.dt[k])strong="جريء ومابيهربش من أي تحدي 🔥";
+ else if(s.sk[k]>=3||s.bs[k]>=3)strong="تركيزه عالي وبيمسك سلسلة صح 🎯";
+ else strong="بيكمّل حبيبه ويحسن الصحبة 💞";
+ out.push(["نقطة القوة",strong]);
+ if(s.ti[k].length)out.push(["الألقاب",s.ti[k].join(" • ")]);
  return out}
-
 function verdict(s){
  const a=s.S[0],b=s.S[1],gap=Math.abs(a-b),w=a>b?0:1,l=1-w;
  const tot=s.tot[0]+s.tot[1],comp=tot?Math.round((s.ok[0]+s.ok[1])/tot*100):0;
- let head,body;
- if(gap==0){head="🤝 تعادل! الحب كسب";body="مفيش غالب ولا مغلوب… الاتنين متساويين في الحب والعند 😂"}
- else if(gap<=100){head="🏆 الفايز: "+s.n[w];body="فوز بالعافية! "+s.n[l]+" كان قريب أوي، الجولة الجاية الدنيا هتتقلب 😏"}
- else if(gap<=300){head="👑 الفايز: "+s.n[w];body=s.n[w]+" حافظ حبيبه كويس. و"+s.n[l]+" عليه يذاكر أكتر 📚"}
- else{head="👑🔥 فوز ساحق لـ "+s.n[w];body=s.n[l]+" هيدفع العشا النهارده، والحكم نهائي ومفيهوش استئناف 😂🍽️"}
+ let hd,body;
+ if(gap==0){hd="🤝 تعادل! الحب كسب";body="مفيش غالب ولا مغلوب… الاتنين متساويين في الحب والعند 😂"}
+ else if(gap<=100){hd="🏆 الفايز: "+s.n[w];body="فوز بالعافية! "+s.n[l]+" كان قريب أوي 😏"}
+ else if(gap<=300){hd="👑 الفايز: "+s.n[w];body=s.n[w]+" حافظ حبيبه كويس. و"+s.n[l]+" عليه يذاكر أكتر 📚"}
+ else{hd="👑🔥 فوز ساحق لـ "+s.n[w];body=s.n[l]+" هيدفع العشا النهارده 😂🍽️"}
  let cm;
  if(comp>=75)cm="💞 توأم روح! بتفهموا بعض من غير كلام";
- else if(comp>=50)cm="✨ كيميا حلوة، شوية تركيز كمان وتبقوا مثال يحتذى بيه";
+ else if(comp>=50)cm="✨ كيميا حلوة، شوية تركيز كمان وتبقوا مثال";
  else if(comp>=25)cm="🌱 لسه بتتعرفوا على بعض… كمّلوا وهتطلعوا حلوين";
  else cm="😂 محتاجين قعدة صفا وتتكلموا أكتر!";
- return {head,body,comp,cm}}
+ return {hd,body,comp,cm}}
 
+/* ====== الرسم ====== */
+function renderHome(m){
+ head(m);
+ tp(m,"اعمل غرفة وابعت الكود لشخص واحد بس تختاره، أو ادخل بكود غرفة حد دعاك. كل غرفة ليها دردشتها الخاصة.");
+ const inp=document.createElement("input");inp.id="nm";inp.placeholder="اسمك";inp.value=ls.get("lg_name")||"";inp.maxLength=14;m.appendChild(inp);
+ if(joinErr)tp(m,joinErr).className="err";
+ dv(m,"","").textContent="طول اللعبة:";
+ const sg=dv(m,"seg");[[30,"سريعة 30"],[60,"متوسطة 60"],[100,"كاملة 100"]].forEach(([n,t])=>{const b=document.createElement("button");b.textContent=t;if(lenSel==n)b.className="on";b.onclick=()=>{lenSel=n;[...sg.children].forEach(c=>c.className="");b.className="on"};sg.appendChild(b)});
+ mk(m,"🏠 إنشاء غرفة جديدة","",createRoom);
+ dv(m,"","").textContent="— أو —";
+ const ci=document.createElement("input");ci.id="jc";ci.placeholder="كود الغرفة (5 حروف)";ci.maxLength=5;ci.style.direction="ltr";ci.style.textTransform="uppercase";m.appendChild(ci);
+ const q=new URLSearchParams(location.search).get("r");if(q&&!ci.value)ci.value=q.toUpperCase();
+ mk(m,"🚪 اطلب الدخول","alt",()=>askJoin($("jc").value));
+ const rs=myRooms();
+ if(rs.length){const w=dv(m,"rooms");dv(w,"","غرفك السابقة").style.fontSize="13px";rs.forEach(r=>{const b=document.createElement("button");b.textContent=r.c;b.onclick=()=>openRoom(r.c);w.appendChild(b)})}
+}
 function render(){
- const m=$("main");m.innerHTML="";const s=st,i=me();
- dv(m,"","").appendChild(Object.assign(document.createElement("h1"),{textContent:"لعبة الحب أونلاين 💞"}));
- if(!s||(s.ph=="lobby"&&i<0)){
-  tp(m,!s||!s.u[0]?"اكتب اسمك وادخل، وابعت الرابط للتاني يدخل كمان 💌":(s.n[0]+" منتظرك! ادخل واكتب اسمك"));
-  const inp=document.createElement("input");inp.id="nm";inp.placeholder="اسمك";m.appendChild(inp);mk(m,"ادخل اللعبة 🎮","",join);return}
- if(s.ph=="lobby"){tp(m,"⏳ منتظرين اللاعب التاني يفتح الرابط ويدخل…");mk(m,"إلغاء","alt",resetAll);return}
- if(i<0){tp(m,"اللعبة دي فيها لاعبين بالفعل ("+s.n[0]+" و"+s.n[1]+")");mk(m,"ابدأ لعبة جديدة","",resetAll);return}
- const other=s.n[1-i];
-
- if(s.ph=="prof"){
-  if(s.prof[i]){
-   dv(m,"big","⏳");
-   tp(m,"تمام يا "+s.n[i]+"! إجاباتك اتسجلت ✅ -- منتظرين "+other+" يخلص أسئلته…");
-   return}
-  tp(m,"الأول: جاوب عن نفسك بصراحة 😏 "+other+" هيحاول يخمّن إجاباتك بعد كده!");
-  bar(m,Math.round(pq/P.length*100));
-  const q=P[pq];
-  dv(m,"","").textContent="سؤال "+(pq+1)+" من "+P.length;
-  dv(m,"").id="txt";m.lastChild.textContent=q.s;
-  const bt=dv(m,"row");
-  q.o.forEach((o,k)=>mk(bt,o,k%2?"alt":"",()=>{
-   pa.push(k);pq++;
-   if(pq>=P.length){const mine=pa.slice();act(x=>{x.prof[i]=mine;if(x.prof[0]&&x.prof[1])startPlay(x)});pa=[];pq=0}
-   else render();
-  }));
+ const m=$("main");const keepNm=$("nm")?$("nm").value:null,keepJc=$("jc")?$("jc").value:null;m.innerHTML="";
+ if(!code){$("fab").style.display="none";renderHome(m);if(keepNm!==null&&$("nm"))$("nm").value=keepNm;if(keepJc&&$("jc"))$("jc").value=keepJc;return}
+ head(m);const s=st,i=me();
+ if(!s){tp(m,"الغرفة دي مش موجودة أو اتمسحت");mk(m,"رجوع","alt",leave);return}
+ $("fab").style.display=i>=0?"block":"none";
+ // غير مقبول
+ if(i<0){
+  if(s.req&&s.req.u==uid){dv(m,"big","⏳");tp(m,"طلبك وصل لـ "+s.n[0]+" -- منتظرين يوافق ✋");mk(m,"إلغاء الطلب","ghost",()=>{act(x=>{if(x.req&&x.req.u==uid){x.req=null}else return false});leave()})}
+  else{dv(m,"big","🔒");tp(m,s.u[1]?"الغرفة دي بين "+s.n[0]+" و"+s.n[1]+" بس":"الغرفة دي خاصة بـ "+s.n[0]+". اطلب الدخول بالكود.");
+   if(!s.u[1])mk(m,"🚪 اطلب الدخول","",()=>askJoin(code));mk(m,"رجوع","ghost",leave)}
   return}
-
+ const other=s.n[1-i];
+ if(s.ph=="lobby"){
+  if(i==0){
+   dv(m,"big","💌");tp(m,"الغرفة جاهزة، ابعت الكود لشخص واحد بس:");
+   const c=dv(m,"code",code);c.style.fontSize="26px";
+   mk(m,"📤 شارك الكود","alt",shareRoom);
+   if(s.req){const p=dv(m,"pl","");const b=document.createElement("b");b.textContent=s.req.n+" عايز يدخل غرفتك";p.appendChild(b);
+    const r2=dv(p,"row");
+    mk(r2,"✅ اقبله","",()=>act(x=>{if(!x.req||x.u[1])return false;x.n[1]=x.req.n;x.u[1]=x.req.u;x.req=null;x.ph="prof"}));
+    mk(r2,"❌ ارفض","ghost",()=>act(x=>{x.req=null}))}
+   else tp(m,"⏳ منتظر حد يطلب الدخول…");
+   mk(m,"🗑️ إلغاء الغرفة","ghost",leave)}
+  return}
+ if(s.ph=="prof"){
+  if(s.prof[i]){dv(m,"big","⏳");tp(m,"تمام يا "+s.n[i]+"! إجاباتك اتسجلت ✅ -- منتظرين "+other+" يخلص…");return}
+  tp(m,"الأول: جاوب عن نفسك بصراحة 😏 "+other+" هيحاول يخمّن إجاباتك!");
+  bar(m,Math.round(pq/PROF_N*100));
+  const q=GQ[s.pi[pq]];
+  dv(m,"","سؤال "+(pq+1)+" من "+PROF_N);
+  dv(m,"").id="txt";m.lastChild.textContent=q.q;
+  const bt=dv(m,"row");
+  q.o.forEach((o,k)=>mk(bt,o,k%2?"alt":"",()=>{pa.push(k);pq++;
+   if(pq>=PROF_N){const mine=pa.slice();act(x=>{if(x.prof[i])return false;x.prof[i]=mine;if(x.prof[0]&&x.prof[1])startPlay(x)});pa=[];pq=0}
+   else render()}));
+  return}
  const sc=dv(m,"sc");
  [0,1].forEach(k=>{const d=dv(sc,"");
   if(s.ph=="play"){const c=cur(s);if(isTurn(c.ty)&&k==s.t)d.className="on"}
@@ -330,47 +295,50 @@ function render(){
  if(s.ph=="end"){
   const v=verdict(s);
   dv(m,"big",s.S[0]==s.S[1]?"🤝":"🏆");
-  const h=document.createElement("h2");h.textContent=v.head;m.appendChild(h);
+  const h=document.createElement("h2");h.textContent=v.hd;m.appendChild(h);
   tp(m,v.body);
-  [0,1].forEach(k=>{const pl=dv(m,"pl");const bb=document.createElement("b");bb.textContent=s.n[k]+" -- "+s.S[k]+" نقطة";pl.appendChild(bb);
-   const sm=dv(pl,"","");sm.style.color="var(--muted)";sm.style.fontSize="13px";sm.textContent="خمّن صح "+s.ok[k]+" من "+s.tot[k];
-   const tt=dv(pl,"","");titlesOf(s,k).forEach(t=>{const e=document.createElement("span");e.className="ti";e.textContent=t;tt.appendChild(e)})});
   const cp=dv(m,"pl","");const c1=document.createElement("b");c1.textContent="نسبة التفاهم: "+v.comp+"%";cp.appendChild(c1);bar(cp,v.comp);dv(cp,"",v.cm);
+  const ah=document.createElement("h2");ah.textContent="🔍 تحليل الشخصية";m.appendChild(ah);
+  [0,1].forEach(k=>{const pl=dv(m,"pl");const bb=document.createElement("b");bb.textContent=s.n[k]+(k==i?" (أنت)":"")+" -- "+s.S[k]+" نقطة";pl.appendChild(bb);
+   analysis(s,k).forEach(([a,b])=>{const ln=dv(pl,"ln");const sp=document.createElement("span");sp.textContent=a+": ";ln.appendChild(sp);ln.appendChild(document.createTextNode(b))})});
+  if(s.fav.length){const fh=document.createElement("h3");fh.textContent="💌 أحلى إجاباتكم";m.appendChild(fh);
+   s.fav.slice(-8).forEach(f=>{const d=dv(m,"fav");d.textContent=f.n+": «"+f.a+"»  ← "+f.q.replace(/\s*[^\u0600-\u06FF\s{}؟?]+\s*$/,"")})}
   const bt=dv(m,"row");
-  mk(bt,"🔁 نفس الإجابات، 100 جولة جديدة","",replay);
-  mk(bt,"🆕 نبدأ من الأول","alt",resetAll);
+  mk(bt,"🔁 جولة جديدة بنفس الإجابات","",replay);
+  mk(bt,"🆕 أسئلة جديدة","alt",resetRoom);
+  mk(bt,"🚪 اخرج","ghost",leave);
   return}
 
  const r=s.r,c=cur(s),mine=s.t==i,who=s.n[s.t];
  if(mrk!=r){mrk=r;mo=null}
  const meta=dv(m,"","");
- const t1=document.createElement("small");t1.style.color="var(--muted)";t1.textContent="الجولة "+(r+1)+" من "+MAX+" ";meta.appendChild(t1);
- if(c.mx>1){const g=document.createElement("span");g.className="tag";g.textContent=r==MAX-1?"👑 الجولة الذهبية ×2":"⚡ جولة دبل ×2";meta.appendChild(g)}
+ const t1=document.createElement("small");t1.style.color="var(--muted)";t1.textContent="الجولة "+(r+1)+" من "+s.len+" ";meta.appendChild(t1);
+ const sc2=document.createElement("span");sc2.className="sec";sc2.textContent=SEC[c.ty];meta.appendChild(sc2);
+ if(c.mx>1){const g=document.createElement("span");g.className="tag";g.textContent=r==s.len-1?"👑 الجولة الذهبية ×2":"⚡ جولة دبل ×2";meta.appendChild(g)}
  const pts=10*c.mx;
  const kd=dv(m,"","");kd.id="kind";
  const bt=document.createElement("div");bt.className="row";
- const body=ty=>{const e=dv(m,"","");e.id="txt";return e};
+ const body=()=>{const e=dv(m,"","");e.id="txt";return e};
+ const sub=(t,o)=>t.replace(/\{o\}/g,o);
 
  if(c.ty=="g"){
-  const asked=1-s.t,q=P[c.id],txt=q.g.replace(/\{o\}/g,s.n[asked]);
-  kd.textContent="🕵️ خمّن -- "+who+" بيخمّن إجابة "+s.n[asked]+" (+"+pts+")";
-  body().textContent=txt;m.appendChild(bt);
+  const asked=1-s.t,gi=s.pi[c.id],q=GQ[gi];
+  kd.textContent="🕵️ "+who+" بيخمّن إجابة "+s.n[asked]+" (+"+pts+")";
+  body().textContent="خمّن: "+s.n[asked]+" جاوب إيه على «"+q.q+"»";m.appendChild(bt);
   if(mine){
    tp(bt,"اختار اللي تتوقعه 👇");
    q.o.forEach((o,k)=>mk(bt,o,k%2?"alt":"",()=>{act(x=>{if(!inRound(x,r)||x.t!=i)return false;
-     const real=x.prof[1-i][c.id],ok=k==real;x.tot[i]++;
-     if(ok){x.ok[i]++;x.sk[i]++;if(x.sk[i]>x.bs[i])x.bs[i]=x.sk[i];const bonus=Math.min(15,5*(x.sk[i]-1));x.S[i]+=pts+bonus;
+     const real=x.prof[1-i][c.id],ok=k==real;x.tot[i]++;x.ak[1-i]++;
+     if(ok){x.ok[i]++;x.ac[1-i]++;x.sk[i]++;if(x.sk[i]>x.bs[i])x.bs[i]=x.sk[i];const bonus=Math.min(15,5*(x.sk[i]-1));x.S[i]+=pts+bonus;
       adv(x,"✅ "+x.n[i]+" عرف! الإجابة "+q.o[real]+" -- +"+(pts+bonus)+(bonus?" (بونص سلسلة 🔥)":""))}
      else{x.sk[i]=0;adv(x,"❌ "+x.n[i]+" قال "+q.o[k]+" بس "+x.n[1-i]+" اختار "+q.o[real]+" 😅")}})}));
-  }else{
-   tp(bt,"⏳ "+who+" بيخمّن إجابتك على: «"+q.s+"» -- ادعي له 😂");
-  }
+  }else tp(bt,"⏳ "+who+" بيخمّن إجابتك على: «"+q.q+"»");
  }
  else if(c.ty=="m"){
-  const h=H[c.id];
-  kd.textContent="🔮 قارئ الأفكار -- الاتنين يختاروا ويتوقعوا (+"+pts+" لكل توقع صح)";
+  const h=MQ[c.id];
+  kd.textContent="🔮 الاتنين يختاروا ويتوقعوا (+"+pts+" لكل توقع صح)";
   const done=s.v[i]!==null;
-  if(done){body().textContent=h[0]+"  أو  "+h[1];m.appendChild(bt);tp(bt,"✅ سجلت اختيارك: "+h[s.v[i][0]]+" وتوقعك: "+h[s.v[i][1]]+" -- ⏳ منتظر "+other)}
+  if(done){body().textContent=h[0]+"  أو  "+h[1];m.appendChild(bt);tp(bt,"✅ اخترت: "+h[s.v[i][0]]+" وتوقعت: "+h[s.v[i][1]]+" -- ⏳ منتظر "+other)}
   else if(mo===null){body().textContent="إنت شخصياً بتفضل إيه؟";m.appendChild(bt);h.forEach((o,k)=>mk(bt,o,k?"alt":"",()=>{mo=k;render()}))}
   else{body().textContent="طب "+other+" هيختار إيه؟ 🤔";m.appendChild(bt);h.forEach((o,k)=>mk(bt,o,k?"alt":"",()=>{const own=mo;
     act(x=>{if(!inRound(x,r)||x.v[i]!==null)return false;x.v[i]=[own,k];
@@ -381,48 +349,71 @@ function render(){
       adv(x,msg)}})}))}
  }
  else if(c.ty=="v"){
-  const w=W[c.id];kd.textContent="👆 تصويت -- لو اتفقتوا: +5 للاتنين واللقب لـ اللي اتصوّت له";
+  const w=VQ[c.id];kd.textContent="لو اتفقتوا: +5 للاتنين واللقب لـ اللي اتصوّت له";
   body().textContent=w[0];m.appendChild(bt);
   if(s.v[i]!==null){tp(bt,"✅ اخترت: "+s.n[s.v[i]]+" -- ⏳ منتظر "+other)}
-  else{tp(bt,"اختار/ي واحد 👇");[0,1].forEach(k=>mk(bt,s.n[k],k?"alt":"",()=>{act(x=>{if(!inRound(x,r)||x.v[i]!==null)return false;x.v[i]=k;
+  else{tp(bt,"اختار واحد 👇");[0,1].forEach(k=>mk(bt,s.n[k],k?"alt":"",()=>{act(x=>{if(!inRound(x,r)||x.v[i]!==null)return false;x.v[i]=k;
     if(x.v[0]!==null&&x.v[1]!==null){
      if(x.v[0]==x.v[1]){const z=x.v[0];x.S[0]+=5;x.S[1]+=5;x.ti[z].push(w[1]);adv(x,"اتفقتوا! 🎖️ "+x.n[z]+" خد لقب: "+w[1]+" (+5 للاتنين)")}
      else adv(x,x.n[0]+" صوّت لـ "+x.n[x.v[0]]+" و"+x.n[1]+" صوّت لـ "+x.n[x.v[1]]+" -- اختلفتوا 😄")}})}))}
  }
  else if(c.ty=="r"){
-  kd.textContent="💬 سؤال رومانسي -- الاتنين يجاوبوا (+5 لكل واحد)";
-  body().textContent=R[c.id];m.appendChild(bt);
-  if(s.v[i]===null){tp(bt,"اتكلموا في الدردشة أو بصوتكم، وبعدين دوس 👇");mk(bt,"جاوبت ✔","",()=>{act(x=>{if(!inRound(x,r)||x.v[i]!==null)return false;x.v[i]=1;
+  kd.textContent="الاتنين يجاوبوا (+5 لكل واحد)";
+  body().textContent=sub(RQ[c.id],other);m.appendChild(bt);
+  if(s.v[i]===null){tp(bt,"اتكلموا في الدردشة أو اكتب إجابتك (اختياري) 👇");const ai=document.createElement("input");ai.id="ans";ai.placeholder="إجابتك (اختياري)…";ai.maxLength=200;bt.appendChild(ai);
+   mk(bt,"جاوبت ✔","",()=>{const v=$("ans").value.trim().slice(0,200);act(x=>{if(!inRound(x,r)||x.v[i]!==null)return false;x.v[i]=1;if(v)x.fav.push({n:x.n[i],q:sub(RQ[c.id],x.n[1-i]),a:v});
     if(x.v[0]!==null&&x.v[1]!==null){x.S[0]+=5;x.S[1]+=5;adv(x,"حلوين أوي 🥰 +5 للاتنين")}})})}
   else tp(bt,"✅ جاوبت -- ⏳ منتظر "+other);
  }
  else{
-  const isQ=c.ty=="q",tx=(isQ?Q:D)[c.id].replace(/\{o\}/g,s.n[1-s.t]);
-  kd.textContent=(isQ?"🧠 سؤال -- ":"🔥 تحدي -- ")+who+(isQ?" يجاوب":" ينفّذ")+" (+"+pts+")";
+  const isQ=c.ty=="q",tx=sub((isQ?OQ:DQ)[c.id],s.n[1-s.t]);
+  kd.textContent=(isQ?"🧠 ":"🔥 ")+who+(isQ?" يجاوب":" ينفّذ")+" (+"+pts+")";
   body().textContent=tx;m.appendChild(bt);
   if(mine){
    if(!s.a){
-    if(isQ){tp(bt,"اكتب إجابتك 👇");const ai=document.createElement("input");ai.id="ans";ai.placeholder="إجابتك…";bt.appendChild(ai);
+    if(isQ){tp(bt,"اكتب إجابتك 👇");const ai=document.createElement("input");ai.id="ans";ai.placeholder="إجابتك…";ai.maxLength=200;bt.appendChild(ai);
      mk(bt,"إرسال الإجابة 📨","",()=>{const v=$("ans").value.trim();if(!v)return;act(x=>{if(!inRound(x,r)||x.a)return false;x.a=v.slice(0,200)})})}
     else{tp(bt,"نفّذ التحدي وبعدين دوس 👇");mk(bt,"خلصت التحدي ✔","",()=>act(x=>{if(!inRound(x,r)||x.a)return false;x.a="تم"}))}
    }else tp(bt,"✅ تم -- ⏳ منتظر حكم "+other);
   }else{
    if(!s.a)tp(bt,"⏳ منتظر "+who+(isQ?" يجاوب…":" ينفّذ التحدي…"));
    else{
-    const ab=dv(bt,"ansbox",isQ?"إجابة "+who+": "+s.a:who+" بيقول إنه نفّذ التحدي ✔");
-    mk(bt,isQ?"❤️ عجبتني (+"+pts+" لـ "+who+")":"✔ نفّذ (+"+pts+" لـ "+who+")","",()=>act(x=>{if(!inRound(x,r))return false;x.S[x.t]+=pts;adv(x,"برافو لـ "+who+"! 👏 +"+pts)}));
-    mk(bt,isQ?"😅 ضعيفة":"✖ لأ","alt",()=>act(x=>{if(!inRound(x,r))return false;adv(x,isQ?"حكم "+x.n[1-x.t]+": إجابة ضعيفة 😅":"يا خسارة، التحدي مأخدش 😅")}));
+    dv(bt,"ansbox",isQ?"إجابة "+who+": "+s.a:who+" بيقول إنه نفّذ التحدي ✔");
+    mk(bt,isQ?"❤️ عجبتني (+"+pts+" لـ "+who+")":"✔ نفّذ (+"+pts+" لـ "+who+")","",()=>act(x=>{if(!inRound(x,r))return false;
+      if(isQ){x.cn[x.t]++;x.cw[x.t]+=x.a.length;if(x.a.length>3)x.fav.push({n:x.n[x.t],q:tx,a:x.a})}else{x.dt[x.t]++;x.dc[x.t]++}
+      x.S[x.t]+=pts;adv(x,"برافو لـ "+who+"! 👏 +"+pts)}));
+    mk(bt,isQ?"😅 ضعيفة":"✖ لأ","alt",()=>act(x=>{if(!inRound(x,r))return false;
+      if(isQ){x.cn[x.t]++;x.cw[x.t]+=x.a.length}else x.dt[x.t]++;
+      adv(x,isQ?"حكم "+x.n[1-x.t]+": إجابة ضعيفة 😅":"يا خسارة، التحدي مأخدش 😅")}));
    }
   }
  }
+ const lv=dv(m,"","");const lb=document.createElement("button");lb.className="b ghost";lb.style.cssText="flex:none;min-width:0;font-size:12px;padding:6px 12px";lb.textContent="🚪 خروج من الغرفة";lb.onclick=leave;lv.appendChild(lb)
 }
 
-function send(){const v=$("ci").value.trim();if(!v||me()<0)return;$("ci").value="";push(cref,{u:uid,n:st.n[me()],m:v.slice(0,300),t:Date.now()}).catch(()=>{})}
-function chat(){onValue(query(cref,limitToLast(60)),q=>{const box=$("chat");box.innerHTML="";q.forEach(d=>{const x=d.val(),el=document.createElement("div");el.className="m "+(x.u==uid?"me":"ot");const sm=document.createElement("small");sm.textContent=x.n;el.appendChild(sm);el.appendChild(document.createTextNode(x.m));box.appendChild(el)});box.scrollTop=box.scrollHeight})}
-try{uid=localStorage.getItem("lg_uid");if(!uid){uid="u"+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem("lg_uid",uid)}}catch(e){uid="u"+Math.random().toString(36).slice(2)}
-$("cbox").style.display="flex";$("cs").onclick=send;$("ci").onkeydown=e=>{if(e.key=="Enter")send()};
-onValue(sref,sn=>{const v=sn.val();st=v?norm(v):null;render()},e=>{$("main").innerHTML="<p>مشكلة في الاتصال: "+e.code+"</p>"});
-chat();
+/* ====== الدردشة (خاصة بالغرفة) ====== */
+const seenKey=()=>"lg_seen_"+code;
+function setChat(o){chatOpen=o;$("sheet").style.display=o?"flex":"none";if(o){ls.set(seenKey(),String(Date.now()));drawChat();setTimeout(()=>$("ci").focus(),50)}}
+function drawChat(){
+ if(!code)return;const box=$("chat");const seen=+ls.get(seenKey())||0;let unread=0;
+ if(chatOpen){box.innerHTML="";
+  if(!msgs.length){const e=document.createElement("p");e.textContent="مفيش رسائل لسه. ابدأ إنت 💬";box.appendChild(e)}
+  msgs.forEach(x=>{const el=document.createElement("div");el.className="m "+(x.u==uid?"me":"ot");const sm=document.createElement("small");const d=new Date(x.t||0);sm.textContent=x.n+" • "+d.toLocaleTimeString("ar-EG",{hour:"2-digit",minute:"2-digit"});el.appendChild(sm);el.appendChild(document.createTextNode(x.m));box.appendChild(el)});
+  box.scrollTop=box.scrollHeight;ls.set(seenKey(),String(Date.now()))}
+ else msgs.forEach(x=>{if(x.u!=uid&&(x.t||0)>seen)unread++});
+ const b=$("badge");b.style.display=unread?"flex":"none";b.textContent=unread>9?"9+":unread}
+function send(txt){const v=(txt||$("ci").value).trim();if(!v||me()<0||!code)return;if(!txt)$("ci").value="";push(cref(code),{u:uid,n:st.n[me()],m:v.slice(0,300),t:Date.now()}).catch(()=>{})}
+$("fab").onclick=()=>setChat(true);$("cx").onclick=()=>setChat(false);$("cs").onclick=()=>send();$("ci").onkeydown=e=>{if(e.key=="Enter")send()};
+["❤️","😂","😍","🥺","👏","🔥"].forEach(e=>{const b=document.createElement("button");b.textContent=e;b.onclick=()=>send(e);$("qk").appendChild(b)});
+
+/* ====== بداية ====== */
+const qr=(new URLSearchParams(location.search).get("r")||"").toUpperCase();
+const last=ls.get("lg_last");
+if(qr&&myRooms().some(r=>r.c==qr))openRoom(qr);
+else if(qr){render()}
+else if(last&&myRooms().some(r=>r.c==last))openRoom(last);
+else render();
+window.__lg={get st(){return st},get code(){return code}};
 </script>
 </body>
 </html>
