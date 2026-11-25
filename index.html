@@ -405,6 +405,24 @@ function renderCap(m){head(m);const h=document.createElement("h2");h.textContent
  if(!A.length)tp(m,"لسه مفيش كبسولات.");
  A.forEach(x=>{const p=dv(m,"fav","");const left=Math.round((new Date(x.o+"T00:00:00")-new Date(today+"T00:00:00"))/864e5);p.style.whiteSpace="pre-line";p.textContent=left>0?"🔒 تتفتح "+x.o+" (بعد "+left+" يوم) · اتكتبت "+x.c:"🔓 اتفتحت · اتكتبت "+x.c+"\n"+x.t;const rm=document.createElement("button");rm.className="util";rm.textContent="🗑";rm.onclick=()=>{const B=cap();B.splice(x.i,1);ls.set("lg_cap",JSON.stringify(B));render()};p.appendChild(rm)});
  mk(m,"رجوع","alt",()=>{view="home";render()})}
+
+const BKEYS=["lg_bucket","lg_name","lg_favq","lg_events","lg_diary","lg_cap","lg_anniv","lg_theme","lg_mode","lg_talknames","lg_mood","lg_hist","lg_snd"];
+const bkOk=k=>BKEYS.includes(k)||/^lg_pa_[A-Za-z0-9_\-]{1,40}$/.test(k);
+function bkExport(){const o={};try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(bkOk(k)){const v=localStorage.getItem(k);if(v!==null)o[k]=v}}}catch(e){}return JSON.stringify({app:"love-game",v:1,t:Date.now(),d:o})}
+function bkImport(txt){let j;try{j=JSON.parse(txt.trim())}catch(e){return -1}if(!j||j.app!=="love-game"||!j.d||typeof j.d!=="object")return -1;let n=0;Object.entries(j.d).forEach(([k,v])=>{if(bkOk(k)&&typeof v==="string"&&v.length<300000){ls.set(k,v);n++}});return n}
+function renderBackup(m){head(m);const h=document.createElement("h2");h.textContent="💾 نسخة احتياطية";m.appendChild(h);
+ tp(m,"كل اللي كتبتوه (يوميات، كبسولات، مناسبات، قايمة أحلام، الألبوم) متخزن على الموبايل ده بس. خدوا نسخة عشان لو غيرتوا الموبايل أو مسحتوا المتصفح. مفيش حاجة بتتبعت لأي سيرفر.");
+ const code=bkExport();const cnt=JSON.parse(code).d;const stt=dv(m,"dd","");stt.textContent="📦 "+Object.keys(cnt).length+" عنصر محفوظ · "+Math.round(code.length/1024*10)/10+" ك.ب";
+ const ta=document.createElement("textarea");ta.id="bk";ta.rows=4;ta.readOnly=true;ta.value=code;ta.style.cssText="width:100%;font-size:11px;direction:ltr;padding:8px;border-radius:10px;border:1px solid rgba(127,127,127,.4);background:transparent;color:inherit";m.appendChild(ta);
+ const r=dv(m,"row");
+ mk(r,"⬇️ نزّل ملف","",()=>{try{const b=new Blob([code],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="love-game-backup-"+lds(Date.now())+".json";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}catch(e){}});
+ mk(r,"📋 انسخ الكود","alt",()=>{try{navigator.clipboard.writeText(code)}catch(e){ta.select()}});
+ const h3=document.createElement("h3");h3.textContent="⬆️ استرجاع";m.appendChild(h3);
+ const rt=document.createElement("textarea");rt.id="bkr";rt.rows=3;rt.placeholder="الصق كود النسخة هنا";rt.style.cssText="width:100%;font-size:11px;direction:ltr;padding:8px;border-radius:10px;border:2px solid var(--accent);background:transparent;color:inherit";m.appendChild(rt);
+ const msg=dv(m,"");msg.style.cssText="text-align:center;font-size:14px";
+ const fi=document.createElement("input");fi.type="file";fi.accept=".json,application/json";fi.onchange=()=>{const f=fi.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{rt.value=String(rd.result||"").slice(0,2000000)};rd.readAsText(f)};m.appendChild(fi);
+ mk(m,"⬆️ استرجع (هيكتب فوق البيانات الحالية)","gold",()=>{const n=bkImport(rt.value);if(n<0){msg.textContent="❌ الكود مش صحيح";return}msg.textContent="✅ اتسترجع "+n+" عنصر";setTimeout(()=>{applyTheme();applyMode();render()},900)});
+ mk(m,"رجوع","alt",()=>{view="home";render()})}
 function renderHome(m){
  head(m);
  tp(m,"اعمل غرفة وابعت الكود لشخص واحد بس تختاره، أو ادخل بكود غرفة حد دعاك. كل غرفة ليها دردشتها الخاصة.");
@@ -417,12 +435,13 @@ function renderHome(m){
  const ci=document.createElement("input");ci.id="jc";ci.placeholder="كود الغرفة (5 حروف)";ci.maxLength=5;ci.style.direction="ltr";ci.style.textTransform="uppercase";m.appendChild(ci);
  const q=new URLSearchParams(location.search).get("r");if(q&&!ci.value)ci.value=q.toUpperCase();
  mk(m,"🚪 اطلب الدخول","alt",()=>askJoin($("jc").value));
- const TB=document.createElement("details");TB.open=true;const TS=document.createElement("summary");TS.textContent="🧰 أدوات وألعاب للثنائي (10)";TB.appendChild(TS);m.appendChild(TB);
+ const TB=document.createElement("details");TB.open=true;const TS=document.createElement("summary");TS.textContent="🧰 أدوات وألعاب للثنائي (11)";TB.appendChild(TS);m.appendChild(TB);
  mk(TB,"🗣️ جلسة وش لوش (من غير غرفة)","gold",()=>{view="talk";render()});
  mk(TB,"📍 خطة خروجة","alt",()=>{view="plan";render()});
  mk(TB,"📱 اختبار سلّم الموبايل","gold",()=>{PA=null;view="pass";render()});
  mk(TB,"💬 اختبار لغة الحب","gold",()=>{LG=null;view="lang";render()});
  mk(TB,"🎂 مناسباتنا وعدّ تنازلي","alt",()=>{view="events";render()});
+ mk(TB,"💾 نسخة احتياطية","alt",()=>{view="backup";render()});
  mk(TB,"📔 يومياتنا","gold",()=>{view="diary";render()});
  mk(TB,"⏳ كبسولة الزمن","gold",()=>{view="cap";render()});
  mk(TB,"🎁 صندوق المفاجآت","gold",()=>{view="box";render()});
@@ -445,7 +464,7 @@ function render(){if(!code)$("ov").style.display="none";const a=$("ans"),av=a?a.
  render0();paintPres();const b=$("ans");if(b&&av&&k==lastAnsKey){b.value=av;if(af)b.focus()}lastAnsKey=k}
 function render0(){
  const m=$("main");const keepNm=$("nm")?$("nm").value:null,keepJc=$("jc")?$("jc").value:null;m.innerHTML="";
- if(!code){$("fab").style.display="none";(({album:renderAlbum,talk:renderTalk,plan:renderPlan,bucket:renderBucket,pass:renderPass,lang:renderLang,events:renderEvents,mood:renderMood,box:renderBox,diary:renderDiary,cap:renderCap})[view]||renderHome)(m);if(keepNm!==null&&$("nm"))$("nm").value=keepNm;if(keepJc&&$("jc"))$("jc").value=keepJc;return}
+ if(!code){$("fab").style.display="none";(({album:renderAlbum,talk:renderTalk,plan:renderPlan,bucket:renderBucket,pass:renderPass,lang:renderLang,events:renderEvents,mood:renderMood,box:renderBox,diary:renderDiary,cap:renderCap,backup:renderBackup})[view]||renderHome)(m);if(keepNm!==null&&$("nm"))$("nm").value=keepNm;if(keepJc&&$("jc"))$("jc").value=keepJc;return}
  head(m);const s=st,i=me();
  if(!s){tp(m,"الغرفة دي مش موجودة أو اتمسحت");mk(m,"رجوع","alt",leave);return}
  $("fab").style.display=i>=0?"block":"none";
