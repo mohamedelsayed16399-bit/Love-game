@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%92%9E%3C/text%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>لعبة الحب أونلاين 💞</title>
 <meta name="theme-color" content="#e63e6d">
@@ -91,7 +92,7 @@ details{width:100%;text-align:start;background:rgba(127,127,127,.1);border-radiu
 <div id="ov"><img id="ovi" alt="كارت النتيجة"><div class="row" style="max-width:380px"><button class="b" id="ovs">📤 شارك</button><button class="b ghost" id="ovx">إغلاق</button></div></div>
 <div id="app"><div class="box" id="main"><p>جارٍ التحميل…</p></div></div>
 <button id="fab" aria-label="الدردشة">💬<i id="badge">0</i></button>
-<div id="sheet"><div class="hd"><span>💬 دردشة الغرفة <span class="code" id="scode"></span></span><button id="cx">✕</button></div><div id="chat"></div><div class="qk" id="qk"></div><div class="cin"><input id="ci" placeholder="اكتب رسالة…" maxlength="300"><button class="b" id="cs" style="flex:none;min-width:70px">إرسال</button></div></div>
+<div id="sheet"><div class="hd"><span>💬 دردشة الغرفة <span class="code" id="scode"></span></span><button id="cx">✕</button></div><div id="chat"></div><div id="ctyp" style="font-size:12px;color:var(--muted);min-height:14px"></div><div class="qk" id="qk"></div><div class="cin"><input id="ci" placeholder="اكتب رسالة…" maxlength="300"><button class="b" id="cs" style="flex:none;min-width:70px">إرسال</button></div></div>
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {getDatabase,ref,get,onValue,push,query,limitToLast,runTransaction,set,onDisconnect,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
@@ -117,7 +118,8 @@ const VQ=[["مين فينا أكتر واحد بيتأخر؟ ⏰", "⏰ ملك �
 const MQ=[["🏖️ بحر", "⛰️ جبل"], ["☕ قهوة", "🍵 شاي"], ["🌅 شروق", "🌇 غروب"], ["🍫 حلو", "🍟 مالح"], ["🌧️ شتا", "☀️ صيف"], ["✈️ سفر", "🏠 قعدة في البيت"], ["🎬 فيلم", "📺 سيرياس"], ["🐶 كلب", "🐱 قطة"], ["🎧 سماعات", "🔊 سبيكر"], ["📱 سوشيال", "📖 كتاب"], ["🌅 صبح", "🌙 ليل"], ["🎬 فيلم", "🎮 لعبة"], ["🍕 بيتزا", "🍔 برجر"], ["🏠 قعدة بيت", "🚶 خروج"], ["📱 موبايل", "📖 كتاب"], ["🎵 موسيقى", "🎙️ بودكاست"], ["🌊 بحر", "⛰️ جبل"], ["🍫 شوكولاتة", "🍿 فشار"], ["🎨 رسم", "🎸 موسيقى"], ["📸 صور", "📝 كتابة"], ["🎮 لعب", "📺 مشاهدة"], ["🌊 بحر", "🏊 مسبح"], ["🌮 تاكو", "🍕 بيتزا"], ["📱 رسالة", "📞 مكالمة"], ["📚 كتب", "🎧 بودكاست"], ["🍫 شوكولاتة بالحليب", "🍫 شوكولاتة غامقة"], ["🎬 أكشن", "😂 كوميدي"], ["📺 نتفليكس", "▶️ يوتيوب"], ["⛰️ جبل", "🏜️ صحرا"], ["☕ قهوة", "🥤 مشروب طاقة"], ["🏖️ شاطئ", "🌲 غابة"], ["🎲 ألعاب لوحية", "🎮 ألعاب فيديو"], ["🚆 قطر", "🚌 أتوبيس"], ["🌸 ربيع", "☀️ صيف"], ["🍵 شاي", "🍋 ليمونادة"], ["🚿 دش الصبح", "🚿 دش بالليل"], ["🏙️ مدينة", "🌳 ريف"]];
 const RQ=["إيه أحلى لحظة جمعتكم سوا لحد دلوقتي؟ 💞", "إيه الحاجة اللي نفسك تعملوها سوا السنة دي؟ ✨", "إيه أكتر حاجة بتحبها في شخصية التاني؟ 🌹", "لو سافرتوا بكرة، رايحين فين؟ ✈️", "إيه الكلمة اللي نفسك تسمعها منه أكتر؟ 💬", "إيه اللي بيخليك تحس إنكم لبعض؟ 💗", "إيه أكتر حاجة نفسك تكتشفها عن {o} لسه؟ 🔍", "إيه أحلى حاجة في صوت {o}؟ 🎵", "لو تعيش يوم كامل مع {o} من غير فلوس، هتعملوا إيه؟ 💸", "إيه أكتر حاجة بتخليك تشتاق لـ {o}؟ 🥺", "لو {o} يبقى لون، هيبقى إيه؟ 🎨", "لو تكتب أغنية لـ {o}، عن إيه هتكون؟ 🎤", "لو {o} يبقى فيلم، هيبقى نوعه إيه؟ 🎬", "إيه أكتر حاجة نفسك تقولها لـ {o} ومش لاقي وقت؟ 🗣️", "إيه أكتر حاجة بتخليك حاسس إنك قريب من {o} جداً؟ 💞", "إمتى بتحس إن {o} بيحبك أكتر؟ ❤️", "إزاي بتكملوا بعض في الشخصية؟ 🧩", "إيه أول حاجة بتتطلع لرؤيتها لما تشوف {o}؟ 👀", "إيه اللون اللي بيمثل علاقتكم؟ 🎨", "إيه أحلى حاجة في علاقتكم دلوقتي؟ 🌟", "إيه تصرف صغير من {o} بيعنيلك الدنيا؟ ✨", "اوصف مستقبلكم سوا في 3 كلمات؟ 🔮", "إيه أحلى حاجة بيعملها {o} من غير ما يحس؟ 🥰", "إيه موقف مضحك حصل بينكم بسبب سوء تفاهم؟ 🤭", "إيه العادة اللي نفسك تبدأوها سوا؟ 🎯", "إيه وعد نفسك توعد بيه {o}؟ 🤝", "إزاي {o} غير حياتك للأحسن؟ 🦋", "إيه أحلى طريقة بتحبو تقضوها في ليلة هادية؟ 🌙"];
 const SYNQ=["قد إيه بتحب الرومانسية؟","قد إيه جعان دلوقتي؟","قد إيه بتحب المفاجآت؟","قد إيه عنيد؟","قد إيه بتحب السفر؟","قد إيه مزاجك حلو النهارده؟","قد إيه بتحب تتصور؟","قد إيه بتحافظ على الأسرار؟","قد إيه بتحب النوم؟","قد إيه بتحب الطبخ؟","قد إيه منظم في حياتك؟","قد إيه بتتأخر في المواعيد؟","قد إيه بتحب الخروجات الطويلة؟","قد إيه بتحب الهدايا؟"];
-const SEC={s:"🎯 تزامن",g:"🕵️ أسئلة التخمين",q:"🧠 أسئلة مفتوحة",d:"🔥 التحديات",v:"👆 مين فينا؟",m:"🔮 قارئ الأفكار",r:"💬 أسئلة رومانسية"};
+const LQ=["اكتب لـ {o} جملة تشكره فيها على حاجة صغيرة عملها","اكتب لـ {o} حلم صغير نفسك تعيشوه سوا","اكتب لـ {o} حاجة بتفكر فيها بس بتتكسف تقولها","اكتب لـ {o} أحلى ضحكة حصلت بينكم","اكتب لـ {o} وعد صغير هتنفذه الأسبوع ده","اكتب لـ {o} إيه اللي بيخليك تحس بالأمان معاه","اكتب لـ {o} ذكرى هتفضل معاك دايماً","اكتب لـ {o} رسالة قصيرة كأنها هتتقري بعد سنة","اكتب لـ {o} حاجة بتحبها في طريقته","اكتب لـ {o} أمنية ليه السنة الجاية"];
+const SEC={l:"💌 رسالة سرية",s:"🎯 تزامن",g:"🕵️ أسئلة التخمين",q:"🧠 أسئلة مفتوحة",d:"🔥 التحديات",v:"👆 مين فينا؟",m:"🔮 قارئ الأفكار",r:"💬 أسئلة رومانسية"};
 // أسئلة أساسية دايماً موجودة في أسئلتك عشان تحليل الشخصية: لغة الحب، الزعل، العيب، الخوف، القوة، الجاذبية، الخروجات، الضيق
 const CORE={love:4,upset:3,flaw:8,fear:13,power:14,attr:24,out:5,annoy:18};
 const COREIDX=Object.values(CORE);
@@ -140,7 +142,7 @@ function pickPI(){const rest=shuf(GQ.map((_,i)=>i).filter(i=>!COREIDX.includes(i
 function fresh(host,len){return {n:[host,""],u:[uid,""],ph:"lobby",len:len,pi:pickPI(),req:null,prof:[null,null],t:0,r:0,S:[0,0],ok:[0,0],tot:[0,0],sk:[0,0],bs:[0,0],ti:[[],[]],v:[null,null],a:"",last:"",deck:[],ak:[0,0],ac:[0,0],cw:[0,0],cn:[0,0],dc:[0,0],dt:[0,0],fav:[],pk:[1,1],ps:[1,1],dbl:[0,0],rej:null}}
 function norm(s){
  s.n=pair(s.n,"");s.u=pair(s.u,"");s.S=pair(s.S,0);s.ok=pair(s.ok,0);s.tot=pair(s.tot,0);s.sk=pair(s.sk,0);s.bs=pair(s.bs,0);
- s.pk=pair(s.pk,1);s.ps=pair(s.ps,1);s.dbl=pair(s.dbl,0);s.rej=s.rej||null;s.ak=pair(s.ak,0);s.ac=pair(s.ac,0);s.cw=pair(s.cw,0);s.cn=pair(s.cn,0);s.dc=pair(s.dc,0);s.dt=pair(s.dt,0);
+ s.rv=pair(s.rv,null);s.gid=s.gid||0;s.pk=pair(s.pk,1);s.ps=pair(s.ps,1);s.dbl=pair(s.dbl,0);s.rej=s.rej||null;s.ak=pair(s.ak,0);s.ac=pair(s.ac,0);s.cw=pair(s.cw,0);s.cn=pair(s.cn,0);s.dc=pair(s.dc,0);s.dt=pair(s.dt,0);
  s.prof=pair(s.prof,null).map(p=>p?L(p):null);
  s.ti=pair(s.ti,null).map(L);
  s.v=pair(s.v,null).map(e=>e!==null&&typeof e=="object"?L(e):e);
@@ -149,16 +151,16 @@ function norm(s){
 
 /* ====== جدول الجولات ====== */
 const CYC=["g","q","d","m","v","r"];
-const SZ={g:()=>PROF_N,q:()=>OQ.length,d:()=>DQ.length,v:()=>VQ.length,m:()=>MQ.length,r:()=>RQ.length,s:()=>SYNQ.length};
+const SZ={g:()=>PROF_N,q:()=>OQ.length,d:()=>DQ.length,v:()=>VQ.length,m:()=>MQ.length,r:()=>RQ.length,s:()=>SYNQ.length,l:()=>LQ.length};
 function makeDeck(len){
  const step=Math.round(len/5),cnt={};
- return Array.from({length:len},(_,i)=>{const ty=((i+1)%10==5)?"s":CYC[i%6];cnt[ty]=cnt[ty]||0;const id=cnt[ty]++%SZ[ty]();
+ return Array.from({length:len},(_,i)=>{const ty=((i+1)%10==5)?"s":((i+1)%10==9)?"l":CYC[i%6];cnt[ty]=cnt[ty]||0;const id=cnt[ty]++%SZ[ty]();
   return ty+"|"+id+"|"+(((i+1)%step==0)?2:1)})}
 const isTurn=ty=>ty=="g"||ty=="q"||ty=="d";
 function turnFor(deck,r){let n=0;for(let j=0;j<r;j++)if(isTurn(deck[j].split("|")[0]))n++;return n%2}
-function startPlay(s){const nc=Math.max(1,Math.round(s.len/30));s.pk=[nc,nc];s.ps=[nc,nc];s.dbl=[0,0];s.ph="play";s.r=0;s.S=[0,0];s.ok=[0,0];s.tot=[0,0];s.sk=[0,0];s.bs=[0,0];s.ti=[[],[]];s.v=[null,null];s.a="";s.ak=[0,0];s.ac=[0,0];s.cw=[0,0];s.cn=[0,0];s.dc=[0,0];s.dt=[0,0];s.fav=[];
+function startPlay(s){s.gid=Date.now();s.rv=[null,null];const nc=Math.max(1,Math.round(s.len/30));s.pk=[nc,nc];s.ps=[nc,nc];s.dbl=[0,0];s.ph="play";s.r=0;s.S=[0,0];s.ok=[0,0];s.tot=[0,0];s.sk=[0,0];s.bs=[0,0];s.ti=[[],[]];s.v=[null,null];s.a="";s.ak=[0,0];s.ac=[0,0];s.cw=[0,0];s.cn=[0,0];s.dc=[0,0];s.dt=[0,0];s.fav=[];
  s.last="يلا نبدأ! 🔥 "+s.len+" جولة قدامكم";s.deck=makeDeck(s.len);s.t=turnFor(s.deck,0)}
-function adv(s,msg){s.dbl=[0,0];s.last=msg;s.v=[null,null];s.a="";s.r++;if(s.r>=s.len)s.ph="end";else s.t=turnFor(s.deck,s.r)}
+function adv(s,msg){s.dbl=[0,0];s.rv=[null,null];s.last=msg;s.v=[null,null];s.a="";s.r++;if(s.r>=s.len)s.ph="end";else s.t=turnFor(s.deck,s.r)}
 function cur(s){const p=s.deck[s.r].split("|");return {ty:p[0],id:+p[1],mx:+p[2]}}
 function me(){return st?st.u.indexOf(uid):-1}
 const inRound=(s,r)=>s.ph=="play"&&s.r==r;
@@ -191,7 +193,7 @@ async function askJoin(c){
   if(res=="full"){joinErr="الغرفة دي فيها لاعبين بالفعل";render();return}
  addRoom(c,"");openRoom(c)}
 function openRoom(c){
- closeRoom(true);code=c;pq=0;pa=[];mrk=-1;msgs=[];st=null;ls.set("lg_last",c);
+ closeRoom(true);lastUnread=-1;code=c;pq=0;pa=[];mrk=-1;msgs=[];st=null;ls.set("lg_last",c);
  history.replaceState(null,"","?r="+c);
  stFirst=true;needPrev=null;startPresence(c);startFx(c);
   unsubS=onValue(sref(c),sn=>{const v=sn.val();const prev=st;st=v?norm(v):null;onState(prev,st);render()},e=>{$("main").innerHTML="<p>مشكلة في الاتصال: "+e.code+"</p>"});
@@ -208,7 +210,7 @@ function tp(p,txt){const e=document.createElement("p");e.textContent=txt;p.appen
 function dv(p,cls,txt){const e=document.createElement("div");if(cls)e.className=cls;if(txt!=null)e.textContent=txt;p.appendChild(e);return e}
 function bar(p,pc){const b=dv(p,"bar"),i=document.createElement("i");i.style.width=pc+"%";b.appendChild(i)}
 function head(m,withLeave){const t=dv(m,"top");const h=document.createElement("h1");h.textContent="لعبة الحب 💞";t.appendChild(h);
- if(code){const c=document.createElement("span");c.className="code";c.textContent=code;t.appendChild(c);const sb=document.createElement("button");sb.className="util";sb.style.cssText="border:0;background:rgba(127,127,127,.18);border-radius:50%;width:32px;height:32px;cursor:pointer;color:var(--text)";sb.id="sndb";sb.textContent=snd()?"🔔":"🔕";sb.onclick=()=>{ls.set("lg_snd",snd()?"0":"1");sb.textContent=snd()?"🔔":"🔕"};t.appendChild(sb)}}
+ if(code){const c=document.createElement("span");c.className="code";c.textContent=code;t.appendChild(c);const sb=document.createElement("button");sb.className="util";sb.style.cssText="border:0;background:rgba(127,127,127,.18);border-radius:50%;width:32px;height:32px;cursor:pointer;color:var(--text)";sb.id="sndb";sb.textContent=snd()?"🔔":"🔕";sb.onclick=()=>{ls.set("lg_snd",snd()?"0":"1");sb.textContent=snd()?"🔔":"🔕"};t.appendChild(sb)}const tb=document.createElement("button");tb.className="util";tb.style.cssText="border:0;background:rgba(127,127,127,.18);border-radius:50%;width:32px;height:32px;cursor:pointer;color:var(--text)";tb.id="thmb";tb.textContent="🎨";tb.onclick=()=>{ls.set("lg_theme",String(((+ls.get("lg_theme")||0)+1)%THEMES.length));applyTheme()};t.appendChild(tb)}
 function shareRoom(){const url=location.origin+location.pathname+"?r="+code;const msg="تعالى العب معايا لعبة الحب 💞 كود الغرفة: "+code;
  if(navigator.share){navigator.share({title:"لعبة الحب",text:msg,url}).catch(()=>{})}
  else if(navigator.clipboard){navigator.clipboard.writeText(msg+"\n"+url).then(()=>{$("last")&&($("last").textContent="اتنسخ الرابط ✅")}).catch(()=>{})}}
@@ -274,18 +276,19 @@ function renderHome(m){
  const ci=document.createElement("input");ci.id="jc";ci.placeholder="كود الغرفة (5 حروف)";ci.maxLength=5;ci.style.direction="ltr";ci.style.textTransform="uppercase";m.appendChild(ci);
  const q=new URLSearchParams(location.search).get("r");if(q&&!ci.value)ci.value=q.toUpperCase();
  mk(m,"🚪 اطلب الدخول","alt",()=>askJoin($("jc").value));
+ {const hh=hist();if(hh.length)mk(m,"📔 ألبومنا ("+hh.length+" لعبة)","gold",()=>{view="album";render()})}
  const dt=document.createElement("details");const sm=document.createElement("summary");sm.textContent="📖 إزاي تلعبوا؟";dt.appendChild(sm);
- ["1) واحد يعمل غرفة ويبعت الكود لشريكه بس، والتاني يطلب الدخول والمضيف يقبل.","2) كل واحد يجاوب عن نفسه الأول، وبعدين بتتناوبوا على التخمين والأسئلة والتحديات.","3) كل 10 جولات تقريباً فيه جولة تزامن 🎯: اختاروا نفس الرقم.","4) كروت ⚡ الدبل بتضاعف نقاطك في دورك، وكروت ⏭ التخطي ليكم الاتنين.","5) في الآخر: تحليل شخصية ونسبة تفاهم وكارت نتيجة تشاركوه."].forEach(t=>{const p=document.createElement("div");p.textContent=t;dt.appendChild(p)});m.appendChild(dt);
+ ["0) 💌 كل 10 جولات فيه رسالة سرية: كل واحد يكتب للتاني وبتتكشف مع بعض.","1) واحد يعمل غرفة ويبعت الكود لشريكه بس، والتاني يطلب الدخول والمضيف يقبل.","2) كل واحد يجاوب عن نفسه الأول، وبعدين بتتناوبوا على التخمين والأسئلة والتحديات.","3) كل 10 جولات تقريباً فيه جولة تزامن 🎯: اختاروا نفس الرقم.","4) كروت ⚡ الدبل بتضاعف نقاطك في دورك، وكروت ⏭ التخطي ليكم الاتنين.","5) في الآخر: تحليل شخصية ونسبة تفاهم وكارت نتيجة تشاركوه."].forEach(t=>{const p=document.createElement("div");p.textContent=t;dt.appendChild(p)});m.appendChild(dt);
  const rs=myRooms();
  if(rs.length){const w=dv(m,"rooms");dv(w,"","غرفك السابقة").style.fontSize="13px";rs.forEach(r=>{const b=document.createElement("button");b.textContent=r.c+(r.n?" · "+r.n:"");b.onclick=()=>openRoom(r.c);w.appendChild(b)})}
 }
 let waitSince=Date.now(),waitSig="",waitT=null,lastAnsKey="";
-function render(){const a=$("ans"),av=a?a.value:null,af=a&&document.activeElement===a;const k=st?code+"|"+st.r+"|"+st.ph:"";
- if(!st)waitSig="";else{const sg=JSON.stringify([st.r,st.ph,st.a,st.v,st.req,st.prof.map(x=>!!x)]);if(sg!=waitSig){waitSig=sg;waitSince=Date.now();clearTimeout(waitT);waitT=setTimeout(()=>{if(code)render()},91000)}}
+function render(){if(!code)$("ov").style.display="none";const a=$("ans"),av=a?a.value:null,af=a&&document.activeElement===a;const k=st?code+"|"+st.r+"|"+st.ph:"";
+ if(!st)waitSig="";else{const sg=JSON.stringify([st.r,st.ph,st.a,st.v,st.rv,st.req,st.prof.map(x=>!!x)]);if(sg!=waitSig){waitSig=sg;waitSince=Date.now();clearTimeout(waitT);waitT=setTimeout(()=>{if(code)render()},91000)}}
  render0();paintPres();const b=$("ans");if(b&&av&&k==lastAnsKey){b.value=av;if(af)b.focus()}lastAnsKey=k}
 function render0(){
  const m=$("main");const keepNm=$("nm")?$("nm").value:null,keepJc=$("jc")?$("jc").value:null;m.innerHTML="";
- if(!code){$("fab").style.display="none";renderHome(m);if(keepNm!==null&&$("nm"))$("nm").value=keepNm;if(keepJc&&$("jc"))$("jc").value=keepJc;return}
+ if(!code){$("fab").style.display="none";(view=="album"?renderAlbum:renderHome)(m);if(keepNm!==null&&$("nm"))$("nm").value=keepNm;if(keepJc&&$("jc"))$("jc").value=keepJc;return}
  head(m);const s=st,i=me();
  if(!s){tp(m,"الغرفة دي مش موجودة أو اتمسحت");mk(m,"رجوع","alt",leave);return}
  $("fab").style.display=i>=0?"block":"none";
@@ -328,7 +331,7 @@ function render0(){
   d.textContent=s.n[k]+(k==i?" (أنت)":"");const pd=document.createElement("i");pd.className="pdot";pd.dataset.k=k;d.insertBefore(pd,d.firstChild);
   const b=document.createElement("b");b.textContent=s.S[k];d.appendChild(b);
   const sm=document.createElement("small");sm.textContent=s.sk[k]>=2?"🔥 سلسلة "+s.sk[k]:"";d.appendChild(sm)});
- const l=dv(m,"","");l.id="last";l.textContent=s.last;
+ const l=dv(m,"","");l.id="last";l.textContent=s.last;const tyl=dv(m,"","");tyl.id="typ";tyl.style.cssText="font-size:12px;color:var(--muted)";
 
  if(s.ph=="end"){
   const v=verdict(s);
@@ -341,6 +344,7 @@ function render0(){
    analysis(s,k).forEach(([a,b])=>{const ln=dv(pl,"ln");const sp=document.createElement("span");sp.textContent=a+": ";ln.appendChild(sp);ln.appendChild(document.createTextNode(b))})});
   if(s.fav.length){const fh=document.createElement("h3");fh.textContent="💌 أحلى إجاباتكم";m.appendChild(fh);
    s.fav.slice(-8).forEach(f=>{const d=dv(m,"fav");d.textContent=f.n+": «"+f.a+"»  ← "+f.q.replace(/\s*[^\u0600-\u06FF\s{}؟?]+\s*$/,"")})}
+  const aw=awards(s);if(aw.length){const ah2=document.createElement("h3");ah2.textContent="🏅 جوايز اللعبة";m.appendChild(ah2);aw.forEach(t=>dv(m,"fav",t))}
   const stt=dv(m,"stt");[0,1].forEach(k=>{const d=dv(stt,"");d.textContent=s.n[k];const b=document.createElement("b");b.textContent="🔥 "+s.bs[k];d.appendChild(b);d.appendChild(document.createTextNode("أطول سلسلة · "+s.ok[k]+"/"+s.tot[k]+" توقع صح"))});
   const bt=dv(m,"row");
   mk(bt,"🖼️ كارت النتيجة للمشاركة","gold",()=>shareCard(s));
@@ -406,6 +410,23 @@ function render0(){
      if(d==0){[0,1].forEach(z=>{x.sk[z]++;if(x.sk[z]>x.bs[z])x.bs[z]=x.sk[z]})}
      adv(x,"اخترتوا "+x.v[0]+" و"+x.v[1]+" -- "+(d==0?"تطابق تام! 🎯💞 +"+g:d==1?"قريبين أوي 😍 +"+g:"بعيدين شوية 😄"))}})))}
  }
+
+ else if(c.ty=="l"){
+  const both=s.v[0]!==null&&s.v[1]!==null;
+  kd.textContent="💌 كل واحد يكتب رسالة قصيرة للتاني، وبتتكشف مع بعض (+"+(10*c.mx)+" للكاتب لو وصلت)";
+  body().textContent=sub(LQ[c.id],other);m.appendChild(bt);
+  if(!both){
+   if(s.v[i]===null){const ai=document.createElement("input");ai.id="ans";ai.placeholder="رسالتك…";ai.maxLength=160;bt.appendChild(ai);
+    mk(bt,"💌 ابعت الرسالة","",()=>{const v=($("ans").value.trim()||"💗").slice(0,160);act(x=>{if(!inRound(x,r)||x.v[i]!==null)return false;x.v[i]=v;x.fav.push({n:x.n[i],q:"💌 رسالة لـ"+x.n[1-i],a:v})})})}
+   else tp(bt,"✅ رسالتك اتبعتت -- ⏳ منتظر "+other)}
+  else{
+   [1-i,i].forEach(k=>dv(bt,"ansbox",(k==i?"رسالتك: ":"رسالة "+s.n[k]+" ليك: ")+s.v[k]));
+   if(s.rv[i]===null){tp(bt,"رسالة "+other+" وصلتك؟");
+    const fin=(x,h)=>{x.rv[i]=h;if(h)x.S[1-i]+=10*c.mx;if(x.rv[0]!==null&&x.rv[1]!==null)adv(x,"💌 الرسايل اتكشفت "+(x.rv[0]+x.rv[1]==2?"والاتنين اتحركوا 🥹":"ويا رب تكون عجبتكم 🙂"))};
+    mk(bt,"❤️ وصلتني","",()=>act(x=>{if(!inRound(x,r)||x.rv[i]!==null)return false;fin(x,1)}));
+    mk(bt,"🙂 حلوة","alt",()=>act(x=>{if(!inRound(x,r)||x.rv[i]!==null)return false;fin(x,0)}))}
+   else tp(bt,"✅ ردّيت -- ⏳ منتظر "+other)}
+ }
  else if(c.ty=="r"){
   kd.textContent="الاتنين يجاوبوا (+5 لكل واحد)";
   body().textContent=sub(RQ[c.id],other);m.appendChild(bt);
@@ -456,7 +477,7 @@ function drawChat(){
   if(!msgs.length){const e=document.createElement("p");e.textContent="مفيش رسائل لسه. ابدأ إنت 💬";box.appendChild(e)}
   msgs.forEach(x=>{const el=document.createElement("div");el.className="m "+(x.u==uid?"me":"ot");const sm=document.createElement("small");const d=new Date(x.t||0);sm.textContent=x.n+" • "+d.toLocaleTimeString("ar-EG",{hour:"2-digit",minute:"2-digit"});el.appendChild(sm);el.appendChild(document.createTextNode(x.m));box.appendChild(el)});
   box.scrollTop=box.scrollHeight;ls.set(seenKey(),String(Date.now()))}
- else msgs.forEach(x=>{if(x.u!=uid&&(x.t||0)>seen)unread++});
+ else{msgs.forEach(x=>{if(x.u!=uid&&(x.t||0)>seen)unread++});if(lastUnread>=0&&unread>lastUnread)ping();lastUnread=unread}
  const b=$("badge");b.style.display=unread?"flex":"none";b.textContent=unread>9?"9+":unread}
 function send(txt){const v=(txt||$("ci").value).trim();if(!v||me()<0||!code)return;if(!txt)$("ci").value="";push(cref(code),{u:uid,n:st.n[me()],m:v.slice(0,300),t:Date.now()}).catch(()=>{})}
 $("fab").onclick=()=>setChat(true);$("cx").onclick=()=>setChat(false);$("cs").onclick=()=>send();$("ci").onkeydown=e=>{if(e.key=="Enter")send()};
@@ -471,7 +492,7 @@ function startPresence(c){stopPresence();
   if(on){const r=pref(c,uid);onDisconnect(r).set({on:false,t:serverTimestamp()}).catch(()=>{});set(r,{on:!document.hidden,t:serverTimestamp()}).catch(()=>{})}});
  unsubP=onValue(ref(rdb,BASE+c+"/pr"),sn=>{pres=sn.val()||{};paintPres()},()=>{})}
 function stopPresence(){if(unsubCon){unsubCon();unsubCon=null}if(unsubP){unsubP();unsubP=null}if(code){set(pref(code,uid),{on:false,t:Date.now()}).catch(()=>{})}pres={};$("net").style.display="none"}
-function paintPres(){if(!st)return;const i=me();document.querySelectorAll(".pdot").forEach(el=>{const k=+el.dataset.k;const p=pres[st.u[k]];const on=k==i||(p&&p.on===true);el.textContent=on?"🟢":"⚪";el.title=on?"متصل":"غير متصل"})}
+function paintPres(){if(!st)return;const i=me();document.querySelectorAll(".pdot").forEach(el=>{const k=+el.dataset.k;const p=pres[st.u[k]];const on=k==i||(p&&p.on===true);el.textContent=on?"🟢":"⚪";el.title=on?"متصل":"غير متصل"});const j=1-i,pj=j>=0&&st.u[j]?pres[st.u[j]]:null,tt=(i>=0&&pj&&pj.ty&&Date.now()-pj.ty<4500)?"✍️ "+st.n[j]+" بيكتب…":"";const a1=$("typ"),a2=$("ctyp");if(a1)a1.textContent=tt;if(a2)a2.textContent=tt}
 document.addEventListener("visibilitychange",()=>{if(code)set(pref(code,uid),{on:!document.hidden,t:serverTimestamp()}).catch(()=>{});if(!document.hidden)document.title=BASE_TITLE});
 function startFx(c){stopFx();fxFirst=true;unsubF=onValue(query(ref(rdb,BASE+c+"/fx"),limitToLast(1)),sn=>{sn.forEach(d=>{const v=d.val();if(!fxFirst&&v&&v.u!=uid&&typeof v.e=="string")floatEmoji(v.e.slice(0,4))});fxFirst=false},()=>{})}
 function stopFx(){if(unsubF){unsubF();unsubF=null}}
@@ -487,9 +508,11 @@ function needsMe(s,i){if(i<0)return false;
  const c=cur(s);
  if(c.ty=="g")return s.t==i;
  if(c.ty=="q"||c.ty=="d")return s.t==i?!s.a:!!s.a;
+ if(c.ty=="l"){const both=s.v[0]!==null&&s.v[1]!==null;return both?s.rv[i]===null:s.v[i]===null}
  return s.v[i]===null}
 function onState(prev,s){
  if(!s)return;const i=me();
+ if(s.ph=="end"&&i>=0)recordHist(s);
  if(i>=0&&s.n[1-i])addRoom(code,s.n[1-i]);
  const nd=needsMe(s,i);
  if(stFirst){stFirst=false;needPrev=nd;prevLast=s.last;prevPh=s.ph;return}
@@ -522,6 +545,24 @@ $("ovx").onclick=()=>{$("ov").style.display="none"};
 $("ovs").onclick=async()=>{if(!cardBlob)return;const f=new File([cardBlob],"love-game-result.png",{type:"image/png"});
  try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:"نتيجتنا في لعبة الحب 💞",text:"جربوا لعبة الحب 💞"});return}}catch(e){if(e&&e.name=="AbortError")return}
  const a=document.createElement("a");a.href=URL.createObjectURL(cardBlob);a.download="love-game-result.png";document.body.appendChild(a);a.click();a.remove()};
+
+/* ====== ثيمات، ألبوم، جوايز، كتابة ====== */
+const THEMES=[["#e63e6d","#7c4dff"],["#7c4dff","#e63e6d"],["#0ea5e9","#14b8a6"],["#f59e0b","#ef4444"],["#10b981","#6366f1"],["#ec4899","#f59e0b"]];
+function applyTheme(){const t=THEMES[(+ls.get("lg_theme")||0)%THEMES.length];const r=document.documentElement.style;r.setProperty("--accent",t[0]);r.setProperty("--b2",t[1])}
+applyTheme();
+let view="home",lastUnread=-1,lastTy=0;
+const hist=()=>{try{return JSON.parse(ls.get("lg_hist")||"[]")}catch(e){return[]}};
+function recordHist(s){if(!s.gid)return;const h=hist();if(h.some(x=>x.g==s.gid&&x.c==code))return;h.unshift({g:s.gid,c:code,d:Date.now(),a:[s.n[0],s.n[1]],S:[s.S[0],s.S[1]],p:verdict(s).comp});ls.set("lg_hist",JSON.stringify(h.slice(0,40)))}
+function awards(s){const o=[];const add=(t,a,b)=>{if(a!=b)o.push(t+": "+s.n[a>b?0:1])};
+ add("🎯 قارئ العقول",s.tot[0]?s.ok[0]/s.tot[0]:0,s.tot[1]?s.ok[1]/s.tot[1]:0);add("🔥 ملك السلاسل",s.bs[0],s.bs[1]);add("💪 بطل التحديات",s.dc[0],s.dc[1]);add("📝 الكاتب الرومانسي",s.cw[0],s.cw[1]);return o}
+function renderAlbum(m){head(m);const h=hist();const h2=document.createElement("h2");h2.textContent="📔 ألبوم ذكرياتنا";m.appendChild(h2);
+ if(!h.length){tp(m,"لسه مفيش ألعاب خلصت على الجهاز ده.")}
+ else{const avg=Math.round(h.reduce((a,x)=>a+x.p,0)/h.length),best=Math.max(...h.map(x=>x.p));
+  const stt=dv(m,"stt");[["ألعاب",h.length],["متوسط التفاهم",avg+"%"],["أعلى تفاهم",best+"%"]].forEach(([a,b])=>{const d=dv(stt,"");d.textContent=a;const bb=document.createElement("b");bb.textContent=b;d.appendChild(bb)});
+  h.forEach(x=>{const p=dv(m,"pl");const b=document.createElement("b");b.textContent=x.a[0]+" "+x.S[0]+" × "+x.S[1]+" "+x.a[1];p.appendChild(b);dv(p,"ln",new Date(x.d).toLocaleDateString("ar-EG")+" · غرفة "+x.c+" · تفاهم "+x.p+"%");bar(p,x.p)})}
+ mk(m,"رجوع","alt",()=>{view="home";render()})}
+document.addEventListener("input",e=>{if(e.target&&(e.target.id=="ans"||e.target.id=="ci")&&code&&me()>=0&&Date.now()-lastTy>2500){lastTy=Date.now();set(ref(rdb,BASE+code+"/pr/"+uid+"/ty"),Date.now()).catch(()=>{})}});
+setInterval(()=>{if(code&&st)paintPres()},2000);
 
 /* ====== بداية ====== */
 const qr=(new URLSearchParams(location.search).get("r")||"").toUpperCase();
