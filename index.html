@@ -13,6 +13,7 @@
 <style>
 :root{--bg:#fff1f4;--card:#fff;--text:#4a1626;--accent:#e63e6d;--b2:#7c4dff;--gold:#f5a623;--muted:#a05a6e;color-scheme:light}
 @media (prefers-color-scheme:dark){:root{--bg:#1d0f15;--card:#2c1720;--text:#ffe3ea;--accent:#ff5c8a;--b2:#a58bff;--gold:#ffc861;--muted:#d49aab;color-scheme:dark}}
+:root.dk{--bg:#1d0f15;--card:#2c1720;--text:#ffe3ea;--gold:#ffc861;--muted:#d49aab;color-scheme:dark}:root.lt{--bg:#fff1f4;--card:#fff;--text:#4a1626;--gold:#f5a623;--muted:#a05a6e;color-scheme:light}
 *{box-sizing:border-box}
 body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:"Cairo","Segoe UI",Tahoma,sans-serif;display:flex;justify-content:center;padding:14px 14px 90px;text-align:center}
 #app{width:min(440px,100%);display:flex;flex-direction:column;gap:12px}
@@ -142,7 +143,7 @@ function pickPI(){const rest=shuf(GQ.map((_,i)=>i).filter(i=>!COREIDX.includes(i
 function fresh(host,len){return {n:[host,""],u:[uid,""],ph:"lobby",len:len,pi:pickPI(),req:null,prof:[null,null],t:0,r:0,S:[0,0],ok:[0,0],tot:[0,0],sk:[0,0],bs:[0,0],ti:[[],[]],v:[null,null],a:"",last:"",deck:[],ak:[0,0],ac:[0,0],cw:[0,0],cn:[0,0],dc:[0,0],dt:[0,0],fav:[],pk:[1,1],ps:[1,1],dbl:[0,0],rej:null}}
 function norm(s){
  s.n=pair(s.n,"");s.u=pair(s.u,"");s.S=pair(s.S,0);s.ok=pair(s.ok,0);s.tot=pair(s.tot,0);s.sk=pair(s.sk,0);s.bs=pair(s.bs,0);
- s.rv=pair(s.rv,null);s.gid=s.gid||0;s.pk=pair(s.pk,1);s.ps=pair(s.ps,1);s.dbl=pair(s.dbl,0);s.rej=s.rej||null;s.ak=pair(s.ak,0);s.ac=pair(s.ac,0);s.cw=pair(s.cw,0);s.cn=pair(s.cn,0);s.dc=pair(s.dc,0);s.dt=pair(s.dt,0);
+ s.rv=pair(s.rv,null);s.gid=s.gid||0;s.lg=L(s.lg);s.pk=pair(s.pk,1);s.ps=pair(s.ps,1);s.dbl=pair(s.dbl,0);s.rej=s.rej||null;s.ak=pair(s.ak,0);s.ac=pair(s.ac,0);s.cw=pair(s.cw,0);s.cn=pair(s.cn,0);s.dc=pair(s.dc,0);s.dt=pair(s.dt,0);
  s.prof=pair(s.prof,null).map(p=>p?L(p):null);
  s.ti=pair(s.ti,null).map(L);
  s.v=pair(s.v,null).map(e=>e!==null&&typeof e=="object"?L(e):e);
@@ -158,9 +159,9 @@ function makeDeck(len){
   return ty+"|"+id+"|"+(((i+1)%step==0)?2:1)})}
 const isTurn=ty=>ty=="g"||ty=="q"||ty=="d";
 function turnFor(deck,r){let n=0;for(let j=0;j<r;j++)if(isTurn(deck[j].split("|")[0]))n++;return n%2}
-function startPlay(s){s.gid=Date.now();s.rv=[null,null];const nc=Math.max(1,Math.round(s.len/30));s.pk=[nc,nc];s.ps=[nc,nc];s.dbl=[0,0];s.ph="play";s.r=0;s.S=[0,0];s.ok=[0,0];s.tot=[0,0];s.sk=[0,0];s.bs=[0,0];s.ti=[[],[]];s.v=[null,null];s.a="";s.ak=[0,0];s.ac=[0,0];s.cw=[0,0];s.cn=[0,0];s.dc=[0,0];s.dt=[0,0];s.fav=[];
+function startPlay(s){s.lg=[];s.gid=Date.now();s.rv=[null,null];const nc=Math.max(1,Math.round(s.len/30));s.pk=[nc,nc];s.ps=[nc,nc];s.dbl=[0,0];s.ph="play";s.r=0;s.S=[0,0];s.ok=[0,0];s.tot=[0,0];s.sk=[0,0];s.bs=[0,0];s.ti=[[],[]];s.v=[null,null];s.a="";s.ak=[0,0];s.ac=[0,0];s.cw=[0,0];s.cn=[0,0];s.dc=[0,0];s.dt=[0,0];s.fav=[];
  s.last="يلا نبدأ! 🔥 "+s.len+" جولة قدامكم";s.deck=makeDeck(s.len);s.t=turnFor(s.deck,0)}
-function adv(s,msg){s.dbl=[0,0];s.rv=[null,null];s.last=msg;s.v=[null,null];s.a="";s.r++;if(s.r>=s.len)s.ph="end";else s.t=turnFor(s.deck,s.r)}
+function adv(s,msg){s.lg=(s.lg||[]).concat([(s.r+1)+") "+String(msg).slice(0,90)]).slice(-120);s.dbl=[0,0];s.rv=[null,null];s.last=msg;s.v=[null,null];s.a="";s.r++;if(s.r<s.len&&Math.floor(s.r*4/s.len)>Math.floor((s.r-1)*4/s.len))s.last+=" · 🏁 "+Math.floor(s.r*4/s.len)*25+"% من اللعبة خلص";if(s.r>=s.len)s.ph="end";else s.t=turnFor(s.deck,s.r)}
 function cur(s){const p=s.deck[s.r].split("|");return {ty:p[0],id:+p[1],mx:+p[2]}}
 function me(){return st?st.u.indexOf(uid):-1}
 const inRound=(s,r)=>s.ph=="play"&&s.r==r;
@@ -210,7 +211,7 @@ function tp(p,txt){const e=document.createElement("p");e.textContent=txt;p.appen
 function dv(p,cls,txt){const e=document.createElement("div");if(cls)e.className=cls;if(txt!=null)e.textContent=txt;p.appendChild(e);return e}
 function bar(p,pc){const b=dv(p,"bar"),i=document.createElement("i");i.style.width=pc+"%";b.appendChild(i)}
 function head(m,withLeave){const t=dv(m,"top");const h=document.createElement("h1");h.textContent="لعبة الحب 💞";t.appendChild(h);
- if(code){const c=document.createElement("span");c.className="code";c.textContent=code;t.appendChild(c);const sb=document.createElement("button");sb.className="util";sb.style.cssText="border:0;background:rgba(127,127,127,.18);border-radius:50%;width:32px;height:32px;cursor:pointer;color:var(--text)";sb.id="sndb";sb.textContent=snd()?"🔔":"🔕";sb.onclick=()=>{ls.set("lg_snd",snd()?"0":"1");sb.textContent=snd()?"🔔":"🔕"};t.appendChild(sb)}const tb=document.createElement("button");tb.className="util";tb.style.cssText="border:0;background:rgba(127,127,127,.18);border-radius:50%;width:32px;height:32px;cursor:pointer;color:var(--text)";tb.id="thmb";tb.textContent="🎨";tb.onclick=()=>{ls.set("lg_theme",String(((+ls.get("lg_theme")||0)+1)%THEMES.length));applyTheme()};t.appendChild(tb)}
+ if(code){const c=document.createElement("span");c.className="code";c.textContent=code;t.appendChild(c);const sb=document.createElement("button");sb.className="util";sb.style.cssText="border:0;background:rgba(127,127,127,.18);border-radius:50%;width:32px;height:32px;cursor:pointer;color:var(--text)";sb.id="sndb";sb.textContent=snd()?"🔔":"🔕";sb.onclick=()=>{ls.set("lg_snd",snd()?"0":"1");sb.textContent=snd()?"🔔":"🔕"};t.appendChild(sb)}const tb=document.createElement("button");tb.className="util";tb.style.cssText="border:0;background:rgba(127,127,127,.18);border-radius:50%;width:32px;height:32px;cursor:pointer;color:var(--text)";tb.id="thmb";tb.textContent="🎨";tb.onclick=()=>{ls.set("lg_theme",String(((+ls.get("lg_theme")||0)+1)%THEMES.length));applyTheme()};t.appendChild(tb);const mb=document.createElement("button");mb.className="util";mb.style.cssText=tb.style.cssText;mb.id="modb";mb.textContent="🌓";mb.onclick=()=>{const o=["","dk","lt"];ls.set("lg_mode",o[(o.indexOf(ls.get("lg_mode")||"")+1)%3]);applyMode()};t.appendChild(mb)}
 function shareRoom(){const url=location.origin+location.pathname+"?r="+code;const msg="تعالى العب معايا لعبة الحب 💞 كود الغرفة: "+code;
  if(navigator.share){navigator.share({title:"لعبة الحب",text:msg,url}).catch(()=>{})}
  else if(navigator.clipboard){navigator.clipboard.writeText(msg+"\n"+url).then(()=>{$("last")&&($("last").textContent="اتنسخ الرابط ✅")}).catch(()=>{})}}
@@ -344,10 +345,12 @@ function render0(){
    analysis(s,k).forEach(([a,b])=>{const ln=dv(pl,"ln");const sp=document.createElement("span");sp.textContent=a+": ";ln.appendChild(sp);ln.appendChild(document.createTextNode(b))})});
   if(s.fav.length){const fh=document.createElement("h3");fh.textContent="💌 أحلى إجاباتكم";m.appendChild(fh);
    s.fav.slice(-8).forEach(f=>{const d=dv(m,"fav");d.textContent=f.n+": «"+f.a+"»  ← "+f.q.replace(/\s*[^\u0600-\u06FF\s{}؟?]+\s*$/,"")})}
-  const aw=awards(s);if(aw.length){const ah2=document.createElement("h3");ah2.textContent="🏅 جوايز اللعبة";m.appendChild(ah2);aw.forEach(t=>dv(m,"fav",t))}
+  if(s.lg.length){const d=document.createElement("details");const sm=document.createElement("summary");sm.textContent="🎞 شريط اللحظات ("+s.lg.length+" جولة)";d.appendChild(sm);s.lg.forEach(t=>{const e=document.createElement("div");e.textContent=t;e.style.fontSize="13px";d.appendChild(e)});m.appendChild(d)}
+   const aw=awards(s);if(aw.length){const ah2=document.createElement("h3");ah2.textContent="🏅 جوايز اللعبة";m.appendChild(ah2);aw.forEach(t=>dv(m,"fav",t))}
   const stt=dv(m,"stt");[0,1].forEach(k=>{const d=dv(stt,"");d.textContent=s.n[k];const b=document.createElement("b");b.textContent="🔥 "+s.bs[k];d.appendChild(b);d.appendChild(document.createTextNode("أطول سلسلة · "+s.ok[k]+"/"+s.tot[k]+" توقع صح"))});
   const bt=dv(m,"row");
   mk(bt,"🖼️ كارت النتيجة للمشاركة","gold",()=>shareCard(s));
+   if(s.fav.length)mk(bt,"💌 كارت أحلى الإجابات","gold",()=>favCard(s));
   mk(bt,"🔁 جولة جديدة بنفس الإجابات","",replay);
   mk(bt,"🆕 أسئلة جديدة","alt",resetRoom);
   mk(bt,"🚪 اخرج","ghost",leave);
@@ -443,7 +446,8 @@ function render0(){
    if(!s.a){
     if(isQ){tp(bt,"اكتب إجابتك 👇");const ai=document.createElement("input");ai.id="ans";ai.placeholder="إجابتك…";ai.maxLength=200;bt.appendChild(ai);
      mk(bt,"إرسال الإجابة 📨","",()=>{const v=$("ans").value.trim();if(!v)return;act(x=>{if(!inRound(x,r)||x.a)return false;x.a=v.slice(0,200)})})}
-    else{tp(bt,"نفّذ التحدي وبعدين دوس 👇");mk(bt,"خلصت التحدي ✔","",()=>act(x=>{if(!inRound(x,r)||x.a)return false;x.a="تم"}))}
+    else{tp(bt,"نفّذ التحدي وبعدين دوس 👇");
+     {const tk=code+"|"+r;if(chT.k!=tk)chT={k:tk,t:Date.now()};const tm=tp(bt,"");tm.style.fontWeight="800";const upd=()=>{const left=60-Math.floor((Date.now()-chT.t)/1000);tm.textContent=left>0?"⏱ "+left+" ثانية":"⏰ خلص الوقت! (ولا يهمك، كمّل)"};upd();const iv=setInterval(()=>{if(!tm.isConnected||Date.now()-chT.t>65000){clearInterval(iv);return}upd()},1000)}mk(bt,"خلصت التحدي ✔","",()=>act(x=>{if(!inRound(x,r)||x.a)return false;x.a="تم"}))}
    }else tp(bt,"✅ تم -- ⏳ منتظر حكم "+other);
   }else{
    if(!s.a)tp(bt,"⏳ منتظر "+who+(isQ?" يجاوب…":" ينفّذ التحدي…"));
@@ -557,13 +561,25 @@ function awards(s){const o=[];const add=(t,a,b)=>{if(a!=b)o.push(t+": "+s.n[a>b?
  add("🎯 قارئ العقول",s.tot[0]?s.ok[0]/s.tot[0]:0,s.tot[1]?s.ok[1]/s.tot[1]:0);add("🔥 ملك السلاسل",s.bs[0],s.bs[1]);add("💪 بطل التحديات",s.dc[0],s.dc[1]);add("📝 الكاتب الرومانسي",s.cw[0],s.cw[1]);return o}
 function renderAlbum(m){head(m);const h=hist();const h2=document.createElement("h2");h2.textContent="📔 ألبوم ذكرياتنا";m.appendChild(h2);
  if(!h.length){tp(m,"لسه مفيش ألعاب خلصت على الجهاز ده.")}
- else{const avg=Math.round(h.reduce((a,x)=>a+x.p,0)/h.length),best=Math.max(...h.map(x=>x.p));
-  const stt=dv(m,"stt");[["ألعاب",h.length],["متوسط التفاهم",avg+"%"],["أعلى تفاهم",best+"%"]].forEach(([a,b])=>{const d=dv(stt,"");d.textContent=a;const bb=document.createElement("b");bb.textContent=b;d.appendChild(bb)});
+ else{const LV=[[0,"🌱 بداية"],[3,"💞 ثنائي"],[8,"🔥 مقرّبين"],[15,"👑 توأم روح"],[30,"💎 أسطورة"]];let li=0;LV.forEach((x,k)=>{if(h.length>=x[0])li=k});const lvl=[LV[li][1]];const days=new Set(h.map(x=>new Date(x.d).toDateString()));let streak=0;for(let k=0;k<400;k++){const dd=new Date(Date.now()-k*864e5).toDateString();if(days.has(dd))streak++;else if(k>0)break}
+  const avg=Math.round(h.reduce((a,x)=>a+x.p,0)/h.length),best=Math.max(...h.map(x=>x.p));
+  const stt=dv(m,"stt");[["ألعاب",h.length],["متوسط التفاهم",avg+"%"],["أعلى تفاهم",best+"%"],["المستوى",lvl[0]],["أيام اللعب",days.size],["سلسلة أيام",streak]].forEach(([a,b])=>{const d=dv(stt,"");d.textContent=a;const bb=document.createElement("b");bb.textContent=b;d.appendChild(bb)});
   h.forEach(x=>{const p=dv(m,"pl");const b=document.createElement("b");b.textContent=x.a[0]+" "+x.S[0]+" × "+x.S[1]+" "+x.a[1];p.appendChild(b);dv(p,"ln",new Date(x.d).toLocaleDateString("ar-EG")+" · غرفة "+x.c+" · تفاهم "+x.p+"%");bar(p,x.p)})}
  mk(m,"رجوع","alt",()=>{view="home";render()})}
 document.addEventListener("input",e=>{if(e.target&&(e.target.id=="ans"||e.target.id=="ci")&&code&&me()>=0&&Date.now()-lastTy>2500){lastTy=Date.now();set(ref(rdb,BASE+code+"/pr/"+uid+"/ty"),Date.now()).catch(()=>{})}});
 setInterval(()=>{if(code&&st)paintPres()},2000);
 
+let chT={};
+function applyMode(){document.documentElement.className=ls.get("lg_mode")||""}
+applyMode();
+function favCard(s){const W=1080,H=1350,c=document.createElement("canvas");c.width=W;c.height=H;const g=c.getContext("2d");
+ const gr=g.createLinearGradient(0,0,W,H);gr.addColorStop(0,"#7c4dff");gr.addColorStop(1,"#ff5c8a");g.fillStyle=gr;g.fillRect(0,0,W,H);
+ g.fillStyle="rgba(255,255,255,.16)";g.beginPath();if(g.roundRect)g.roundRect(60,60,W-120,H-120,60);else g.rect(60,60,W-120,H-120);g.fill();
+ g.direction="rtl";g.textAlign="center";g.fillStyle="#fff";const F="Cairo,Tahoma,'Segoe UI',sans-serif";
+ g.font="800 66px "+F;g.fillText("💌 أحلى إجاباتنا",W/2,190);
+ let y=290;s.fav.slice(-4).forEach(f=>{g.font="700 36px "+F;g.fillStyle="rgba(255,255,255,.8)";g.fillText(f.n+" قال:",W/2,y);g.font="700 44px "+F;g.fillStyle="#fff";y=wrapT(g,"«"+f.a+"»",W/2,y+62,860,62)+34});
+ g.font="600 36px "+F;g.fillStyle="rgba(255,255,255,.85)";g.fillText(s.n[0]+" 💞 "+s.n[1],W/2,H-170);g.fillText(location.host+location.pathname.replace(/\/$/,""),W/2,H-110);
+ c.toBlob(b=>{if(!b)return;cardBlob=b;$("ovi").src=URL.createObjectURL(b);$("ov").style.display="flex"},"image/png")}
 /* ====== بداية ====== */
 const qr=(new URLSearchParams(location.search).get("r")||"").toUpperCase();
 const last=ls.get("lg_last");
