@@ -48,7 +48,7 @@ button.b:disabled{opacity:.45}
 .pl .ln{font-size:14px}.pl .ln span{color:var(--muted)}
 .ti{display:inline-block;background:rgba(127,127,127,.15);border-radius:14px;padding:2px 10px;margin:2px;font-size:13px;font-weight:700}
 .big{font-size:42px}
-.fav{width:100%;text-align:start;font-size:14px;line-height:1.7;background:rgba(127,127,127,.1);border-radius:10px;padding:8px}
+.ach{display:inline-block;background:rgba(127,127,127,.12);border-radius:12px;padding:6px 10px;margin:3px;font-size:13px}.ach.off{opacity:.35;filter:grayscale(1)}.spk{width:100%;display:flex;align-items:flex-end;gap:4px;height:70px;margin:8px 0}.spk b{flex:1 1 0;min-width:10px;display:block;background:linear-gradient(#e63e6d,#ff8fab);border-radius:4px 4px 0 0;min-height:4px}.fav{width:100%;text-align:start;font-size:14px;line-height:1.7;background:rgba(127,127,127,.1);border-radius:10px;padding:8px}
 .seg{display:flex;gap:6px;width:100%}.seg button{flex:1;font:inherit;font-weight:700;padding:8px 4px;border-radius:10px;border:2px solid var(--accent);background:transparent;color:var(--text);cursor:pointer;font-size:13px}.seg button.on{background:var(--accent);color:#fff}
 .err{color:var(--accent);font-weight:700}
 .rooms{width:100%;display:flex;flex-direction:column;gap:6px}
@@ -266,6 +266,8 @@ function verdict(s){
  return {hd,body,comp,cm}}
 
 /* ====== الرسم ====== */
+const DATEIDEAS=["اعملوا عشا بيتي مع بعض وكل واحد يطبخ طبق من غير ما التاني يعرف", "اتمشوا على الكورنيش من غير موبايلات ساعة كاملة", "اقعدوا في كافيه وكل واحد يرسم التاني على منديل", "اتفرجوا على فيلم قديم كل واحد بيحبه وقارنوا", "اعملوا بيكنيك على السطح بالليل ومعاكم بطانية وشاي", "جربوا مطعم أكل أجنبي عمركم ما جربتوه", "اكتبوا لبعض جواب وافتحوه بعد سنة", "اطلعوا ركوب عجلة أو سكوتر وكل واحد يختار الطريق مرة", "اتصوروا في فوتوبوث وخدوا ٤ صور بوشوش مضحكة", "اعملوا مسابقة طبخ: أحلى ساندوتش في ١٠ دقايق", "روحوا مكان حد فيكم عاش فيه طفولته وفرجه عليه", "اقعدوا قدام البحر وقولوا ٣ أحلام لكل واحد", "اعملوا ليلة ألعاب: ورق، دومينو وطاولة", "اتفقوا كل واحد يجيب هدية بـ ٥٠ جنيه بس ويقارنوا", "اشتروا نبتة صغيرة واهتموا بيها سوا", "اعملوا قايمة أماكن نفسكم تزوروها واختاروا أول واحد", "اسمعوا أغنية من أيام الطفولة وخمنوا بتفكركم بإيه", "صحوا بدري واتفرجوا على الشروق مع فطار فول", "اعملوا مكالمة فيديو وكل واحد يوري التاني أوضته وقصتها", "اتعلموا حاجة جديدة سوا: رقصة أو كلمات بلغة تانية", "اعملوا يوم من غير شكوى، أول واحد يشتكي يشتري الحلو", "زوروا متحف أو معرض وكل واحد يختار لوحة تشبه التاني", "اكتبوا ٥ حاجات حلوة في بعض وعلقوها على التلاجة", "اعملوا سهرة قمر وشاي وحكايات من الطفولة", "اتصوروا صورة كل شهر في نفس المكان", "اطبخوا أكلة بدون وصفة وشوفوا هتطلع إيه", "روحوا سوق قديم وكل واحد يشتري حاجة صغيرة للتاني", "اتفقوا على يوم مفاجأة: واحد يخطط والتاني يمشي وراه", "اعملوا بلاي ليست مشتركة لأحسن ١٠ أغاني بتجمعكم", "شوفوا غروب الشمس من مكان عالي وقولوا امنية"];const ENDLINES=["الحب مش إنك تلاقي الشخص الكامل، الحب إنك تحب الناقص بتاعك بكل عيوبه ❤️", "أحلى ذكريات بتتعمل في اللحظات البسيطة مع الشخص الصح 🌙", "اللي بيحبك بجد بيسمعك حتى لو قلت نفس الكلام ١٠٠ مرة 💞", "مش لازم يكون يوم عظيم، المهم يكون معاك 🤍", "كل ضحكة بينكم هي دفتر ذكريات جديد 📔", "اتفاهمتوا النهاردة ، وبكرة هتفهموا أكتر 🌱", "القلب اللي بيعرف يضحك مع حد بيعرف يتعب معاه كمان 🫶", "المهم مش كم سؤال جاوبتوا، المهم كم مرة قربتوا 💫"];
+let cfDone='';
 function renderHome(m){
  head(m);
  tp(m,"اعمل غرفة وابعت الكود لشخص واحد بس تختاره، أو ادخل بكود غرفة حد دعاك. كل غرفة ليها دردشتها الخاصة.");
@@ -279,6 +281,7 @@ function renderHome(m){
  const q=new URLSearchParams(location.search).get("r");if(q&&!ci.value)ci.value=q.toUpperCase();
  mk(m,"🚪 اطلب الدخول","alt",()=>askJoin($("jc").value));
  {const hh=hist();if(hh.length)mk(m,"📔 ألبومنا ("+hh.length+" لعبة)","gold",()=>{view="album";render()})}
+ {const di=dv(m,"fav","");di.style.display="none";mk(m,"💡 فكرة خروجة رومانسية","alt",()=>{di.style.display="block";let n;do{n=Math.floor(Math.random()*DATEIDEAS.length)}while(n===window.__di&&DATEIDEAS.length>1);window.__di=n;di.textContent="💡 "+DATEIDEAS[n]})}
  const dt=document.createElement("details");const sm=document.createElement("summary");sm.textContent="📖 إزاي تلعبوا؟";dt.appendChild(sm);
  ["0) 💌 كل 10 جولات فيه رسالة سرية: كل واحد يكتب للتاني وبتتكشف مع بعض.","1) واحد يعمل غرفة ويبعت الكود لشريكه بس، والتاني يطلب الدخول والمضيف يقبل.","2) كل واحد يجاوب عن نفسه الأول، وبعدين بتتناوبوا على التخمين والأسئلة والتحديات.","3) كل 10 جولات تقريباً فيه جولة تزامن 🎯: اختاروا نفس الرقم.","4) كروت ⚡ الدبل بتضاعف نقاطك في دورك، وكروت ⏭ التخطي ليكم الاتنين.","5) في الآخر: تحليل شخصية ونسبة تفاهم وكارت نتيجة تشاركوه."].forEach(t=>{const p=document.createElement("div");p.textContent=t;dt.appendChild(p)});m.appendChild(dt);
  const rs=myRooms();
@@ -340,6 +343,7 @@ function render0(){
   dv(m,"big",s.S[0]==s.S[1]?"🤝":"🏆");
   const h=document.createElement("h2");h.textContent=v.hd;m.appendChild(h);
   tp(m,v.body);
+  dv(m,'fav',ENDLINES[(s.gid||0)%ENDLINES.length]);
   const cp=dv(m,"pl","");const c1=document.createElement("b");c1.textContent="نسبة التفاهم: "+v.comp+"%";cp.appendChild(c1);bar(cp,v.comp);dv(cp,"",v.cm);
   const ah=document.createElement("h2");ah.textContent="🔍 تحليل الشخصية";m.appendChild(ah);
   [0,1].forEach(k=>{const pl=dv(m,"pl");const bb=document.createElement("b");bb.textContent=s.n[k]+(k==i?" (أنت)":"")+" -- "+s.S[k]+" نقطة";pl.appendChild(bb);
@@ -565,6 +569,8 @@ function renderAlbum(m){head(m);const h=hist();const h2=document.createElement("
  else{const LV=[[0,"🌱 بداية"],[3,"💞 ثنائي"],[8,"🔥 مقرّبين"],[15,"👑 توأم روح"],[30,"💎 أسطورة"]];let li=0;LV.forEach((x,k)=>{if(h.length>=x[0])li=k});const lvl=[LV[li][1]];const days=new Set(h.map(x=>new Date(x.d).toDateString()));let streak=0;for(let k=0;k<400;k++){const dd=new Date(Date.now()-k*864e5).toDateString();if(days.has(dd))streak++;else if(k>0)break}
   const avg=Math.round(h.reduce((a,x)=>a+x.p,0)/h.length),best=Math.max(...h.map(x=>x.p));
   const stt=dv(m,"stt");[["ألعاب",h.length],["متوسط التفاهم",avg+"%"],["أعلى تفاهم",best+"%"],["المستوى",lvl[0]],["أيام اللعب",days.size],["سلسلة أيام",streak]].forEach(([a,b])=>{const d=dv(stt,"");d.textContent=a;const bb=document.createElement("b");bb.textContent=b;d.appendChild(bb)});
+  {const sh=document.createElement("h3");sh.textContent="📈 تفاهمكم عبر الألعاب";m.appendChild(sh);const sp=dv(m,"spk");h.slice(0,12).reverse().forEach(x=>{const i=document.createElement("b");i.style.height=Math.max(4,x.p*0.7)+"px";i.title=x.p+"%";sp.appendChild(i)});
+   const ah=document.createElement("h3");ah.textContent="🏅 إنجازاتكم";m.appendChild(ah);const AC=[["🎬 أول لعبة",h.length>=1],["🔁 ٣ ألعاب",h.length>=3],["🔥 ١٠ ألعاب",h.length>=10],["💯 تفاهم ٩٠٪+",h.some(x=>x.p>=90)],["💞 تفاهم ٧٠٪+",h.some(x=>x.p>=70)],["🏆 ٢٠ لعبة",h.length>=20],["📅 ٣ أيام مختلفة",days.size>=3],["🗓️ ٧ أيام مختلفة",days.size>=7]];const aw=dv(m,"");AC.forEach(([t,ok])=>{const e=document.createElement("span");e.className="ach"+(ok?"":" off");e.textContent=t;aw.appendChild(e)})}
   h.forEach(x=>{const p=dv(m,"pl");const b=document.createElement("b");b.textContent=x.a[0]+" "+x.S[0]+" × "+x.S[1]+" "+x.a[1];p.appendChild(b);dv(p,"ln",new Date(x.d).toLocaleDateString("ar-EG")+" · غرفة "+x.c+" · تفاهم "+x.p+"%");bar(p,x.p)})}
  mk(m,"رجوع","alt",()=>{view="home";render()})}
 document.addEventListener("input",e=>{if(e.target&&(e.target.id=="ans"||e.target.id=="ci")&&code&&me()>=0&&Date.now()-lastTy>2500){lastTy=Date.now();set(ref(rdb,BASE+code+"/pr/"+uid+"/ty"),Date.now()).catch(()=>{})}});
