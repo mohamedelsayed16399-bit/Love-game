@@ -317,6 +317,24 @@ function renderBucket(m){head(m);const h=document.createElement("h2");h.textCont
  if(!L.length){const SG=["نشوف شروق الشمس سوا","نسافر بلد عمرنا ما زرناها","نتعلم رقصة سوا","نعمل بيكنيك ليلي","نكتب جواب لبعض بعد سنة"];tp(m,"اقتراحات: "+SG.join(" · "))}
  L.forEach((x,k)=>{const d=dv(m,"fav","");d.textContent=(x.d?"✅ ":"⬜ ")+x.t;d.style.cursor="pointer";if(x.d)d.style.opacity=".6";d.onclick=()=>{const a=bucket();a[k].d=a[k].d?0:1;ls.set("lg_bucket",JSON.stringify(a));render()};const rm=document.createElement("button");rm.className="util";rm.textContent="🗑";rm.style.marginInlineStart="8px";rm.onclick=e=>{e.stopPropagation();const a=bucket();a.splice(k,1);ls.set("lg_bucket",JSON.stringify(a));render()};d.appendChild(rm)});
  mk(m,"رجوع","alt",()=>{view="home";render()})}
+
+let PA=null;
+function renderPass(m){head(m);const h=document.createElement("h2");h.textContent="📱 اختبار سلّم الموبايل";m.appendChild(h);
+ const back=()=>mk(m,"رجوع","alt",()=>{PA=null;view="home";render()});
+ if(!PA){tp(m,"١٠ أسئلة تفضّل. كل واحد يجاوب لوحده على نفس الموبايل وبعدين تشوفوا نسبة التطابق. الإجابات مش بتتشاف لحد النهاية.");
+  const a=document.createElement("input");a.id="pa1";a.placeholder="اسم الأول";a.maxLength=14;a.value=ls.get("lg_name")||"";m.appendChild(a);
+  const b=document.createElement("input");b.id="pa2";b.placeholder="اسم التاني";b.maxLength=14;m.appendChild(b);
+  mk(m,"▶️ ابدأ","",()=>{const n1=$("pa1").value.trim()||"الأول",n2=$("pa2").value.trim()||"التاني";const idx=shuf(Array.from({length:MQ.length},(_,i)=>i)).slice(0,10);PA={n:[n1,n2],idx,A:[[],[]],p:0,i:0,hand:true};render()});back();return}
+ if(PA.p>1){const T=PA.idx.length;let same=0;const diff=[];PA.idx.forEach((q,k)=>{if(PA.A[0][k]==PA.A[1][k])same++;else diff.push(k)});const pc=Math.round(same/T*100);
+  dv(m,"big",pc>=80?"💞":pc>=50?"😊":"😅");const r=dv(m,"dd","");r.textContent="تطابقتوا في "+same+" من "+T+" ("+pc+"%)";bar(r,pc);
+  tp(m,pc>=80?"توأم روح! 💞":pc>=50?"قريبين من بعض 😊":"مختلفين بس ده الحلو فيها 😄");
+  if(diff.length){const h3=document.createElement("h3");h3.textContent="🔍 اختلفتوا في:";m.appendChild(h3);diff.forEach(k=>{const q=MQ[PA.idx[k]];const d=dv(m,"fav","");d.textContent=q[0]+" ولا "+q[1]+"\n"+PA.n[0]+": "+q[PA.A[0][k]]+" · "+PA.n[1]+": "+q[PA.A[1][k]];d.style.whiteSpace="pre-line"})}
+  mk(m,"🔁 جولة جديدة","",()=>{PA=null;render()});back();return}
+ if(PA.hand){dv(m,"big","📱");tp(m,"سلّم الموبايل لـ "+PA.n[PA.p]+" 🤫");mk(m,"أنا "+PA.n[PA.p]+" جاهز","",()=>{PA.hand=false;render()});return}
+ const q=MQ[PA.idx[PA.i]];const pr=dv(m,"dd","");pr.textContent=PA.n[PA.p]+" · سؤال "+(PA.i+1)+" من "+PA.idx.length;bar(pr,Math.round(PA.i/PA.idx.length*100));
+ tp(m,"تفضّل؟").style.textAlign="center";
+ [1,0].forEach(c=>{});
+ [0,1].forEach(c=>mk(m,q[c],c?"alt":"",()=>{PA.A[PA.p][PA.i]=c;PA.i++;if(PA.i>=PA.idx.length){PA.p++;PA.i=0;PA.hand=true}render()}))}
 function renderHome(m){
  head(m);
  tp(m,"اعمل غرفة وابعت الكود لشخص واحد بس تختاره، أو ادخل بكود غرفة حد دعاك. كل غرفة ليها دردشتها الخاصة.");
@@ -331,6 +349,7 @@ function renderHome(m){
  mk(m,"🚪 اطلب الدخول","alt",()=>askJoin($("jc").value));
  mk(m,"🗣️ جلسة وش لوش (من غير غرفة)","gold",()=>{view="talk";render()});
  mk(m,"📍 خطة خروجة","alt",()=>{view="plan";render()});
+ mk(m,"📱 اختبار سلّم الموبايل","gold",()=>{PA=null;view="pass";render()});
  mk(m,"✅ قايمة أحلامنا","alt",()=>{view="bucket";render()});
  {const hh=hist();if(hh.length)mk(m,"📔 ألبومنا ("+hh.length+" لعبة)","gold",()=>{view="album";render()})}
  {const dq=dv(m,"dd","");const dd=ls.get("lg_anniv");const paintA=()=>{const v=ls.get("lg_anniv");dq.innerHTML="";if(v){const n=Math.floor((Date.now()-new Date(v+"T00:00:00").getTime())/864e5);const b=document.createElement("b");b.textContent=n>=0?n:0;dq.appendChild(b);dq.appendChild(document.createTextNode(" يوم مع بعض 💞 "));{const MI=[30,50,100,150,200,300,365,500,730,1000,1095,1461,1826,2555,3650];const nx=MI.find(x=>x>n);if(nx){const prev=[0].concat(MI).filter(x=>x<=n).pop();const pr=document.createElement("div");pr.style.cssText="font-size:12px;opacity:.8;margin-top:4px";pr.textContent="🎉 الاحتفال الجاي: يوم "+nx+" (باقي "+(nx-n)+" يوم)";dq.appendChild(pr);const bb=document.createElement("div");bb.style.cssText="height:6px;border-radius:4px;background:rgba(127,127,127,.2);margin:4px 0;overflow:hidden";const fi=document.createElement("div");fi.style.cssText="height:100%;background:linear-gradient(90deg,#e63e6d,#ff8fab);width:"+Math.max(3,Math.min(100,Math.round((n-prev)/(nx-prev)*100)))+"%";bb.appendChild(fi);dq.appendChild(bb)}else{dq.appendChild(document.createTextNode("👑"))}}const x=document.createElement("button");x.className="util";x.textContent="تغيير";x.onclick=()=>{ls.set("lg_anniv","");paintA()};dq.appendChild(x)}else{dq.appendChild(document.createTextNode("📅 بدأتوا من إمتى؟ "));const di=document.createElement("input");di.type="date";di.style.width="auto";di.onchange=()=>{if(di.value){ls.set("lg_anniv",di.value);paintA()}};dq.appendChild(di)}};paintA()}
@@ -348,7 +367,7 @@ function render(){if(!code)$("ov").style.display="none";const a=$("ans"),av=a?a.
  render0();paintPres();const b=$("ans");if(b&&av&&k==lastAnsKey){b.value=av;if(af)b.focus()}lastAnsKey=k}
 function render0(){
  const m=$("main");const keepNm=$("nm")?$("nm").value:null,keepJc=$("jc")?$("jc").value:null;m.innerHTML="";
- if(!code){$("fab").style.display="none";(({album:renderAlbum,talk:renderTalk,plan:renderPlan,bucket:renderBucket})[view]||renderHome)(m);if(keepNm!==null&&$("nm"))$("nm").value=keepNm;if(keepJc&&$("jc"))$("jc").value=keepJc;return}
+ if(!code){$("fab").style.display="none";(({album:renderAlbum,talk:renderTalk,plan:renderPlan,bucket:renderBucket,pass:renderPass})[view]||renderHome)(m);if(keepNm!==null&&$("nm"))$("nm").value=keepNm;if(keepJc&&$("jc"))$("jc").value=keepJc;return}
  head(m);const s=st,i=me();
  if(!s){tp(m,"الغرفة دي مش موجودة أو اتمسحت");mk(m,"رجوع","alt",leave);return}
  $("fab").style.display=i>=0?"block":"none";
