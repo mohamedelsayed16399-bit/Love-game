@@ -435,7 +435,7 @@ function renderHome(m){
  const ci=document.createElement("input");ci.id="jc";ci.placeholder="كود الغرفة (5 حروف)";ci.maxLength=5;ci.style.direction="ltr";ci.style.textTransform="uppercase";m.appendChild(ci);
  const q=new URLSearchParams(location.search).get("r");if(q&&!ci.value)ci.value=q.toUpperCase();
  mk(m,"🚪 اطلب الدخول","alt",()=>askJoin($("jc").value));
- const TB=document.createElement("details");TB.open=true;const TS=document.createElement("summary");TS.textContent="🧰 أدوات وألعاب للثنائي (15)";TB.appendChild(TS);m.appendChild(TB);
+ const TB=document.createElement("details");TB.open=true;const TS=document.createElement("summary");TS.textContent="🧰 أدوات وألعاب للثنائي (16)";TB.appendChild(TS);m.appendChild(TB);
  mk(TB,"🗣️ جلسة وش لوش (من غير غرفة)","gold",()=>{view="talk";render()});
  mk(TB,"📍 خطة خروجة","alt",()=>{view="plan";render()});
  mk(TB,"📱 اختبار سلّم الموبايل","gold",()=>{PA=null;view="pass";render()});
@@ -446,7 +446,7 @@ function renderHome(m){
  mk(TB,"⏳ كبسولة الزمن","gold",()=>{view="cap";render()});
  mk(TB,"🎁 صندوق المفاجآت","gold",()=>{view="box";render()});
  mk(TB,"🌡️ مزاج النهارده","alt",()=>{view="mood";render()});
- mk(TB,"✅ قايمة أحلامنا","alt",()=>{view="bucket";render()});mk(TB,"🎡 عجلة القرار","gold",()=>{view="wheel";render()});mk(TB,"🃏 ذاكرة القلوب (للاتنين)","gold",()=>{view="memo";render()});mk(TB,"🔥 تحدي ٣٠ يوم حب","gold",()=>{view="c30";render()});mk(TB,"💌 مولّد رسائل حب","gold",()=>{view="lmsg";render()});
+ mk(TB,"✅ قايمة أحلامنا","alt",()=>{view="bucket";render()});mk(TB,"🎡 عجلة القرار","gold",()=>{view="wheel";render()});mk(TB,"🃏 ذاكرة القلوب (للاتنين)","gold",()=>{view="memo";render()});mk(TB,"🔥 تحدي ٣٠ يوم حب","gold",()=>{view="c30";render()});mk(TB,"💌 مولّد رسائل حب","gold",()=>{view="lmsg";render()});mk(TB,"🎁 أفكار هدايا وخروجات","gold",()=>{view="gift";render()});
  {const hh=hist();if(hh.length)mk(m,"📔 ألبومنا ("+hh.length+" لعبة)","gold",()=>{view="album";render()})}
  const DB=document.createElement("details");const DS=document.createElement("summary");DS.textContent="✨ يومكم مع بعض: عدّاد وسؤال النهارده ورسالة وفكرة";DB.appendChild(DS);m.appendChild(DB);
  {const dq=dv(DB,"dd","");const dd=ls.get("lg_anniv");const paintA=()=>{const v=ls.get("lg_anniv");dq.innerHTML="";if(v){const n=Math.floor((Date.now()-new Date(v+"T00:00:00").getTime())/864e5);const b=document.createElement("b");b.textContent=n>=0?n:0;dq.appendChild(b);dq.appendChild(document.createTextNode(" يوم مع بعض 💞 "));{const MI=[30,50,100,150,200,300,365,500,730,1000,1095,1461,1826,2555,3650];const nx=MI.find(x=>x>n);if(nx){const prev=[0].concat(MI).filter(x=>x<=n).pop();const pr=document.createElement("div");pr.style.cssText="font-size:12px;opacity:.8;margin-top:4px";pr.textContent="🎉 الاحتفال الجاي: يوم "+nx+" (باقي "+(nx-n)+" يوم)";dq.appendChild(pr);const bb=document.createElement("div");bb.style.cssText="height:6px;border-radius:4px;background:rgba(127,127,127,.2);margin:4px 0;overflow:hidden";const fi=document.createElement("div");fi.style.cssText="height:100%;background:linear-gradient(90deg,#e63e6d,#ff8fab);width:"+Math.max(3,Math.min(100,Math.round((n-prev)/(nx-prev)*100)))+"%";bb.appendChild(fi);dq.appendChild(bb)}else{dq.appendChild(document.createTextNode("👑"))}}const x=document.createElement("button");x.className="util";x.textContent="تغيير";x.onclick=()=>{ls.set("lg_anniv","");paintA()};dq.appendChild(x)}else{dq.appendChild(document.createTextNode("📅 بدأتوا من إمتى؟ "));const di=document.createElement("input");di.type="date";di.style.width="auto";di.onchange=()=>{if(di.value){ls.set("lg_anniv",di.value);paintA()}};dq.appendChild(di)}};paintA()}
@@ -502,12 +502,22 @@ function renderLmsg(m){head(m);const h=document.createElement("h2");h.textConten
  mk(m,"✨ رسالة جديدة","gold",()=>{const a=LMS[lmC];let t;do{t=a[Math.floor(Math.random()*a.length)]}while(t==lmT&&a.length>1);lmT=t;box.textContent=t;confetti(12)});
  mk(m,"📋 انسخ / شارك","alt",()=>{if(!lmT)return;if(navigator.share){navigator.share({text:lmT}).catch(()=>{})}else if(navigator.clipboard){navigator.clipboard.writeText(lmT).catch(()=>{});box.textContent=lmT+" ✔ اتنسخت"}});
  mk(m,"رجوع","ghost",()=>{view="home";render()})}
+/* ===== أفكار هدايا وخروجات ===== */
+const GFT={"🎁 هدية صغيرة":["جوابات حب مكتوبة بإيدك","كوباية بإسمه/ها","ألبوم صور مطبوع","وردة وكارت","بوكس شوكولاتة","سلسلة مفاتيح بحرف الاسم"],"💎 هدية مميزة":["ساعة أو سلسلة","عطر بيحبه/ا","فيديو مونتاج لذكرياتكم","رحلة يوم واحد","برواز صورتكم","كتاب مع إهداء"],"🌹 خروجة رومانسية":["عشا على الكورنيش","فطار في الصبح بدري","سينما وبعدها آيس كريم","بيكنيك بسيط","مشوار بالعربية بدون وجهة","ليلة أفلام في البيت"],"💸 بدون فلوس":["اطبخوا أكلة سوا","اكتب له قايمة ١٠ حاجات بتحبها","اتمشوا وقت الغروب","ليلة تصوير ذكريات قديمة","شغّل أغنيتكم وارقصوا","اعمل له/ا مفاجأة صغيرة في الأوضة"]};
+let gfC="🎁 هدية صغيرة",gfT="",gfSaved=[];try{gfSaved=JSON.parse(ls.get("lg_gft")||"[]")}catch(e){}
+function renderGift(m){head(m);const h=document.createElement("h2");h.textContent="🎁 أفكار هدايا وخروجات";m.appendChild(h);tp(m,"مش عارف تعمل إيه؟ اختار النوع وهنقترح عليك.");
+ const sg=dv(m,"seg");Object.keys(GFT).forEach(k=>{const b=document.createElement("button");b.textContent=k;if(k==gfC)b.className="on";b.onclick=()=>{gfC=k;gfT="";render()};sg.appendChild(b)});
+ const box=dv(m,"card");box.style.cssText="padding:16px;margin:10px 0;font-size:18px;line-height:1.8;text-align:center;min-height:60px";box.id="gfbox";box.textContent=gfT||"اضغط 'فكرة جديدة' 👇";
+ mk(m,"💡 فكرة جديدة","gold",()=>{const a=GFT[gfC];let t;do{t=a[Math.floor(Math.random()*a.length)]}while(t==gfT&&a.length>1);gfT=t;box.textContent=t;confetti(10)});
+ mk(m,"⭐ احفظها في قايمتي","alt",()=>{if(!gfT||gfSaved.includes(gfT))return;gfSaved.push(gfT);ls.set("lg_gft",JSON.stringify(gfSaved));render()});
+ if(gfSaved.length){const t=document.createElement("h3");t.textContent="قايمتي ("+gfSaved.length+")";m.appendChild(t);gfSaved.forEach((x,i)=>{const r=dv(m,"card");r.style.cssText="padding:8px 12px;margin:4px 0;display:flex;justify-content:space-between;gap:8px";r.appendChild(document.createTextNode(x));const d=document.createElement("button");d.textContent="✖";d.style.cssText="width:auto;padding:2px 10px";d.onclick=()=>{gfSaved.splice(i,1);ls.set("lg_gft",JSON.stringify(gfSaved));render()};r.appendChild(d)})}
+ mk(m,"رجوع","ghost",()=>{view="home";render()})}
 function render(){if(!code)$("ov").style.display="none";const a=$("ans"),av=a?a.value:null,af=a&&document.activeElement===a;const k=st?code+"|"+st.r+"|"+st.ph:"";
  if(!st)waitSig="";else{const sg=JSON.stringify([st.r,st.ph,st.a,st.v,st.rv,st.req,st.prof.map(x=>!!x)]);if(sg!=waitSig){waitSig=sg;waitSince=Date.now();clearTimeout(waitT);waitT=setTimeout(()=>{if(code)render()},91000)}}
  render0();paintPres();const b=$("ans");if(b&&av&&k==lastAnsKey){b.value=av;if(af)b.focus()}lastAnsKey=k}
 function render0(){
  const m=$("main");const keepNm=$("nm")?$("nm").value:null,keepJc=$("jc")?$("jc").value:null;m.innerHTML="";
- if(!code){$("fab").style.display="none";(({album:renderAlbum,talk:renderTalk,plan:renderPlan,bucket:renderBucket,pass:renderPass,lang:renderLang,events:renderEvents,mood:renderMood,box:renderBox,diary:renderDiary,cap:renderCap,backup:renderBackup,wheel:renderWheel,memo:renderMemo,c30:renderC30,lmsg:renderLmsg})[view]||renderHome)(m);if(keepNm!==null&&$("nm"))$("nm").value=keepNm;if(keepJc&&$("jc"))$("jc").value=keepJc;return}
+ if(!code){$("fab").style.display="none";(({album:renderAlbum,talk:renderTalk,plan:renderPlan,bucket:renderBucket,pass:renderPass,lang:renderLang,events:renderEvents,mood:renderMood,box:renderBox,diary:renderDiary,cap:renderCap,backup:renderBackup,wheel:renderWheel,memo:renderMemo,c30:renderC30,lmsg:renderLmsg,gift:renderGift})[view]||renderHome)(m);if(keepNm!==null&&$("nm"))$("nm").value=keepNm;if(keepJc&&$("jc"))$("jc").value=keepJc;return}
  head(m);const s=st,i=me();
  if(!s){tp(m,"الغرفة دي مش موجودة أو اتمسحت");mk(m,"رجوع","alt",leave);return}
  $("fab").style.display=i>=0?"block":"none";
