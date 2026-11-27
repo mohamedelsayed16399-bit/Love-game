@@ -435,7 +435,7 @@ function renderHome(m){
  const ci=document.createElement("input");ci.id="jc";ci.placeholder="كود الغرفة (5 حروف)";ci.maxLength=5;ci.style.direction="ltr";ci.style.textTransform="uppercase";m.appendChild(ci);
  const q=new URLSearchParams(location.search).get("r");if(q&&!ci.value)ci.value=q.toUpperCase();
  mk(m,"🚪 اطلب الدخول","alt",()=>askJoin($("jc").value));
- const TB=document.createElement("details");TB.open=true;const TS=document.createElement("summary");TS.textContent="🧰 أدوات وألعاب للثنائي (20)";TB.appendChild(TS);m.appendChild(TB);
+ const TB=document.createElement("details");TB.open=true;const TS=document.createElement("summary");TS.textContent="🧰 أدوات وألعاب للثنائي (21)";TB.appendChild(TS);m.appendChild(TB);
  mk(TB,"🗣️ جلسة وش لوش (من غير غرفة)","gold",()=>{view="talk";render()});
  mk(TB,"📍 خطة خروجة","alt",()=>{view="plan";render()});
  mk(TB,"📱 اختبار سلّم الموبايل","gold",()=>{PA=null;view="pass";render()});
@@ -446,7 +446,7 @@ function renderHome(m){
  mk(TB,"⏳ كبسولة الزمن","gold",()=>{view="cap";render()});
  mk(TB,"🎁 صندوق المفاجآت","gold",()=>{view="box";render()});
  mk(TB,"🌡️ مزاج النهارده","alt",()=>{view="mood";render()});
- mk(TB,"✅ قايمة أحلامنا","alt",()=>{view="bucket";render()});mk(TB,"🎡 عجلة القرار","gold",()=>{view="wheel";render()});mk(TB,"🃏 ذاكرة القلوب (للاتنين)","gold",()=>{view="memo";render()});mk(TB,"🔥 تحدي ٣٠ يوم حب","gold",()=>{view="c30";render()});mk(TB,"💌 مولّد رسائل حب","gold",()=>{view="lmsg";render()});mk(TB,"🎁 أفكار هدايا وخروجات","gold",()=>{view="gift";render()});mk(TB,"💬 بطاقات أسئلة عميقة","gold",()=>{view="dq";render()});mk(TB,"✍️ أكمل الجملة","gold",()=>{view="csx";render()});mk(TB,"🎶 أغانينا","gold",()=>{view="sng";render()});mk(TB,"🕊️ خطوات المصالحة","gold",()=>{view="rcl";render()});
+ mk(TB,"✅ قايمة أحلامنا","alt",()=>{view="bucket";render()});mk(TB,"🎡 عجلة القرار","gold",()=>{view="wheel";render()});mk(TB,"🃏 ذاكرة القلوب (للاتنين)","gold",()=>{view="memo";render()});mk(TB,"🔥 تحدي ٣٠ يوم حب","gold",()=>{view="c30";render()});mk(TB,"💌 مولّد رسائل حب","gold",()=>{view="lmsg";render()});mk(TB,"🎁 أفكار هدايا وخروجات","gold",()=>{view="gift";render()});mk(TB,"💬 بطاقات أسئلة عميقة","gold",()=>{view="dq";render()});mk(TB,"✍️ أكمل الجملة","gold",()=>{view="csx";render()});mk(TB,"🎶 أغانينا","gold",()=>{view="sng";render()});mk(TB,"🕊️ خطوات المصالحة","gold",()=>{view="rcl";render()});mk(TB,"🫙 برطمان الكلام الحلو","gold",()=>{view="cjr";render()});
  {const hh=hist();if(hh.length)mk(m,"📔 ألبومنا ("+hh.length+" لعبة)","gold",()=>{view="album";render()})}
  const DB=document.createElement("details");const DS=document.createElement("summary");DS.textContent="✨ يومكم مع بعض: عدّاد وسؤال النهارده ورسالة وفكرة";DB.appendChild(DS);m.appendChild(DB);
  {const dq=dv(DB,"dd","");const dd=ls.get("lg_anniv");const paintA=()=>{const v=ls.get("lg_anniv");dq.innerHTML="";if(v){const n=Math.floor((Date.now()-new Date(v+"T00:00:00").getTime())/864e5);const b=document.createElement("b");b.textContent=n>=0?n:0;dq.appendChild(b);dq.appendChild(document.createTextNode(" يوم مع بعض 💞 "));{const MI=[30,50,100,150,200,300,365,500,730,1000,1095,1461,1826,2555,3650];const nx=MI.find(x=>x>n);if(nx){const prev=[0].concat(MI).filter(x=>x<=n).pop();const pr=document.createElement("div");pr.style.cssText="font-size:12px;opacity:.8;margin-top:4px";pr.textContent="🎉 الاحتفال الجاي: يوم "+nx+" (باقي "+(nx-n)+" يوم)";dq.appendChild(pr);const bb=document.createElement("div");bb.style.cssText="height:6px;border-radius:4px;background:rgba(127,127,127,.2);margin:4px 0;overflow:hidden";const fi=document.createElement("div");fi.style.cssText="height:100%;background:linear-gradient(90deg,#e63e6d,#ff8fab);width:"+Math.max(3,Math.min(100,Math.round((n-prev)/(nx-prev)*100)))+"%";bb.appendChild(fi);dq.appendChild(bb)}else{dq.appendChild(document.createTextNode("👑"))}}const x=document.createElement("button");x.className="util";x.textContent="تغيير";x.onclick=()=>{ls.set("lg_anniv","");paintA()};dq.appendChild(x)}else{dq.appendChild(document.createTextNode("📅 بدأتوا من إمتى؟ "));const di=document.createElement("input");di.type="date";di.style.width="auto";di.onchange=()=>{if(di.value){ls.set("lg_anniv",di.value);paintA()}};dq.appendChild(di)}};paintA()}
@@ -552,12 +552,23 @@ function renderRcl(m){head(m);const h=document.createElement("h2");h.textContent
  const mb=dv(m,"card");mb.id="rclmsg";mb.style.cssText="padding:12px;margin:10px 0;text-align:center";mb.textContent=rclM||"محتاج كلمة تبدأ بيها؟ 👇";
  mk(m,"💬 اقترح رسالة اعتذار","alt",()=>{let x;do{x=RCL_M[Math.floor(Math.random()*RCL_M.length)]}while(x==rclM);rclM=x;mb.textContent=x});
  mk(m,"رجوع","ghost",()=>{view="home";render()})}
+/* ===== برطمان المدح ===== */
+let cjrL=[],cjrPick="";try{cjrL=JSON.parse(ls.get("lg_cjr")||"[]")}catch(e){}
+function cjrSave(){ls.set("lg_cjr",JSON.stringify(cjrL))}
+function renderCjr(m){head(m);const h=document.createElement("h2");h.textContent="🫙 برطمان الكلام الحلو";m.appendChild(h);tp(m,"اكتبوا كلمة حلوة عن بعض وحطوها في البرطمان. وقت ما تحتاجوا، اسحبوا واحدة.");
+ const a=document.createElement("input");a.id="cjrIn";a.placeholder="اكتب كلمة حلوة...";a.maxLength=140;m.appendChild(a);
+ mk(m,"➕ حط في البرطمان","gold",()=>{const t=a.value.trim();if(!t)return;cjrL.unshift(t);cjrL=cjrL.slice(0,100);cjrSave();cjrPick="";render()});
+ tp(m,"في البرطمان: "+cjrL.length+" كلمة");
+ const box=dv(m,"card");box.id="cjrBox";box.style.cssText="padding:18px 14px;margin:10px 0;font-size:19px;line-height:1.9;text-align:center;min-height:70px";box.textContent=cjrPick||(cjrL.length?"اسحب كلمة 👇":"البرطمان فاضي، ابدأ بأول كلمة 💞");
+ if(cjrL.length)mk(m,"🎁 اسحب كلمة","alt",()=>{let x;do{x=cjrL[Math.floor(Math.random()*cjrL.length)]}while(x==cjrPick&&cjrL.length>1);cjrPick=x;box.textContent=x;confetti(10)});
+ if(cjrL.length)mk(m,"🗑️ فضّي البرطمان","ghost",()=>{if(confirm("تمسحوا كل الكلام؟")){cjrL=[];cjrSave();cjrPick="";render()}});
+ mk(m,"رجوع","ghost",()=>{view="home";render()})}
 function render(){if(!code)$("ov").style.display="none";const a=$("ans"),av=a?a.value:null,af=a&&document.activeElement===a;const k=st?code+"|"+st.r+"|"+st.ph:"";
  if(!st)waitSig="";else{const sg=JSON.stringify([st.r,st.ph,st.a,st.v,st.rv,st.req,st.prof.map(x=>!!x)]);if(sg!=waitSig){waitSig=sg;waitSince=Date.now();clearTimeout(waitT);waitT=setTimeout(()=>{if(code)render()},91000)}}
  render0();paintPres();const b=$("ans");if(b&&av&&k==lastAnsKey){b.value=av;if(af)b.focus()}lastAnsKey=k}
 function render0(){
  const m=$("main");const keepNm=$("nm")?$("nm").value:null,keepJc=$("jc")?$("jc").value:null;m.innerHTML="";
- if(!code){$("fab").style.display="none";(({album:renderAlbum,talk:renderTalk,plan:renderPlan,bucket:renderBucket,pass:renderPass,lang:renderLang,events:renderEvents,mood:renderMood,box:renderBox,diary:renderDiary,cap:renderCap,backup:renderBackup,wheel:renderWheel,memo:renderMemo,c30:renderC30,lmsg:renderLmsg,gift:renderGift,dq:renderDPQ,csx:renderCsx,sng:renderSng,rcl:renderRcl})[view]||renderHome)(m);if(keepNm!==null&&$("nm"))$("nm").value=keepNm;if(keepJc&&$("jc"))$("jc").value=keepJc;return}
+ if(!code){$("fab").style.display="none";(({album:renderAlbum,talk:renderTalk,plan:renderPlan,bucket:renderBucket,pass:renderPass,lang:renderLang,events:renderEvents,mood:renderMood,box:renderBox,diary:renderDiary,cap:renderCap,backup:renderBackup,wheel:renderWheel,memo:renderMemo,c30:renderC30,lmsg:renderLmsg,gift:renderGift,dq:renderDPQ,csx:renderCsx,sng:renderSng,rcl:renderRcl,cjr:renderCjr})[view]||renderHome)(m);if(keepNm!==null&&$("nm"))$("nm").value=keepNm;if(keepJc&&$("jc"))$("jc").value=keepJc;return}
  head(m);const s=st,i=me();
  if(!s){tp(m,"الغرفة دي مش موجودة أو اتمسحت");mk(m,"رجوع","alt",leave);return}
  $("fab").style.display=i>=0?"block":"none";
